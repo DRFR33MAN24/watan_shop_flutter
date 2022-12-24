@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "7705066811",
+    "project_id": "watanshop-6848f",
+    "storage_bucket": "watanshop-6848f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:7705066811:android:93a465145392412efe8b1e",
+        "android_client_info": {
+          "package_name": "com.sabeal.watanshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "7705066811-m0qb79g1813nrkl5kmacse08ofj7rvin.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sabeal.watanshop",
+            "certificate_hash": "c6ad0f7299e6f00c71cdfeb19ade7f7891f9c190"
+          }
+        },
+        {
+          "client_id": "7705066811-oj2gfnghkdl2fqq4r6kfqb1148k90qgp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJgyLf1Ij_m-AIV2IG3M3BHI_k8GqLmsM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "7705066811-oj2gfnghkdl2fqq4r6kfqb1148k90qgp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
