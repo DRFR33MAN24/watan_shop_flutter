@@ -696,6 +696,7 @@
   "brand": "الماركة",
   "use_current_location": "استخدم الموقع الحالي",
   "pick_on_map": "اختر على الخريطة",
+  "home__drawer_menu_auto_item": "مركبات",
   "demo_warning_description": "هذا هو التطبيق التجريبي. يرجى عدم إدخال أي بيانات دفع حقيقية أو معلومات شخصية. فقط استخدم بيانات الدفع المرسلة.",
   "dialog_understand": "موافق"
 }

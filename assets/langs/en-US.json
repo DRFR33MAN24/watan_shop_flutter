@@ -696,6 +696,7 @@
   "brand": "Brand",
   "use_current_location": "Use Current Location",
   "pick_on_map": "Pick on Map",
+  "home__drawer_menu_auto_item": "Autos",
   "demo_warning_title": "Alert for payment ( DEMO App )",
   "demo_warning_description": "This is the demo application. Please do not input any real payment data and personal information. Just use the sendbox payment data.",
   "dialog_understand": "UNDERSTAND"
