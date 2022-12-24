@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutterbuyandsell/constant/ps_constants.dart';
 import 'package:flutterbuyandsell/viewobject/common/ps_holder.dart';
 
@@ -117,7 +114,7 @@ class ProductParameterHolder extends PsHolder<dynamic> {
     return this;
   }
 
-    ProductParameterHolder getSoldOutParameterHolder() {
+  ProductParameterHolder getSoldOutParameterHolder() {
     searchTerm = '';
     catId = '';
     subCatId = '';
@@ -144,10 +141,10 @@ class ProductParameterHolder extends PsHolder<dynamic> {
     status = '1';
     isDiscount = '';
     adType = '';
-        return this;
+    return this;
   }
 
-    ProductParameterHolder getNearestParameterHolder() {
+  ProductParameterHolder getNearestParameterHolder() {
     searchTerm = '';
     lat = '';
     lng = '';
@@ -272,7 +269,7 @@ class ProductParameterHolder extends PsHolder<dynamic> {
     dealOptionId = '';
     isSoldOut = '';
     conditionOfItemId = '';
-        conditionOfItemName = '';
+    conditionOfItemName = '';
     maxPrice = '';
     minPrice = '';
     brand = '';
@@ -304,7 +301,7 @@ class ProductParameterHolder extends PsHolder<dynamic> {
     dealOptionId = '';
     isSoldOut = '';
     conditionOfItemId = '';
-        conditionOfItemName = '';
+    conditionOfItemName = '';
     maxPrice = '';
     minPrice = '';
     brand = '';
@@ -368,7 +365,7 @@ class ProductParameterHolder extends PsHolder<dynamic> {
     dealOptionId = '';
     isSoldOut = '';
     conditionOfItemId = '';
-        conditionOfItemName = '';
+    conditionOfItemName = '';
     maxPrice = '';
     minPrice = '';
     brand = '';
@@ -400,7 +397,7 @@ class ProductParameterHolder extends PsHolder<dynamic> {
     dealOptionId = '';
     isSoldOut = '';
     conditionOfItemId = '';
-        conditionOfItemName = '';
+    conditionOfItemName = '';
     maxPrice = '';
     minPrice = '';
     brand = '';
@@ -413,6 +410,38 @@ class ProductParameterHolder extends PsHolder<dynamic> {
     orderType = PsConst.FILTERING__DESC;
     status = '1';
     isDiscount = '1';
+    adType = '';
+
+    return this;
+  }
+
+  ProductParameterHolder getAutoParameterHolder() {
+    searchTerm = '';
+    catId = '4';
+    subCatId = '';
+    itemTypeId = '';
+    itemPriceTypeId = '';
+    itemCurrencyId = '';
+    itemLocationId = '';
+    itemLocationName = '';
+    itemLocationTownshipId = '';
+    itemLocationTownshipName = '';
+    dealOptionId = '';
+    isSoldOut = '';
+    conditionOfItemId = '';
+    conditionOfItemName = '';
+    maxPrice = '';
+    minPrice = '';
+    brand = '';
+    lat = '';
+    lng = '';
+    mile = '';
+    addedUserId = '';
+    isPaid = '';
+    orderBy = PsConst.FILTERING__ADDED_DATE;
+    orderType = PsConst.FILTERING__DESC;
+    status = '1';
+    isDiscount = '';
     adType = '';
 
     return this;
@@ -432,7 +461,7 @@ class ProductParameterHolder extends PsHolder<dynamic> {
     dealOptionId = '';
     isSoldOut = '';
     conditionOfItemId = '';
-        conditionOfItemName = '';
+    conditionOfItemName = '';
     maxPrice = '';
     minPrice = '';
     brand = '';
@@ -449,8 +478,6 @@ class ProductParameterHolder extends PsHolder<dynamic> {
 
     return this;
   }
-
-  
 
   @override
   Map<String, dynamic> toMap() {
@@ -495,7 +522,7 @@ class ProductParameterHolder extends PsHolder<dynamic> {
     dealOptionId = '';
     isSoldOut = '';
     conditionOfItemId = '';
-        conditionOfItemName = '';
+    conditionOfItemName = '';
     maxPrice = '';
     minPrice = '';
     brand = '';
@@ -551,9 +578,9 @@ class ProductParameterHolder extends PsHolder<dynamic> {
       result += conditionOfItemId! + ':';
     }
 
-       if ( conditionOfItemName != '') {
-        result += conditionOfItemName! + ':';
-       }
+    if (conditionOfItemName != '') {
+      result += conditionOfItemName! + ':';
+    }
     if (maxPrice != '') {
       result += maxPrice! + ':';
     }
@@ -590,7 +617,7 @@ class ProductParameterHolder extends PsHolder<dynamic> {
     if (isDiscount != '') {
       result += isDiscount!;
     }
-        if (adType != '') {
+    if (adType != '') {
       result += adType!;
     }
 
