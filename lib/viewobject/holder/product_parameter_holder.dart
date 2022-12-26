@@ -447,7 +447,7 @@ class ProductParameterHolder extends PsHolder<dynamic> {
     return this;
   }
 
-    ProductParameterHolder getElectronicsParameterHolder() {
+  ProductParameterHolder getElectronicsParameterHolder() {
     searchTerm = '';
     catId = '5';
     subCatId = '';
@@ -478,9 +478,42 @@ class ProductParameterHolder extends PsHolder<dynamic> {
 
     return this;
   }
-    ProductParameterHolder getRealestateParameterHolder() {
+
+  ProductParameterHolder getRealestateParameterHolder() {
     searchTerm = '';
     catId = '11';
+    subCatId = '';
+    itemTypeId = '';
+    itemPriceTypeId = '';
+    itemCurrencyId = '';
+    itemLocationId = '';
+    itemLocationName = '';
+    itemLocationTownshipId = '';
+    itemLocationTownshipName = '';
+    dealOptionId = '';
+    isSoldOut = '';
+    conditionOfItemId = '';
+    conditionOfItemName = '';
+    maxPrice = '';
+    minPrice = '';
+    brand = '';
+    lat = '';
+    lng = '';
+    mile = '';
+    addedUserId = '';
+    isPaid = '';
+    orderBy = PsConst.FILTERING__ADDED_DATE;
+    orderType = PsConst.FILTERING__DESC;
+    status = '1';
+    isDiscount = '';
+    adType = '';
+
+    return this;
+  }
+
+  ProductParameterHolder getJobsParameterHolder() {
+    searchTerm = '';
+    catId = '12';
     subCatId = '';
     itemTypeId = '';
     itemPriceTypeId = '';

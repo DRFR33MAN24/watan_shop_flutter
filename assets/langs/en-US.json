@@ -379,6 +379,7 @@
   "error_dialog__code_wrong": "Verification OTP code is wrong",
   "error_dialog__select_city": "Please select city",
   "error_dialog__webp_image": "Sorry, You cannot upload webp image",
+  "error_dialog__select_video": "Can't select video",
   "dialog__ok": "OK",
   "warning_dialog__warning": "WARNING",
   "warning_dialog__input_name": "Please input name",
@@ -699,6 +700,9 @@
   "home__drawer_menu_auto_item": "Autos",
   "home__drawer_menu_realestate_item": "Realestate",
   "home__drawer_menu_electronic_item": "Electronics",
+  "home__drawer_menu_jobs_item": "Jobs and Services",
+  "done": "Done",
+  "sort": "Sort",
 
   "demo_warning_title": "Alert for payment ( DEMO App )",
   "demo_warning_description": "This is the demo application. Please do not input any real payment data and personal information. Just use the sendbox payment data.",

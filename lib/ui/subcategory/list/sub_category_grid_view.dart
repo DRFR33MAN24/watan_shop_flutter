@@ -40,9 +40,8 @@ class SubCategoryGridView extends StatefulWidget {
 
 class _ModelGridViewState extends State<SubCategoryGridView>
     with SingleTickerProviderStateMixin {
-
-      _ModelGridViewState() {
-        searchBar = SearchBar(
+  _ModelGridViewState() {
+    searchBar = SearchBar(
         inBar: true,
         controller: searchTextController,
         buildDefaultAppBar: buildAppBar,
@@ -55,10 +54,11 @@ class _ModelGridViewState extends State<SubCategoryGridView>
         onClosed: () {
           _subCategoryProvider!.subCategoryParameterHolder.keyword = '';
           _subCategoryProvider!.resetSubCategoryList(
-              _subCategoryProvider!.subCategoryParameterHolder.toMap(), Utils.checkUserLoginId(
-                                _subCategoryProvider!.psValueHolder!),);
+            _subCategoryProvider!.subCategoryParameterHolder.toMap(),
+            Utils.checkUserLoginId(_subCategoryProvider!.psValueHolder!),
+          );
         });
-      }
+  }
   bool bindDataFirstTime = true;
   final ScrollController _scrollController = ScrollController();
   SubCategoryProvider? _subCategoryProvider;
@@ -66,7 +66,7 @@ class _ModelGridViewState extends State<SubCategoryGridView>
   late TextEditingController searchTextController = TextEditingController();
   AnimationController? animationController;
   Animation<double>? animation;
-    bool subscribeNoti = false;
+  bool subscribeNoti = false;
   List<String?> subscribeList = <String?>[];
   List<String?> unsubscribeListWithMB = <String?>[];
   List<String?> tempList = <String?>[];
@@ -81,19 +81,19 @@ class _ModelGridViewState extends State<SubCategoryGridView>
 
   void onSubmitted(String value) {
     _subCategoryProvider!.subCategoryParameterHolder.keyword = value;
-     _subCategoryProvider!.resetSubCategoryList(
-              _subCategoryProvider!.subCategoryParameterHolder.toMap(), Utils.checkUserLoginId(
-                                _subCategoryProvider!.psValueHolder!),
-              );
+    _subCategoryProvider!.resetSubCategoryList(
+      _subCategoryProvider!.subCategoryParameterHolder.toMap(),
+      Utils.checkUserLoginId(_subCategoryProvider!.psValueHolder!),
+    );
   }
 
   AppBar buildAppBar(BuildContext context) {
     if (_subCategoryProvider != null) {
       _subCategoryProvider!.subCategoryParameterHolder.keyword = '';
       _subCategoryProvider!.resetSubCategoryList(
-              _subCategoryProvider!.subCategoryParameterHolder.toMap(), Utils.checkUserLoginId(
-                                _subCategoryProvider!.psValueHolder!),
-              );
+        _subCategoryProvider!.subCategoryParameterHolder.toMap(),
+        Utils.checkUserLoginId(_subCategoryProvider!.psValueHolder!),
+      );
     }
     searchTextController.clear();
     return AppBar(
@@ -101,23 +101,21 @@ class _ModelGridViewState extends State<SubCategoryGridView>
         statusBarIconBrightness: Utils.getBrightnessForAppBar(context),
       ),
       backgroundColor: PsColors.baseColor,
-      iconTheme: Theme.of(context).iconTheme.copyWith(
-        color: PsColors.iconColor
-      ),
-          // color: Utils.isLightMode(context)
-          //     ? PsColors.primary500
-          //     : PsColors.primaryDarkWhite),
+      iconTheme:
+          Theme.of(context).iconTheme.copyWith(color: PsColors.iconColor),
+      // color: Utils.isLightMode(context)
+      //     ? PsColors.primary500
+      //     : PsColors.primaryDarkWhite),
       title: Text(widget.category!.catName!,
           style: Theme.of(context)
               .textTheme
               .headline6
               ?.copyWith(fontWeight: FontWeight.bold)
-              .copyWith(
-                color: PsColors.textColor2)
-                  // color: Utils.isLightMode(context)
-                  //     ? PsColors.primary500
-                  //     : PsColors.primaryDarkWhite)
-                      ),
+              .copyWith(color: PsColors.textColor2)
+          // color: Utils.isLightMode(context)
+          //     ? PsColors.primary500
+          //     : PsColors.primaryDarkWhite)
+          ),
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.search, color: PsColors.iconColor),
@@ -128,13 +126,13 @@ class _ModelGridViewState extends State<SubCategoryGridView>
         if (valueHolder!.isSubCatSubscribe == PsConst.ONE && !subscribeNoti)
           IconButton(
             icon: Icon(Icons.notification_add, color: PsColors.iconColor),
-            onPressed: () async{
+            onPressed: () async {
               if (await Utils.checkInternetConnectivity()) {
-                Utils.navigateOnUserVerificationView( 
-                  _subCategoryProvider, context, () {
-                      setState(() {
-                        subscribeNoti = true;
-                      });
+                Utils.navigateOnUserVerificationView(
+                    _subCategoryProvider, context, () {
+                  setState(() {
+                    subscribeNoti = true;
+                  });
                 });
               }
             },
@@ -150,65 +148,64 @@ class _ModelGridViewState extends State<SubCategoryGridView>
                     subscribeListWithMB.add(temp! + '_MB');
                   }
 
-                  final SubscribeParameterHolder holder = SubscribeParameterHolder(
-                  userId: valueHolder!.loginUserId!,
-                  catId: widget.category!.catId!,
-                  selectedsubCatId: subscribeListWithMB,
-                   );
+                  final SubscribeParameterHolder holder =
+                      SubscribeParameterHolder(
+                    userId: valueHolder!.loginUserId!,
+                    catId: widget.category!.catId!,
+                    selectedsubCatId: subscribeListWithMB,
+                  );
 
-                await PsProgressDialog.showDialog(context);
-                final PsResource<ApiStatus> subscribeStatus =
-                    await _subCategoryProvider!.postSubCategorySubscribe(
-                        holder.toMap());
-                PsProgressDialog.dismissDialog();
+                  await PsProgressDialog.showDialog(context);
+                  final PsResource<ApiStatus> subscribeStatus =
+                      await _subCategoryProvider!
+                          .postSubCategorySubscribe(holder.toMap());
+                  PsProgressDialog.dismissDialog();
 
-                if (subscribeStatus.status == PsStatus.SUCCESS) {
-                  showDialog<dynamic>(
-                      context: context,
-                      builder: (BuildContext contet) {
-                        return SuccessDialog(
-                          message: Utils.getString(
-                              context, 'Successful Subscription'),
-                          onPressed: () {},
-                        );
-                      });
-
-                  //substract unscribed_topics from subscribed_topics (subscribe - unsubscribe)
-                  Utils.subscribeToModelTopics(List<String>.from(
-                        Set<String>.from(subscribeListWithMB)
-                        .difference(Set<String>.from(unsubscribeListWithMB))
-                    ));
-                  Utils.unSubsribeFromModelTopics(unsubscribeListWithMB);      
-
-                  setState(() {
-                    subscribeNoti = false;
-                    subscribeList.clear();
-                    unsubscribeListWithMB.clear();
-                  });    
-                  _subCategoryProvider!.resetSubCategoryList(
-                            _subCategoryProvider!.subCategoryParameterHolder
-                                .toMap(),
-                            Utils.checkUserLoginId(
-                                _subCategoryProvider!.psValueHolder!),
+                  if (subscribeStatus.status == PsStatus.SUCCESS) {
+                    showDialog<dynamic>(
+                        context: context,
+                        builder: (BuildContext contet) {
+                          return SuccessDialog(
+                            message: Utils.getString(
+                                context, 'Successful Subscription'),
+                            onPressed: () {},
                           );
-                } else {
-                  showDialog<dynamic>(
-                      context: context,
-                      builder: (BuildContext contet) {
-                        return ErrorDialog(
-                          message: Utils.getString(
-                              context, 'subscribe failed.'),
-                        );
-                      });
-                }
+                        });
+
+                    //substract unscribed_topics from subscribed_topics (subscribe - unsubscribe)
+                    Utils.subscribeToModelTopics(List<String>.from(
+                        Set<String>.from(subscribeListWithMB).difference(
+                            Set<String>.from(unsubscribeListWithMB))));
+                    Utils.unSubsribeFromModelTopics(unsubscribeListWithMB);
+
+                    setState(() {
+                      subscribeNoti = false;
+                      subscribeList.clear();
+                      unsubscribeListWithMB.clear();
+                    });
+                    _subCategoryProvider!.resetSubCategoryList(
+                      _subCategoryProvider!.subCategoryParameterHolder.toMap(),
+                      Utils.checkUserLoginId(
+                          _subCategoryProvider!.psValueHolder!),
+                    );
+                  } else {
+                    showDialog<dynamic>(
+                        context: context,
+                        builder: (BuildContext contet) {
+                          return ErrorDialog(
+                            message:
+                                Utils.getString(context, 'subscribe failed.'),
+                          );
+                        });
+                  }
                 } else {
                   setState(() {
                     subscribeNoti = false;
-                });
-                }      
+                  });
+                }
               },
               child: Center(
-                child: Text(Utils.getString(context, 'Done'),
+                child: Text(Utils.getString(context, 'done'),
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
@@ -231,9 +228,9 @@ class _ModelGridViewState extends State<SubCategoryGridView>
         Utils.psPrint('CategoryId number is $categId');
 
         _subCategoryProvider!.nextSubCategoryList(
-            _subCategoryProvider!.subCategoryParameterHolder.toMap(),
-            Utils.checkUserLoginId(valueHolder!),
-            );
+          _subCategoryProvider!.subCategoryParameterHolder.toMap(),
+          Utils.checkUserLoginId(valueHolder!),
+        );
       }
     });
     animationController =
@@ -257,7 +254,6 @@ class _ModelGridViewState extends State<SubCategoryGridView>
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     timeDilation = 1.0;
@@ -267,22 +263,20 @@ class _ModelGridViewState extends State<SubCategoryGridView>
       print('loading ads....');
       checkConnection();
     }
-    
-
 
     return Scaffold(
-       appBar: searchBar.build(context),
+        appBar: searchBar.build(context),
         body: ChangeNotifierProvider<SubCategoryProvider?>(
             lazy: false,
             create: (BuildContext context) {
               _subCategoryProvider =
                   SubCategoryProvider(repo: repo1, psValueHolder: valueHolder);
-                  _subCategoryProvider!.subCategoryParameterHolder.catId = widget.category!.catId;
-              _subCategoryProvider!.categoryId = widget.category!.catId!;    
+              _subCategoryProvider!.subCategoryParameterHolder.catId =
+                  widget.category!.catId;
+              _subCategoryProvider!.categoryId = widget.category!.catId!;
               _subCategoryProvider!.loadAllSubCategoryList(
-                _subCategoryProvider!.subCategoryParameterHolder.toMap(),
-                Utils.checkUserLoginId(_subCategoryProvider!.psValueHolder!)         
-              );
+                  _subCategoryProvider!.subCategoryParameterHolder.toMap(),
+                  Utils.checkUserLoginId(_subCategoryProvider!.psValueHolder!));
               return _subCategoryProvider;
             },
             child: Consumer<SubCategoryProvider>(builder: (BuildContext context,
@@ -296,16 +290,17 @@ class _ModelGridViewState extends State<SubCategoryGridView>
                       admobSize: AdSize.banner,
                     ),
                     Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: <Widget>[
-                      const SizedBox(
-                        width: PsDimens.space1,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: PsDimens.space20, top: PsDimens.space16),
-                        child: InkWell(
-                          child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: <Widget>[
+                        const SizedBox(
+                          width: PsDimens.space1,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              right: PsDimens.space20, top: PsDimens.space16),
+                          child: InkWell(
+                            child: Row(
                               children: <Widget>[
                                 Icon(
                                   Icons.sort_by_alpha_rounded,
@@ -316,133 +311,166 @@ class _ModelGridViewState extends State<SubCategoryGridView>
                                   width: PsDimens.space4,
                                 ),
                                 Container(
-                                   margin: const EdgeInsets.only(left: 20),
+                                  margin: const EdgeInsets.only(left: 20),
                                   child: Text(Utils.getString(context, 'Sort'),
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyText1!
                                           .copyWith(
-                                              fontSize: 16,)),
+                                            fontSize: 16,
+                                          )),
                                 ),
                               ],
                             ),
-                          onTap: () {
-                showDialog<dynamic>(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return FilterDialog(
-                        onAscendingTap: () async {
-                          _subCategoryProvider!.subCategoryParameterHolder
-                              .orderBy = PsConst.FILTERING_SUBCAT_NAME;
-                          _subCategoryProvider!.subCategoryParameterHolder
-                              .orderType = PsConst.FILTERING__ASC;
-                          _subCategoryProvider!.resetSubCategoryList(
-                            _subCategoryProvider!.subCategoryParameterHolder
-                                .toMap(),
-                            Utils.checkUserLoginId(
-                                _subCategoryProvider!.psValueHolder!),
-                          );
-                        },
-                        onDescendingTap: () {
-                          _subCategoryProvider!.subCategoryParameterHolder
-                              .orderBy = PsConst.FILTERING_SUBCAT_NAME;
-                          _subCategoryProvider!.subCategoryParameterHolder
-                              .orderType = PsConst.FILTERING__DESC;
-                          _subCategoryProvider!.resetSubCategoryList(
-                            _subCategoryProvider!.subCategoryParameterHolder
-                                .toMap(),
-                            Utils.checkUserLoginId(
-                                _subCategoryProvider!.psValueHolder!),
-                          );
-                        },
-                      );
-                    });
-              }, ),
-                      ),
-                                     ],
-                                   ),
+                            onTap: () {
+                              showDialog<dynamic>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return FilterDialog(
+                                      onAscendingTap: () async {
+                                        _subCategoryProvider!
+                                                .subCategoryParameterHolder
+                                                .orderBy =
+                                            PsConst.FILTERING_SUBCAT_NAME;
+                                        _subCategoryProvider!
+                                            .subCategoryParameterHolder
+                                            .orderType = PsConst.FILTERING__ASC;
+                                        _subCategoryProvider!
+                                            .resetSubCategoryList(
+                                          _subCategoryProvider!
+                                              .subCategoryParameterHolder
+                                              .toMap(),
+                                          Utils.checkUserLoginId(
+                                              _subCategoryProvider!
+                                                  .psValueHolder!),
+                                        );
+                                      },
+                                      onDescendingTap: () {
+                                        _subCategoryProvider!
+                                                .subCategoryParameterHolder
+                                                .orderBy =
+                                            PsConst.FILTERING_SUBCAT_NAME;
+                                        _subCategoryProvider!
+                                                .subCategoryParameterHolder
+                                                .orderType =
+                                            PsConst.FILTERING__DESC;
+                                        _subCategoryProvider!
+                                            .resetSubCategoryList(
+                                          _subCategoryProvider!
+                                              .subCategoryParameterHolder
+                                              .toMap(),
+                                          Utils.checkUserLoginId(
+                                              _subCategoryProvider!
+                                                  .psValueHolder!),
+                                        );
+                                      },
+                                    );
+                                  });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                     Expanded(
                       child: Stack(children: <Widget>[
                         Container(
-                          margin: const EdgeInsets.all(PsDimens.space8),
+                            margin: const EdgeInsets.all(PsDimens.space8),
                             child: RefreshIndicator(
-                          onRefresh: () {
-                            return _subCategoryProvider!.resetSubCategoryList(
-                                _subCategoryProvider!.subCategoryParameterHolder
-                                    .toMap(),
-                                Utils.checkUserLoginId(valueHolder!),
+                              onRefresh: () {
+                                return _subCategoryProvider!
+                                    .resetSubCategoryList(
+                                  _subCategoryProvider!
+                                      .subCategoryParameterHolder
+                                      .toMap(),
+                                  Utils.checkUserLoginId(valueHolder!),
                                 );
-                          },
-                          child: CustomScrollView(
-                              controller: _scrollController,
-                              physics: const AlwaysScrollableScrollPhysics(),
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: false,
-                              slivers: <Widget>[
-                                SliverGrid(
-                                  gridDelegate:
-                                      const SliverGridDelegateWithMaxCrossAxisExtent(
-                                          maxCrossAxisExtent: 100.0,
-                                          childAspectRatio: 0.80),
-                                  delegate: SliverChildBuilderDelegate(
-                                    (BuildContext context, int index) {
-                                      if (provider.subCategoryList.status ==
-                                          PsStatus.BLOCK_LOADING) {
-                                        return Shimmer.fromColors(
-                                            baseColor: PsColors.grey,
-                                            highlightColor: PsColors.white,
-                                            child:
-                                                Column(children: const <Widget>[
-                                              FrameUIForLoading(),
-                                              FrameUIForLoading(),
-                                              FrameUIForLoading(),
-                                              FrameUIForLoading(),
-                                              FrameUIForLoading(),
-                                              FrameUIForLoading(),
-                                            ]));
-                                      } else
-                                       if(provider.subCategoryList.data != null ||
-                                            provider.subCategoryList.data!.isNotEmpty){
-                                        final int count = provider.subCategoryList.data!.length; 
-                                      final SubCategory? subCategory = provider.subCategoryList.data![index];    
+                              },
+                              child: CustomScrollView(
+                                  controller: _scrollController,
+                                  physics:
+                                      const AlwaysScrollableScrollPhysics(),
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: false,
+                                  slivers: <Widget>[
+                                    SliverGrid(
+                                      gridDelegate:
+                                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                                              maxCrossAxisExtent: 100.0,
+                                              childAspectRatio: 0.80),
+                                      delegate: SliverChildBuilderDelegate(
+                                        (BuildContext context, int index) {
+                                          if (provider.subCategoryList.status ==
+                                              PsStatus.BLOCK_LOADING) {
+                                            return Shimmer.fromColors(
+                                                baseColor: PsColors.grey,
+                                                highlightColor: PsColors.white,
+                                                child: Column(
+                                                    children: const <Widget>[
+                                                      FrameUIForLoading(),
+                                                      FrameUIForLoading(),
+                                                      FrameUIForLoading(),
+                                                      FrameUIForLoading(),
+                                                      FrameUIForLoading(),
+                                                      FrameUIForLoading(),
+                                                    ]));
+                                          } else if (provider
+                                                      .subCategoryList.data !=
+                                                  null ||
+                                              provider.subCategoryList.data!
+                                                  .isNotEmpty) {
+                                            final int count = provider
+                                                .subCategoryList.data!.length;
+                                            final SubCategory? subCategory =
+                                                provider.subCategoryList
+                                                    .data![index];
 
-                                      if (subCategory?.isSubscribe != null && subCategory!.isSubscribe == PsConst.ONE 
-                                              && !tempList.contains(subCategory.id) && needToAdd) {
-                                        tempList.add(subCategory.id);
-                                      }   
-                                      return SubCategoryGridItem(
-                                        subScribeNoti: subscribeNoti,
-                                        tempList: tempList,
-                                        subCategory: subCategory!,
-                                        onTap: () {
-                                          if (subscribeNoti) {
-                                              setState(() {
-                                                
-                                                if (tempList.contains(subCategory.id)) {
-                                                  tempList.remove(subCategory.id);
-                                                  unsubscribeListWithMB.add(subCategory.id! + '_MB');
-                                                }
-                                                else {
-                                                  tempList.add(subCategory.id);
-                                                  unsubscribeListWithMB.remove(subCategory.id! + '_MB');
-                                                }
-                                                            
+                                            if (subCategory?.isSubscribe !=
+                                                    null &&
+                                                subCategory!.isSubscribe ==
+                                                    PsConst.ONE &&
+                                                !tempList
+                                                    .contains(subCategory.id) &&
+                                                needToAdd) {
+                                              tempList.add(subCategory.id);
+                                            }
+                                            return SubCategoryGridItem(
+                                              subScribeNoti: subscribeNoti,
+                                              tempList: tempList,
+                                              subCategory: subCategory!,
+                                              onTap: () {
+                                                if (subscribeNoti) {
+                                                  setState(() {
+                                                    if (tempList.contains(
+                                                        subCategory.id)) {
+                                                      tempList.remove(
+                                                          subCategory.id);
+                                                      unsubscribeListWithMB.add(
+                                                          subCategory.id! +
+                                                              '_MB');
+                                                    } else {
+                                                      tempList
+                                                          .add(subCategory.id);
+                                                      unsubscribeListWithMB
+                                                          .remove(
+                                                              subCategory.id! +
+                                                                  '_MB');
+                                                    }
 
-                                                if (subscribeList
-                                                    .contains(subCategory.id))
-                                                  subscribeList
-                                                      .remove(subCategory.id);
-                                                else
-                                                  subscribeList
-                                                      .add(subCategory.id);
-                                                needToAdd = false;      
-                                              });
-                                          } 
-                                                  else {
-                                                  provider.subCategoryByCatIdParamenterHolder.mile = 
-                                                              valueHolder!.mile;  
-                                                          provider.subCategoryByCatIdParamenterHolder
-                                                                  .catId =
+                                                    if (subscribeList.contains(
+                                                        subCategory.id))
+                                                      subscribeList.remove(
+                                                          subCategory.id);
+                                                    else
+                                                      subscribeList
+                                                          .add(subCategory.id);
+                                                    needToAdd = false;
+                                                  });
+                                                } else {
+                                                  provider
+                                                      .subCategoryByCatIdParamenterHolder
+                                                      .mile = valueHolder!.mile;
+                                                  provider.subCategoryByCatIdParamenterHolder
+                                                          .catId =
                                                       provider.subCategoryList
                                                           .data![index].catId;
                                                   provider.subCategoryByCatIdParamenterHolder
@@ -454,51 +482,56 @@ class _ModelGridViewState extends State<SubCategoryGridView>
                                                       valueHolder!.locationId;
                                                   provider.subCategoryByCatIdParamenterHolder
                                                           .itemLocationName =
-                                                      valueHolder!.locactionName;
-                                                  if (valueHolder!.isSubLocation ==
+                                                      valueHolder!
+                                                          .locactionName;
+                                                  if (valueHolder!
+                                                          .isSubLocation ==
                                                       PsConst.ONE) {
                                                     provider.subCategoryByCatIdParamenterHolder
                                                             .itemLocationTownshipId =
-                                                        valueHolder!.locationTownshipId;
+                                                        valueHolder!
+                                                            .locationTownshipId;
                                                     provider.subCategoryByCatIdParamenterHolder
                                                             .itemLocationTownshipName =
                                                         valueHolder!
                                                             .locationTownshipName;
                                                   }
-                                                  Navigator.pushNamed(context,
-                                                      RoutePaths.filterProductList,
+                                                  Navigator.pushNamed(
+                                                      context,
+                                                      RoutePaths
+                                                          .filterProductList,
                                                       arguments: ProductListIntentHolder(
                                                           appBarTitle: provider
                                                               .subCategoryList
                                                               .data![index]
                                                               .name,
-                                                          productParameterHolder: provider
-                                                              .subCategoryByCatIdParamenterHolder));
+                                                          productParameterHolder:
+                                                              provider
+                                                                  .subCategoryByCatIdParamenterHolder));
                                                 }
-                                                },
-                                                animationController:
-                                                    animationController,
-                                                animation:
-                                                    Tween<double>(begin: 0.0, end: 1.0)
-                                                        .animate(CurvedAnimation(
-                                                  parent: animationController!,
-                                                  curve: Interval(
-                                                      (1 / count) * index, 1.0,
-                                                      curve: Curves.fastOutSlowIn),
-                                                )),
-                                             
-                                        );
-                                      } 
-                                      else {
-                                        return Container();
-                                       }
-                                    },
-                                    childCount:
-                                        provider.subCategoryList.data!.length,
-                                  ),
-                                ),
-                              ]),
-                        )),
+                                              },
+                                              animationController:
+                                                  animationController,
+                                              animation: Tween<double>(
+                                                      begin: 0.0, end: 1.0)
+                                                  .animate(CurvedAnimation(
+                                                parent: animationController!,
+                                                curve: Interval(
+                                                    (1 / count) * index, 1.0,
+                                                    curve:
+                                                        Curves.fastOutSlowIn),
+                                              )),
+                                            );
+                                          } else {
+                                            return Container();
+                                          }
+                                        },
+                                        childCount: provider
+                                            .subCategoryList.data!.length,
+                                      ),
+                                    ),
+                                  ]),
+                            )),
                         // Positioned(
                         //   child: Text('dadf')),
 
@@ -517,14 +550,13 @@ class _ModelGridViewState extends State<SubCategoryGridView>
   }
 }
 
-void updateCheckBox(BuildContext context,SubCategoryProvider provider) {
-
+void updateCheckBox(BuildContext context, SubCategoryProvider provider) {
   if (provider.isChecked) {
-   provider.isChecked = false;
+    provider.isChecked = false;
   } else {
-  provider. isChecked = true;
+    provider.isChecked = true;
   }
- }
+}
 
 class FrameUIForLoading extends StatelessWidget {
   const FrameUIForLoading({

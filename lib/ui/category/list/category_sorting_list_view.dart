@@ -29,7 +29,6 @@ class CategorySortingListView extends StatefulWidget {
 
 class _CategorySortingListViewState extends State<CategorySortingListView>
     with SingleTickerProviderStateMixin {
-
   _CategorySortingListViewState() {
     searchBar = SearchBar(
         inBar: true,
@@ -44,7 +43,8 @@ class _CategorySortingListViewState extends State<CategorySortingListView>
         onClosed: () {
           _categoryProvider!.categoryParameterHolder.keyword = '';
           _categoryProvider!.resetCategoryList(
-              _categoryProvider!.categoryParameterHolder.toMap(), psValueHolder!.loginUserId);
+              _categoryProvider!.categoryParameterHolder.toMap(),
+              psValueHolder!.loginUserId);
         });
   }
   final ScrollController _scrollController = ScrollController();
@@ -61,15 +61,17 @@ class _CategorySortingListViewState extends State<CategorySortingListView>
 
   void onSubmitted(String value) {
     _categoryProvider!.categoryParameterHolder.keyword = value;
-     _categoryProvider!.resetCategoryList(
-              _categoryProvider!.categoryParameterHolder.toMap(), Utils.checkUserLoginId(_categoryProvider!.psValueHolder!));
+    _categoryProvider!.resetCategoryList(
+        _categoryProvider!.categoryParameterHolder.toMap(),
+        Utils.checkUserLoginId(_categoryProvider!.psValueHolder!));
   }
 
   AppBar buildAppBar(BuildContext context) {
     if (_categoryProvider != null) {
       _categoryProvider!.categoryParameterHolder.keyword = '';
-          _categoryProvider!.resetCategoryList(
-              _categoryProvider!.categoryParameterHolder.toMap(), Utils.checkUserLoginId(_categoryProvider!.psValueHolder!));
+      _categoryProvider!.resetCategoryList(
+          _categoryProvider!.categoryParameterHolder.toMap(),
+          Utils.checkUserLoginId(_categoryProvider!.psValueHolder!));
     }
     searchTextController.clear();
     return AppBar(
@@ -77,23 +79,21 @@ class _CategorySortingListViewState extends State<CategorySortingListView>
         statusBarIconBrightness: Utils.getBrightnessForAppBar(context),
       ),
       backgroundColor: PsColors.baseColor,
-      iconTheme: Theme.of(context).iconTheme.copyWith(
-        color: PsColors.iconColor
-      ),
-          // color: Utils.isLightMode(context)
-          //     ? PsColors.primary500
-          //     : PsColors.primaryDarkWhite),
+      iconTheme:
+          Theme.of(context).iconTheme.copyWith(color: PsColors.iconColor),
+      // color: Utils.isLightMode(context)
+      //     ? PsColors.primary500
+      //     : PsColors.primaryDarkWhite),
       title: Text(Utils.getString(context, 'dashboard__category_list'),
           style: Theme.of(context)
               .textTheme
               .headline6
               ?.copyWith(fontWeight: FontWeight.bold)
-              .copyWith(
-                color: PsColors.textColor2)
-                  // color: Utils.isLightMode(context)
-                  //     ? PsColors.primary500
-                  //     : PsColors.primaryDarkWhite)
-                      ),
+              .copyWith(color: PsColors.textColor2)
+          // color: Utils.isLightMode(context)
+          //     ? PsColors.primary500
+          //     : PsColors.primaryDarkWhite)
+          ),
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.search, color: PsColors.iconColor),
@@ -159,83 +159,100 @@ class _CategorySortingListViewState extends State<CategorySortingListView>
     }
 
     return WillPopScope(
-      onWillPop: _requestPop,
-      child: Scaffold(
-        appBar: searchBar.build(context),
-        body: ChangeNotifierProvider<CategoryProvider?>(
+        onWillPop: _requestPop,
+        child: Scaffold(
+          appBar: searchBar.build(context),
+          body: ChangeNotifierProvider<CategoryProvider?>(
             lazy: false,
             create: (BuildContext context) {
-              final CategoryProvider provider = CategoryProvider(
-                  repo: repo1, psValueHolder: psValueHolder);
+              final CategoryProvider provider =
+                  CategoryProvider(repo: repo1, psValueHolder: psValueHolder);
               _categoryProvider = provider;
-              _categoryProvider!.loadCategoryList(_categoryProvider!.categoryParameterHolder.toMap(),
-                Utils.checkUserLoginId(_categoryProvider!.psValueHolder!));
+              _categoryProvider!.loadCategoryList(
+                  _categoryProvider!.categoryParameterHolder.toMap(),
+                  Utils.checkUserLoginId(_categoryProvider!.psValueHolder!));
 
               return _categoryProvider;
             },
             child: Consumer<CategoryProvider>(builder: (BuildContext context,
-                                            CategoryProvider provider, Widget? child) {
+                CategoryProvider provider, Widget? child) {
               return Container(
-              color: PsColors.baseColor,
-              child: Column(
-                children: <Widget>[
-                  const PsAdMobBannerWidget(
-                    admobSize: AdSize.banner,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  color: PsColors.baseColor,
+                  child: Column(
                     children: <Widget>[
-                      const SizedBox(
-                        width: PsDimens.space1,
+                      const PsAdMobBannerWidget(
+                        admobSize: AdSize.banner,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: PsDimens.space20, top: PsDimens.space16),
-                        child: InkWell(
-                          onTap: () {
-                          showDialog<dynamic>(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return FilterDialog(
-                              onAscendingTap: () async {
-                                _categoryProvider!.categoryParameterHolder.orderBy =
-                                    PsConst.FILTERING_CAT_NAME;
-                                _categoryProvider!.categoryParameterHolder.orderType =
-                                    PsConst.FILTERING__ASC;
-                                _categoryProvider!.resetCategoryList(
-                                    _categoryProvider!.categoryParameterHolder.toMap(),
-                                    Utils.checkUserLoginId(
-                                        _categoryProvider!.psValueHolder!));
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          const SizedBox(
+                            width: PsDimens.space1,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                right: PsDimens.space20, top: PsDimens.space16),
+                            child: InkWell(
+                              onTap: () {
+                                showDialog<dynamic>(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return FilterDialog(
+                                        onAscendingTap: () async {
+                                          _categoryProvider!
+                                                  .categoryParameterHolder
+                                                  .orderBy =
+                                              PsConst.FILTERING_CAT_NAME;
+                                          _categoryProvider!
+                                                  .categoryParameterHolder
+                                                  .orderType =
+                                              PsConst.FILTERING__ASC;
+                                          _categoryProvider!.resetCategoryList(
+                                              _categoryProvider!
+                                                  .categoryParameterHolder
+                                                  .toMap(),
+                                              Utils.checkUserLoginId(
+                                                  _categoryProvider!
+                                                      .psValueHolder!));
+                                        },
+                                        onDescendingTap: () {
+                                          _categoryProvider!
+                                                  .categoryParameterHolder
+                                                  .orderBy =
+                                              PsConst.FILTERING_CAT_NAME;
+                                          _categoryProvider!
+                                                  .categoryParameterHolder
+                                                  .orderType =
+                                              PsConst.FILTERING__DESC;
+                                          _categoryProvider!.resetCategoryList(
+                                              _categoryProvider!
+                                                  .categoryParameterHolder
+                                                  .toMap(),
+                                              Utils.checkUserLoginId(
+                                                  _categoryProvider!
+                                                      .psValueHolder!));
+                                        },
+                                      );
+                                    });
                               },
-                              onDescendingTap: () {
-                                _categoryProvider!.categoryParameterHolder.orderBy =
-                                    PsConst.FILTERING_CAT_NAME;
-                                _categoryProvider!.categoryParameterHolder.orderType =
-                                    PsConst.FILTERING__DESC;
-                                _categoryProvider!.resetCategoryList(
-                                    _categoryProvider!.categoryParameterHolder.toMap(),
-                                    Utils.checkUserLoginId(
-                                        _categoryProvider!.psValueHolder!));
-                              },
-                            );
-                          });
-                          },
-                          child: Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.sort_by_alpha_rounded,
-                                  color: PsColors.textColor2,
-                                  size: 12,
-                                ),
-                                const SizedBox(
-                                  width: PsDimens.space4,
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(left: 20),
-                                  child: Text(Utils.getString(context, 'Sort'),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1!
-                                          .copyWith(
+                              child: Row(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.sort_by_alpha_rounded,
+                                    color: PsColors.textColor2,
+                                    size: 12,
+                                  ),
+                                  const SizedBox(
+                                    width: PsDimens.space4,
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.only(left: 20),
+                                    child: Text(
+                                        Utils.getString(context, 'sort'),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .copyWith(
                                               fontSize: 16,
                                               // color: widget.searchProductProvider!
                                               //             .productParameterHolder.catId ==
@@ -244,105 +261,117 @@ class _CategorySortingListViewState extends State<CategorySortingListView>
                                               //         ? PsColors.secondary400
                                               //         : PsColors.primaryDarkWhite
                                               //     : PsColors.textColor1
-                                                  )),
-                                ),
-                              ],
-                            ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Expanded(
-                    child: Stack(children: <Widget>[
-                      Container(
-                          margin: const EdgeInsets.all(PsDimens.space8),
-                          child: RefreshIndicator(
-                            child: CustomScrollView(
-                                controller: _scrollController,
-                                scrollDirection: Axis.vertical,
-                                physics: const AlwaysScrollableScrollPhysics(),
-                                shrinkWrap: false,
-                                slivers: <Widget>[
-                                  SliverGrid(
-                                    gridDelegate:
-                                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                                            maxCrossAxisExtent: 100.0,
-                                            childAspectRatio: 0.8),
-                                    delegate: SliverChildBuilderDelegate(
-                                      (BuildContext context, int index) {
-                                        if (provider.categoryList.data != null ||
-                                            provider
-                                                .categoryList.data!.isNotEmpty) {
-                                          final int count =
-                                              provider.categoryList.data!.length;
-                                          return CategoryVerticalListItem(
-                                            animationController:
-                                                animationController,
-                                            animation: Tween<double>(
-                                                    begin: 0.0, end: 1.0)
-                                                .animate(CurvedAnimation(
-                                              parent: animationController!,
-                                              curve: Interval(
-                                                  (1 / count) * index, 1.0,
-                                                  curve: Curves.fastOutSlowIn),
                                             )),
-                                            category: provider
-                                                .categoryList.data![index],
-                                            onTap: () {
-                                              if (Utils.showUI(psValueHolder!.subCatId)) {
-                                                Navigator.pushNamed(context,
-                                                    RoutePaths.subCategoryGrid,
-                                                    arguments: provider
-                                                        .categoryList
-                                                        .data![index]);
-                                              } else {
-                                                final ProductParameterHolder
-                                                    productParameterHolder =
-                                                    ProductParameterHolder()
-                                                        .getLatestParameterHolder();
-                                                productParameterHolder.mile = psValueHolder!.mile;        
-                                                productParameterHolder.catId =
-                                                    provider.categoryList
-                                                        .data![index].catId;
-                                                Navigator.pushNamed(context,
-                                                    RoutePaths.filterProductList,
-                                                    arguments:
-                                                        ProductListIntentHolder(
-                                                      appBarTitle: provider
-                                                          .categoryList
-                                                          .data![index]
-                                                          .catName,
-                                                      productParameterHolder:
-                                                          productParameterHolder,
-                                                    ));
-                                              }
-                                            },
-                                          );
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                      childCount:
-                                          provider.categoryList.data!.length,
-                                    ),
                                   ),
-                                ]),
-                            onRefresh: () {
-                              return provider.resetCategoryList(
-                                  _categoryProvider!.categoryParameterHolder
-                                      .toMap(),
-                                  Utils.checkUserLoginId(
-                                      _categoryProvider!.psValueHolder!));
-                            },
-                          )),
-                      PSProgressIndicator(provider.categoryList.status)
-                    ]),
-                  )
-                ],
-              ));
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Expanded(
+                        child: Stack(children: <Widget>[
+                          Container(
+                              margin: const EdgeInsets.all(PsDimens.space8),
+                              child: RefreshIndicator(
+                                child: CustomScrollView(
+                                    controller: _scrollController,
+                                    scrollDirection: Axis.vertical,
+                                    physics:
+                                        const AlwaysScrollableScrollPhysics(),
+                                    shrinkWrap: false,
+                                    slivers: <Widget>[
+                                      SliverGrid(
+                                        gridDelegate:
+                                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                                                maxCrossAxisExtent: 100.0,
+                                                childAspectRatio: 0.8),
+                                        delegate: SliverChildBuilderDelegate(
+                                          (BuildContext context, int index) {
+                                            if (provider.categoryList.data !=
+                                                    null ||
+                                                provider.categoryList.data!
+                                                    .isNotEmpty) {
+                                              final int count = provider
+                                                  .categoryList.data!.length;
+                                              return CategoryVerticalListItem(
+                                                animationController:
+                                                    animationController,
+                                                animation: Tween<double>(
+                                                        begin: 0.0, end: 1.0)
+                                                    .animate(CurvedAnimation(
+                                                  parent: animationController!,
+                                                  curve: Interval(
+                                                      (1 / count) * index, 1.0,
+                                                      curve:
+                                                          Curves.fastOutSlowIn),
+                                                )),
+                                                category: provider
+                                                    .categoryList.data![index],
+                                                onTap: () {
+                                                  if (Utils.showUI(
+                                                      psValueHolder!
+                                                          .subCatId)) {
+                                                    Navigator.pushNamed(
+                                                        context,
+                                                        RoutePaths
+                                                            .subCategoryGrid,
+                                                        arguments: provider
+                                                            .categoryList
+                                                            .data![index]);
+                                                  } else {
+                                                    final ProductParameterHolder
+                                                        productParameterHolder =
+                                                        ProductParameterHolder()
+                                                            .getLatestParameterHolder();
+                                                    productParameterHolder
+                                                            .mile =
+                                                        psValueHolder!.mile;
+                                                    productParameterHolder
+                                                            .catId =
+                                                        provider.categoryList
+                                                            .data![index].catId;
+                                                    Navigator.pushNamed(
+                                                        context,
+                                                        RoutePaths
+                                                            .filterProductList,
+                                                        arguments:
+                                                            ProductListIntentHolder(
+                                                          appBarTitle: provider
+                                                              .categoryList
+                                                              .data![index]
+                                                              .catName,
+                                                          productParameterHolder:
+                                                              productParameterHolder,
+                                                        ));
+                                                  }
+                                                },
+                                              );
+                                            } else {
+                                              return null;
+                                            }
+                                          },
+                                          childCount: provider
+                                              .categoryList.data!.length,
+                                        ),
+                                      ),
+                                    ]),
+                                onRefresh: () {
+                                  return provider.resetCategoryList(
+                                      _categoryProvider!.categoryParameterHolder
+                                          .toMap(),
+                                      Utils.checkUserLoginId(
+                                          _categoryProvider!.psValueHolder!));
+                                },
+                              )),
+                          PSProgressIndicator(provider.categoryList.status)
+                        ]),
+                      )
+                    ],
+                  ));
             }),
           ),
-      ));
+        ));
 
     // return WillPopScope(
     //   onWillPop: _requestPop,
@@ -355,41 +384,41 @@ class _CategorySortingListViewState extends State<CategorySortingListView>
     //             searchBar.beginSearch(context);
     //           },
     //     ),
-            // IconButton(
-            //   icon: Icon(
-            //       FontAwesome.filter, //MaterialCommunityIcons.filter_remove_outline,
-            //       color: PsColors.activeColor),// PsColors.primary500),
-            //   onPressed: () {
-            //     showDialog<dynamic>(
-            //         context: context,
-            //         builder: (BuildContext context) {
-            //           return FilterDialog(
-            //             onAscendingTap: () async {
-            //               _categoryProvider.categoryParameterHolder.keyword = 'comput';
-            //               _categoryProvider.categoryParameterHolder.orderBy =
-            //                   PsConst.FILTERING_CAT_NAME;
-            //               _categoryProvider.categoryParameterHolder.orderType =
-            //                   PsConst.FILTERING__ASC;
-            //               _categoryProvider.resetCategoryList(
-            //                   _categoryProvider.categoryParameterHolder.toMap(),
-            //                   Utils.checkUserLoginId(
-            //                       _categoryProvider.psValueHolder!));
-            //             },
-            //             onDescendingTap: () {
-            //               _categoryProvider.categoryParameterHolder.keyword = 'music';
-            //               _categoryProvider.categoryParameterHolder.orderBy =
-            //                   PsConst.FILTERING_CAT_NAME;
-            //               _categoryProvider.categoryParameterHolder.orderType =
-            //                   PsConst.FILTERING__DESC;
-            //               _categoryProvider.resetCategoryList(
-            //                   _categoryProvider.categoryParameterHolder.toMap(),
-            //                   Utils.checkUserLoginId(
-            //                       _categoryProvider.psValueHolder!));
-            //             },
-            //           );
-            //         });
-            //   },
-            // )
+    // IconButton(
+    //   icon: Icon(
+    //       FontAwesome.filter, //MaterialCommunityIcons.filter_remove_outline,
+    //       color: PsColors.activeColor),// PsColors.primary500),
+    //   onPressed: () {
+    //     showDialog<dynamic>(
+    //         context: context,
+    //         builder: (BuildContext context) {
+    //           return FilterDialog(
+    //             onAscendingTap: () async {
+    //               _categoryProvider.categoryParameterHolder.keyword = 'comput';
+    //               _categoryProvider.categoryParameterHolder.orderBy =
+    //                   PsConst.FILTERING_CAT_NAME;
+    //               _categoryProvider.categoryParameterHolder.orderType =
+    //                   PsConst.FILTERING__ASC;
+    //               _categoryProvider.resetCategoryList(
+    //                   _categoryProvider.categoryParameterHolder.toMap(),
+    //                   Utils.checkUserLoginId(
+    //                       _categoryProvider.psValueHolder!));
+    //             },
+    //             onDescendingTap: () {
+    //               _categoryProvider.categoryParameterHolder.keyword = 'music';
+    //               _categoryProvider.categoryParameterHolder.orderBy =
+    //                   PsConst.FILTERING_CAT_NAME;
+    //               _categoryProvider.categoryParameterHolder.orderType =
+    //                   PsConst.FILTERING__DESC;
+    //               _categoryProvider.resetCategoryList(
+    //                   _categoryProvider.categoryParameterHolder.toMap(),
+    //                   Utils.checkUserLoginId(
+    //                       _categoryProvider.psValueHolder!));
+    //             },
+    //           );
+    //         });
+    //   },
+    // )
     //       ],
     //       initProvider: () {
     //         return CategoryProvider(repo: repo1, psValueHolder: psValueHolder);

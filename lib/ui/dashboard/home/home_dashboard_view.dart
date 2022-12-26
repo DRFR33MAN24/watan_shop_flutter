@@ -17,6 +17,7 @@ import 'package:flutterbuyandsell/provider/product/discount_product_provider.dar
 import 'package:flutterbuyandsell/provider/product/electronic_product_provider.dart';
 import 'package:flutterbuyandsell/provider/product/item_list_from_followers_provider.dart';
 import 'package:flutterbuyandsell/provider/product/nearest_product_provider.dart';
+import 'package:flutterbuyandsell/provider/product/jobs_product_provider.dart';
 import 'package:flutterbuyandsell/provider/product/paid_ad_product_provider%20copy.dart';
 import 'package:flutterbuyandsell/provider/product/popular_product_provider.dart';
 import 'package:flutterbuyandsell/provider/product/realestate_product_provider.dart';
@@ -38,6 +39,7 @@ import 'package:flutterbuyandsell/ui/dashboard/home/widgets/blog_product_slider.
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/home_auto_product_horizontal_list_widget.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/home_discount_product_horizontal_list_widget.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/home_electronic_product_horizontal_list_widget.dart';
+import 'package:flutterbuyandsell/ui/dashboard/home/widgets/home_jobs_product_horizontal_list_widget.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/home_paid_ad_product_horizontal_list_widget.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/home_popular_product_horizontal_list_widget.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/home_realestate_product_horizontal_list_widget.dart';
@@ -93,6 +95,7 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
   DiscountProductProvider? _discountProductProvider;
   AutoProductProvider? _autoProductProvider;
   RealestateProductProvider? _realestateProductProvider;
+  JobsProductProvider? _jobsProductProvider;
   ElectronicProductProvider? _electronicProductProvider;
   PaidAdProductProvider? _paidAdItemProvider;
   BlogProvider? _blogProvider;
@@ -468,6 +471,30 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                         .productRealestateParameterHolder);
                 return _realestateProductProvider!;
               }),
+          ChangeNotifierProvider<JobsProductProvider>(
+              lazy: false,
+              create: (BuildContext context) {
+                _jobsProductProvider = JobsProductProvider(
+                    repo: repo2, limit: valueHolder!.discountItemLoadingLimit!);
+                _jobsProductProvider!.productJobsParameterHolder.mile =
+                    valueHolder!.mile;
+                _jobsProductProvider!.productJobsParameterHolder
+                    .itemLocationId = valueHolder!.locationId;
+                _jobsProductProvider!.productJobsParameterHolder
+                    .itemLocationName = valueHolder!.locactionName;
+                if (valueHolder!.isSubLocation == PsConst.ONE) {
+                  _jobsProductProvider!.productJobsParameterHolder
+                      .itemLocationTownshipId = valueHolder!.locationTownshipId;
+                  _jobsProductProvider!
+                          .productJobsParameterHolder.itemLocationTownshipName =
+                      valueHolder!.locationTownshipName;
+                }
+                final String? loginUserId =
+                    Utils.checkUserLoginId(valueHolder!);
+                _jobsProductProvider!.loadProductList(loginUserId,
+                    _jobsProductProvider!.productJobsParameterHolder);
+                return _jobsProductProvider!;
+              }),
           ChangeNotifierProvider<PopularProductProvider>(
               lazy: false,
               create: (BuildContext context) {
@@ -690,7 +717,8 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                   _recentProductProvider!.resetProductList(loginUserId,
                       _recentProductProvider!.productRecentParameterHolder);
 
-
+                  _popularProductProvider!.resetProductList(loginUserId,
+                      _popularProductProvider!.productPopularParameterHolder);
 
                   _discountProductProvider!.resetProductList(loginUserId,
                       _discountProductProvider!.productDiscountParameterHolder);
@@ -707,6 +735,9 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                       loginUserId,
                       _electronicProductProvider!
                           .productElectronicParameterHolder);
+
+                  _jobsProductProvider!.resetProductList(loginUserId,
+                      _jobsProductProvider!.productJobsParameterHolder);
 
                   _nearestProductProvider!.resetProductList(loginUserId!,
                       _nearestProductProvider!.productNearestParameterHolder);
@@ -785,6 +816,26 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                               curve: Interval((1 / count) * 2, 1.0,
                                   curve: Curves.fastOutSlowIn))), //animation
                     ),
+                    RecentProductHorizontalListWidget(
+                      psValueHolder: valueHolder,
+                      animationController:
+                          widget.animationController, //animationController,
+                      animation: Tween<double>(begin: 0.0, end: 1.0).animate(
+                          CurvedAnimation(
+                              parent: widget.animationController,
+                              curve: Interval((1 / count) * 3, 1.0,
+                                  curve: Curves.fastOutSlowIn))), //animation
+                    ),
+                    HomePopularProductHorizontalListWidget(
+                      psValueHolder: valueHolder,
+                      animationController:
+                          widget.animationController, //animationController,
+                      animation: Tween<double>(begin: 0.0, end: 1.0).animate(
+                          CurvedAnimation(
+                              parent: widget.animationController,
+                              curve: Interval((1 / count) * 3, 1.0,
+                                  curve: Curves.fastOutSlowIn))), //animation
+                    ),
                     HomeAutoProductHorizontalListWidget(
                       psValueHolder: valueHolder,
                       animationController:
@@ -815,14 +866,14 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                               curve: Interval((1 / count) * 4, 1.0,
                                   curve: Curves.fastOutSlowIn))), //animation
                     ),
-                    RecentProductHorizontalListWidget(
+                    HomeJobsProductHorizontalListWidget(
                       psValueHolder: valueHolder,
                       animationController:
                           widget.animationController, //animationController,
                       animation: Tween<double>(begin: 0.0, end: 1.0).animate(
                           CurvedAnimation(
                               parent: widget.animationController,
-                              curve: Interval((1 / count) * 3, 1.0,
+                              curve: Interval((1 / count) * 4, 1.0,
                                   curve: Curves.fastOutSlowIn))), //animation
                     ),
                     NearestProductHorizontalListWidget(
@@ -845,7 +896,6 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                               curve: Interval((1 / count) * 4, 1.0,
                                   curve: Curves.fastOutSlowIn))), //animation
                     ),
-
                     HomePaidAdProductHorizontalListWidget(
                       psValueHolder: valueHolder,
                       animationController: widget.animationController,
