@@ -690,8 +690,7 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                   _recentProductProvider!.resetProductList(loginUserId,
                       _recentProductProvider!.productRecentParameterHolder);
 
-                  _popularProductProvider!.resetProductList(loginUserId,
-                      _popularProductProvider!.productPopularParameterHolder);
+
 
                   _discountProductProvider!.resetProductList(loginUserId,
                       _discountProductProvider!.productDiscountParameterHolder);
@@ -846,16 +845,7 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                               curve: Interval((1 / count) * 4, 1.0,
                                   curve: Curves.fastOutSlowIn))), //animation
                     ),
-                    HomePopularProductHorizontalListWidget(
-                      psValueHolder: valueHolder,
-                      animationController:
-                          widget.animationController, //animationController,
-                      animation: Tween<double>(begin: 0.0, end: 1.0).animate(
-                          CurvedAnimation(
-                              parent: widget.animationController,
-                              curve: Interval((1 / count) * 4, 1.0,
-                                  curve: Curves.fastOutSlowIn))), //animation
-                    ),
+
                     HomePaidAdProductHorizontalListWidget(
                       psValueHolder: valueHolder,
                       animationController: widget.animationController,
