@@ -282,6 +282,7 @@ class PsColors {
 
   static const Color _c_rating_color = Colors.yellow;
   static const Color _c_sold_out = Color(0xFF59C5CF);
+  static const Color _c_sold_out_dark = Color(0xFFffb0b1);
   static const Color _c_item_type_color = Color(0xFFBDBDBD);
 
   // static const Color ps_ctheme__color_about_us = Colors.cyan;
@@ -395,7 +396,7 @@ class PsColors {
     categoryBackgroundColor = _d_base_light_color;
     loadingCircleColor = _c_blue_color;
     ratingColor = _c_rating_color;
-    soldOutUIColor = _c_sold_out;
+    soldOutUIColor = _c_sold_out_dark;
     itemTypeColor = _c_item_type_color;
     paidAdsColor = _c_paid_ads_color;
     bluemarkColor = _c_blue_color;

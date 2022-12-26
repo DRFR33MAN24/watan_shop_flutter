@@ -14,10 +14,12 @@ import 'package:flutterbuyandsell/provider/category/category_provider.dart';
 import 'package:flutterbuyandsell/provider/chat/user_unread_message_provider.dart';
 import 'package:flutterbuyandsell/provider/product/auto_product_provider.dart';
 import 'package:flutterbuyandsell/provider/product/discount_product_provider.dart';
+import 'package:flutterbuyandsell/provider/product/electronic_product_provider.dart';
 import 'package:flutterbuyandsell/provider/product/item_list_from_followers_provider.dart';
 import 'package:flutterbuyandsell/provider/product/nearest_product_provider.dart';
 import 'package:flutterbuyandsell/provider/product/paid_ad_product_provider%20copy.dart';
 import 'package:flutterbuyandsell/provider/product/popular_product_provider.dart';
+import 'package:flutterbuyandsell/provider/product/realestate_product_provider.dart';
 import 'package:flutterbuyandsell/provider/product/recent_product_provider.dart';
 import 'package:flutterbuyandsell/repository/Common/notification_repository.dart';
 import 'package:flutterbuyandsell/repository/blog_repository.dart';
@@ -35,8 +37,10 @@ import 'package:flutterbuyandsell/ui/common/ps_textfield_widget_with_icon.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/blog_product_slider.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/home_auto_product_horizontal_list_widget.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/home_discount_product_horizontal_list_widget.dart';
+import 'package:flutterbuyandsell/ui/dashboard/home/widgets/home_electronic_product_horizontal_list_widget.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/home_paid_ad_product_horizontal_list_widget.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/home_popular_product_horizontal_list_widget.dart';
+import 'package:flutterbuyandsell/ui/dashboard/home/widgets/home_realestate_product_horizontal_list_widget.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/my_header_widget.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/nearest_product_horizontal_list_widget.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/recent_product_horizontal_list_widget.dart';
@@ -88,6 +92,8 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
   PopularProductProvider? _popularProductProvider;
   DiscountProductProvider? _discountProductProvider;
   AutoProductProvider? _autoProductProvider;
+  RealestateProductProvider? _realestateProductProvider;
+  ElectronicProductProvider? _electronicProductProvider;
   PaidAdProductProvider? _paidAdItemProvider;
   BlogProvider? _blogProvider;
   UserUnreadMessageProvider? _userUnreadMessageProvider;
@@ -386,6 +392,82 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                     _recentProductProvider!.productRecentParameterHolder);
                 return _recentProductProvider;
               }),
+          ChangeNotifierProvider<AutoProductProvider>(
+              lazy: false,
+              create: (BuildContext context) {
+                _autoProductProvider = AutoProductProvider(
+                    repo: repo2, limit: valueHolder!.discountItemLoadingLimit!);
+                _autoProductProvider!.productAutoParameterHolder.mile =
+                    valueHolder!.mile;
+                _autoProductProvider!.productAutoParameterHolder
+                    .itemLocationId = valueHolder!.locationId;
+                _autoProductProvider!.productAutoParameterHolder
+                    .itemLocationName = valueHolder!.locactionName;
+                if (valueHolder!.isSubLocation == PsConst.ONE) {
+                  _autoProductProvider!.productAutoParameterHolder
+                      .itemLocationTownshipId = valueHolder!.locationTownshipId;
+                  _autoProductProvider!
+                          .productAutoParameterHolder.itemLocationTownshipName =
+                      valueHolder!.locationTownshipName;
+                }
+                final String? loginUserId =
+                    Utils.checkUserLoginId(valueHolder!);
+                _autoProductProvider!.loadProductList(loginUserId,
+                    _autoProductProvider!.productAutoParameterHolder);
+                return _autoProductProvider!;
+              }),
+          ChangeNotifierProvider<ElectronicProductProvider>(
+              lazy: false,
+              create: (BuildContext context) {
+                _electronicProductProvider = ElectronicProductProvider(
+                    repo: repo2, limit: valueHolder!.discountItemLoadingLimit!);
+                _electronicProductProvider!
+                    .productElectronicParameterHolder.mile = valueHolder!.mile;
+                _electronicProductProvider!.productElectronicParameterHolder
+                    .itemLocationId = valueHolder!.locationId;
+                _electronicProductProvider!.productElectronicParameterHolder
+                    .itemLocationName = valueHolder!.locactionName;
+                if (valueHolder!.isSubLocation == PsConst.ONE) {
+                  _electronicProductProvider!.productElectronicParameterHolder
+                      .itemLocationTownshipId = valueHolder!.locationTownshipId;
+                  _electronicProductProvider!.productElectronicParameterHolder
+                          .itemLocationTownshipName =
+                      valueHolder!.locationTownshipName;
+                }
+                final String? loginUserId =
+                    Utils.checkUserLoginId(valueHolder!);
+                _electronicProductProvider!.loadProductList(
+                    loginUserId,
+                    _electronicProductProvider!
+                        .productElectronicParameterHolder);
+                return _electronicProductProvider!;
+              }),
+          ChangeNotifierProvider<RealestateProductProvider>(
+              lazy: false,
+              create: (BuildContext context) {
+                _realestateProductProvider = RealestateProductProvider(
+                    repo: repo2, limit: valueHolder!.discountItemLoadingLimit!);
+                _realestateProductProvider!
+                    .productRealestateParameterHolder.mile = valueHolder!.mile;
+                _realestateProductProvider!.productRealestateParameterHolder
+                    .itemLocationId = valueHolder!.locationId;
+                _realestateProductProvider!.productRealestateParameterHolder
+                    .itemLocationName = valueHolder!.locactionName;
+                if (valueHolder!.isSubLocation == PsConst.ONE) {
+                  _realestateProductProvider!.productRealestateParameterHolder
+                      .itemLocationTownshipId = valueHolder!.locationTownshipId;
+                  _realestateProductProvider!.productRealestateParameterHolder
+                          .itemLocationTownshipName =
+                      valueHolder!.locationTownshipName;
+                }
+                final String? loginUserId =
+                    Utils.checkUserLoginId(valueHolder!);
+                _realestateProductProvider!.loadProductList(
+                    loginUserId,
+                    _realestateProductProvider!
+                        .productRealestateParameterHolder);
+                return _realestateProductProvider!;
+              }),
           ChangeNotifierProvider<PopularProductProvider>(
               lazy: false,
               create: (BuildContext context) {
@@ -458,30 +540,6 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                     _paidAdItemProvider!.productPaidAdParameterHolder);
 
                 return _paidAdItemProvider;
-              }),
-          ChangeNotifierProvider<AutoProductProvider>(
-              lazy: false,
-              create: (BuildContext context) {
-                _autoProductProvider = AutoProductProvider(
-                    repo: repo2, limit: valueHolder!.discountItemLoadingLimit!);
-                _autoProductProvider!.productDiscountParameterHolder.mile =
-                    valueHolder!.mile;
-                _autoProductProvider!.productDiscountParameterHolder
-                    .itemLocationId = valueHolder!.locationId;
-                _autoProductProvider!.productDiscountParameterHolder
-                    .itemLocationName = valueHolder!.locactionName;
-                if (valueHolder!.isSubLocation == PsConst.ONE) {
-                  _autoProductProvider!.productDiscountParameterHolder
-                      .itemLocationTownshipId = valueHolder!.locationTownshipId;
-                  _autoProductProvider!.productDiscountParameterHolder
-                          .itemLocationTownshipName =
-                      valueHolder!.locationTownshipName;
-                }
-                final String? loginUserId =
-                    Utils.checkUserLoginId(valueHolder!);
-                _autoProductProvider!.loadProductList(loginUserId,
-                    _autoProductProvider!.productDiscountParameterHolder);
-                return _autoProductProvider!;
               }),
           ChangeNotifierProvider<BlogProvider?>(
               lazy: false,
@@ -639,7 +697,17 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                       _discountProductProvider!.productDiscountParameterHolder);
 
                   _autoProductProvider!.resetProductList(loginUserId,
-                      _autoProductProvider!.productDiscountParameterHolder);
+                      _autoProductProvider!.productAutoParameterHolder);
+
+                  _realestateProductProvider!.resetProductList(
+                      loginUserId,
+                      _realestateProductProvider!
+                          .productRealestateParameterHolder);
+
+                  _electronicProductProvider!.resetProductList(
+                      loginUserId,
+                      _electronicProductProvider!
+                          .productElectronicParameterHolder);
 
                   _nearestProductProvider!.resetProductList(loginUserId!,
                       _nearestProductProvider!.productNearestParameterHolder);
@@ -718,6 +786,36 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                               curve: Interval((1 / count) * 2, 1.0,
                                   curve: Curves.fastOutSlowIn))), //animation
                     ),
+                    HomeAutoProductHorizontalListWidget(
+                      psValueHolder: valueHolder,
+                      animationController:
+                          widget.animationController, //animationController,
+                      animation: Tween<double>(begin: 0.0, end: 1.0).animate(
+                          CurvedAnimation(
+                              parent: widget.animationController,
+                              curve: Interval((1 / count) * 4, 1.0,
+                                  curve: Curves.fastOutSlowIn))), //animation
+                    ),
+                    HomeElectronicProductHorizontalListWidget(
+                      psValueHolder: valueHolder,
+                      animationController:
+                          widget.animationController, //animationController,
+                      animation: Tween<double>(begin: 0.0, end: 1.0).animate(
+                          CurvedAnimation(
+                              parent: widget.animationController,
+                              curve: Interval((1 / count) * 4, 1.0,
+                                  curve: Curves.fastOutSlowIn))), //animation
+                    ),
+                    HomeRealestateProductHorizontalListWidget(
+                      psValueHolder: valueHolder,
+                      animationController:
+                          widget.animationController, //animationController,
+                      animation: Tween<double>(begin: 0.0, end: 1.0).animate(
+                          CurvedAnimation(
+                              parent: widget.animationController,
+                              curve: Interval((1 / count) * 4, 1.0,
+                                  curve: Curves.fastOutSlowIn))), //animation
+                    ),
                     RecentProductHorizontalListWidget(
                       psValueHolder: valueHolder,
                       animationController:
@@ -739,16 +837,6 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                                   curve: Curves.fastOutSlowIn))), //animation
                     ),
                     HomeDiscountProductHorizontalListWidget(
-                      psValueHolder: valueHolder,
-                      animationController:
-                          widget.animationController, //animationController,
-                      animation: Tween<double>(begin: 0.0, end: 1.0).animate(
-                          CurvedAnimation(
-                              parent: widget.animationController,
-                              curve: Interval((1 / count) * 4, 1.0,
-                                  curve: Curves.fastOutSlowIn))), //animation
-                    ),
-                    HomeAutoProductHorizontalListWidget(
                       psValueHolder: valueHolder,
                       animationController:
                           widget.animationController, //animationController,

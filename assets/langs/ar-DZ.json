@@ -1,5 +1,5 @@
 {
-  "app_name": " رفرفة شراء وبيع",
+  "app_name": "متجر وطن",
   "default__user_name": "المستعمل",
   "force_update__update": " تحديث",
   "user_status__deleted": "تم حذف حسابك من قبل المسؤول",
@@ -259,8 +259,8 @@
   "home__drawer_menu_discount_product": " خصم المنتج",
   "home__menu_drawer_featured_product": " منتجات مميزة",
   "home__drawer_menu_trending_product": " تتجه المنتج",
-  "home__drawer_menu_popular_item": "الاكثر شهرة",
-  "home__drawer_menu_discount_item": "عناصر الخصم",
+  "home__drawer_menu_popular_item": "الاكثر شعبية",
+  "home__drawer_menu_discount_item": "يتوافر عليه خصم",
   "home__drawer_menu_feature_item": "العناصر الاحدث",
   "home__menu_drawer_collection": " مجموعة",
   "home__menu_drawer_user_info": " معلومات المستخدم",
@@ -627,7 +627,7 @@
   "paid__ads_in_rejected": "الإعلانات المرفوضة",
   "paid__ads_waiting": "بانتظار الموافقة",
   "paid__ads_is_not_yet_start": " إعلانات ليست بعد بدء",
-  "dashboard_recent_product": " آخر عناصر حملت",
+  "dashboard_recent_product": "الاعلانات الاحدث",
   "dashboard_nearest_product": "أقرب عناصر،",
   "dashboard__item_list_from_followers": " عناصر من متابعيك",
   "item_promote__entry": " البند ترويج",
@@ -697,6 +697,8 @@
   "use_current_location": "استخدم الموقع الحالي",
   "pick_on_map": "اختر على الخريطة",
   "home__drawer_menu_auto_item": "مركبات",
+  "home__drawer_menu_realestate_item": "عقارات",
+  "home__drawer_menu_electronic_item": "الكترونيات",
   "demo_warning_description": "هذا هو التطبيق التجريبي. يرجى عدم إدخال أي بيانات دفع حقيقية أو معلومات شخصية. فقط استخدم بيانات الدفع المرسلة.",
   "dialog_understand": "موافق"
 }

@@ -9,8 +9,8 @@ import 'package:flutterbuyandsell/utils/utils.dart';
 import 'package:flutterbuyandsell/viewobject/holder/product_parameter_holder.dart';
 import 'package:flutterbuyandsell/viewobject/product.dart';
 
-class AutoProductProvider extends PsProvider {
-  AutoProductProvider({required ProductRepository repo, int limit = 0})
+class ElectronicProductProvider extends PsProvider {
+  ElectronicProductProvider({required ProductRepository repo, int limit = 0})
       : super(repo, limit) {
     if (limit != 0) {
       super.limit = limit;
@@ -29,8 +29,8 @@ class AutoProductProvider extends PsProvider {
       PsResource<List<Product>>(PsStatus.NOACTION, '', <Product>[]);
   final PsResource<List<Product>> _tempProductList =
       PsResource<List<Product>>(PsStatus.NOACTION, '', <Product>[]);
-  final ProductParameterHolder productAutoParameterHolder =
-      ProductParameterHolder().getAutoParameterHolder();
+  final ProductParameterHolder productElectronicParameterHolder =
+      ProductParameterHolder().getElectronicsParameterHolder();
   PsResource<List<Product>> get productList => _productList;
   StreamSubscription<PsResource<List<Product>>>? subscription;
   StreamController<PsResource<List<Product>>>? productListStream;

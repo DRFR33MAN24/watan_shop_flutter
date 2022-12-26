@@ -17,16 +17,13 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 class ItemLocationFirstView extends StatefulWidget {
-
   @override
   _ItemLocationFirstViewState createState() => _ItemLocationFirstViewState();
 }
 
 class _ItemLocationFirstViewState extends State<ItemLocationFirstView>
     with TickerProviderStateMixin {
-
   _ItemLocationFirstViewState() {
-
     searchBar = SearchBar(
         inBar: true,
         controller: searchTextController,
@@ -48,7 +45,6 @@ class _ItemLocationFirstViewState extends State<ItemLocationFirstView>
   late SearchBar searchBar;
   int i = 0;
 
-
   @override
   void dispose() {
     // animation = null;
@@ -64,7 +60,9 @@ class _ItemLocationFirstViewState extends State<ItemLocationFirstView>
       backgroundColor: PsColors.baseColor,
       iconTheme:
           Theme.of(context).iconTheme.copyWith(color: PsColors.iconColor),
-      title: const Text( '', ),
+      title: const Text(
+        '',
+      ),
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.search, color: PsColors.iconColor),
@@ -78,21 +76,18 @@ class _ItemLocationFirstViewState extends State<ItemLocationFirstView>
   }
 
   void resetDataList() {
-      _itemLocationProvider.latestLocationParameterHolder.keyword = '';
-      _itemLocationProvider.resetItemLocationList(
-          _itemLocationProvider.latestLocationParameterHolder.toMap(),
-          Utils.checkUserLoginId(valueHolder!));
-
+    _itemLocationProvider.latestLocationParameterHolder.keyword = '';
+    _itemLocationProvider.resetItemLocationList(
+        _itemLocationProvider.latestLocationParameterHolder.toMap(),
+        Utils.checkUserLoginId(valueHolder!));
   }
 
-    void onSubmitted(String value) {
- 
-      _itemLocationProvider.latestLocationParameterHolder.keyword = value;
-      _itemLocationProvider.resetItemLocationList(
-          _itemLocationProvider.latestLocationParameterHolder.toMap(),
-          Utils.checkUserLoginId(valueHolder!));
+  void onSubmitted(String value) {
+    _itemLocationProvider.latestLocationParameterHolder.keyword = value;
+    _itemLocationProvider.resetItemLocationList(
+        _itemLocationProvider.latestLocationParameterHolder.toMap(),
+        Utils.checkUserLoginId(valueHolder!));
   }
-
 
   @override
   void initState() {
@@ -141,36 +136,35 @@ class _ItemLocationFirstViewState extends State<ItemLocationFirstView>
     // },
     // );
 
-        return MultiProvider(
-        providers: <SingleChildWidget>[
-          ChangeNotifierProvider<ItemLocationProvider?>(
-              lazy: false,
-              create: (BuildContext context) {
-                final ItemLocationProvider provider = ItemLocationProvider(
-                    repo: repo1, psValueHolder: valueHolder, limit: valueHolder!.defaultLoadingLimit!);
+    return MultiProvider(
+      providers: <SingleChildWidget>[
+        ChangeNotifierProvider<ItemLocationProvider?>(
+            lazy: false,
+            create: (BuildContext context) {
+              final ItemLocationProvider provider = ItemLocationProvider(
+                  repo: repo1,
+                  psValueHolder: valueHolder,
+                  limit: valueHolder!.defaultLoadingLimit!);
 
-             provider.latestLocationParameterHolder.keyword = '';
-                 provider.loadItemLocationList(
-                     provider.latestLocationParameterHolder.toMap(),
-                     Utils.checkUserLoginId(provider.psValueHolder!));
-                 _itemLocationProvider = provider;
-                 return _itemLocationProvider;
-
-              }),
-
-        ],
-        child: Consumer<ItemLocationProvider>(
-          builder:
-              (BuildContext context, ItemLocationProvider provider, Widget? child) {
-            return  Scaffold(
-               appBar: searchBar.build(context),
-              body: ItemLocationListViewWidget(
-                scrollController: _scrollController,
-                animationController: animationController,
-               ),
-            );
-          }),
-       );
+              provider.latestLocationParameterHolder.keyword = '';
+              provider.loadItemLocationList(
+                  provider.latestLocationParameterHolder.toMap(),
+                  Utils.checkUserLoginId(provider.psValueHolder!));
+              _itemLocationProvider = provider;
+              return _itemLocationProvider;
+            }),
+      ],
+      child: Consumer<ItemLocationProvider>(builder:
+          (BuildContext context, ItemLocationProvider provider, Widget? child) {
+        return Scaffold(
+          appBar: searchBar.build(context),
+          body: ItemLocationListViewWidget(
+            scrollController: _scrollController,
+            animationController: animationController,
+          ),
+        );
+      }),
+    );
   }
 }
 
@@ -178,12 +172,11 @@ class ItemLocationListViewWidget extends StatefulWidget {
   const ItemLocationListViewWidget(
       {Key? key,
       required this.scrollController,
-    required this.animationController
-      })
+      required this.animationController})
       : super(key: key);
 
   final ScrollController scrollController;
- final AnimationController? animationController;
+  final AnimationController? animationController;
 
   @override
   _ItemLocationListViewWidgetState createState() =>
@@ -214,15 +207,14 @@ class _ItemLocationListViewWidgetState
           return PSProgressIndicator(provider.itemLocationList.status,
               message: provider.itemLocationList.message);
         }),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-                    Utils.getString(context, 'Seletct Your City'),
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline5!
-                        .copyWith(color: Utils.isLightMode(context) ? PsColors.secondary400 : PsColors.primaryDarkWhite)),
-      ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(Utils.getString(context, 'select_your_location'),
+              style: Theme.of(context).textTheme.headline5!.copyWith(
+                  color: Utils.isLightMode(context)
+                      ? PsColors.secondary400
+                      : PsColors.primaryDarkWhite)),
+        ),
         Expanded(
           child: RefreshIndicator(
             child: MediaQuery.removePadding(
@@ -246,63 +238,62 @@ class _ItemLocationListViewWidgetState
                         itemBuilder: (BuildContext context, int index) {
                           final int count = dataList.length + 1;
                           // ignore: unnecessary_null_comparison
-                         // if (dataList != null || dataList.isNotEmpty) {
-                            return ItemLocationListItem(
-                              animationController: widget.animationController,
-                              animation:
-                                  Tween<double>(begin: 0.0, end: 1.0).animate(
-                                CurvedAnimation(
-                                  parent: widget.animationController!,
-                                  curve: Interval((1 / count) * index, 1.0,
-                                      curve: Curves.fastOutSlowIn),
-                                ),
+                          // if (dataList != null || dataList.isNotEmpty) {
+                          return ItemLocationListItem(
+                            animationController: widget.animationController,
+                            animation:
+                                Tween<double>(begin: 0.0, end: 1.0).animate(
+                              CurvedAnimation(
+                                parent: widget.animationController!,
+                                curve: Interval((1 / count) * index, 1.0,
+                                    curve: Curves.fastOutSlowIn),
                               ),
-                              itemLocation: index == 0
-                                  ? Utils.getString(
-                                      context, 'product_list__category_all')
-                                  : dataList[index - 1].name,
-                              onTap: () async {
-                                    // Navigator.pop(
-                                    // context,
-                                    // _provider
-                                    //     .itemLocationList.data![index -1]);
-                                      if (index == 0) {
-                                  await _provider.replaceItemLocationData(
-                                      '',
-                                      Utils.getString(context,
-                                          'product_list__category_all'),
-                                      PsConst.INVALID_LAT_LNG,
-                                      PsConst.INVALID_LAT_LNG);
-
-                                  await _provider
-                                      .replaceItemLocationTownshipData(
-                                    '',
+                            ),
+                            itemLocation: index == 0
+                                ? Utils.getString(
+                                    context, 'product_list__category_all')
+                                : dataList[index - 1].name,
+                            onTap: () async {
+                              // Navigator.pop(
+                              // context,
+                              // _provider
+                              //     .itemLocationList.data![index -1]);
+                              if (index == 0) {
+                                await _provider.replaceItemLocationData(
                                     '',
                                     Utils.getString(
                                         context, 'product_list__category_all'),
                                     PsConst.INVALID_LAT_LNG,
-                                    PsConst.INVALID_LAT_LNG,
-                                  );
+                                    PsConst.INVALID_LAT_LNG);
 
-                                  // if (valueHolder.isSubLocation ==
-                                  //     PsConst.ONE) {
-                                  //   Navigator.pushReplacementNamed(context,
-                                  //       RoutePaths.itemLocationTownshipList,
-                                  //       arguments: '');
-                                  // } else {
-                                  Navigator.pushReplacementNamed(
-                                      context, RoutePaths.home);
-                                  // }
-                                } else {
-                                    Navigator.pop(
+                                await _provider.replaceItemLocationTownshipData(
+                                  '',
+                                  '',
+                                  Utils.getString(
+                                      context, 'product_list__category_all'),
+                                  PsConst.INVALID_LAT_LNG,
+                                  PsConst.INVALID_LAT_LNG,
+                                );
+
+                                // if (valueHolder.isSubLocation ==
+                                //     PsConst.ONE) {
+                                //   Navigator.pushReplacementNamed(context,
+                                //       RoutePaths.itemLocationTownshipList,
+                                //       arguments: '');
+                                // } else {
+                                Navigator.pushReplacementNamed(
+                                    context, RoutePaths.home);
+                                // }
+                              } else {
+                                Navigator.pop(
                                     context,
                                     _provider
-                                        .itemLocationList.data![index -1]);
-                                  await _provider.replaceItemLocationData(
-                                      dataList[index - 1].id,
-                                      dataList[index - 1].name!,
-                                      dataList[index - 1].lat!,
-                                      dataList[index - 1].lng!);
+                                        .itemLocationList.data![index - 1]);
+                                await _provider.replaceItemLocationData(
+                                    dataList[index - 1].id,
+                                    dataList[index - 1].name!,
+                                    dataList[index - 1].lat!,
+                                    dataList[index - 1].lng!);
                                 //   // if (valueHolder.isSubLocation ==
                                 //   //     PsConst.ONE) {
                                 //   //   Navigator.pushReplacementNamed(context,
@@ -312,9 +303,9 @@ class _ItemLocationListViewWidgetState
                                 //     Navigator.pushReplacementNamed(
                                 //         context, RoutePaths.itemLocationTownshipFirst,arguments:dataList[index - 1].id );
                                 //  // }
-                                }
-                              },
-                            );
+                              }
+                            },
+                          );
                           // } else {
                           //   return Container();
                           // }
@@ -334,4 +325,3 @@ class _ItemLocationListViewWidgetState
     return _widget!;
   }
 }
-

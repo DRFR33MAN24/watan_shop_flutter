@@ -55,17 +55,18 @@ class PsConfig {
   static const String iosApiKey = 'AIz000000000000000000000000000000000000';
 
   static const String androidGoogleAppId =
-      '1:000000000000:android:0000000000000000000000';
-  static const String androidGcmSenderId = '000000000000';
-  static const String androidProjectId = 'flutter-buy-and-sell';
-  static const String androidApiKey = 'AIz0000000000000000000-0000000000000000';
+      '1:7705066811:android:93a465145392412efe8b1e';
+  static const String androidGcmSenderId = '7705066811';
+  static const String androidProjectId = 'watanshop-6848f';
+  static const String androidApiKey = 'AIzaSyDJgyLf1Ij_m-AIV2IG3M3BHI_k8GqLmsM';
   static const String androidDatabaseUrl =
-      'https://flutter-buy-and-sell.firebaseio.com';
+      'https://watanshop-6848f-default-rtdb.europe-west1.firebasedatabase.app';
 
   ///
   /// Facebook Key
   ///
-  //static const String fbKey = '126556525430166';
+  static const String fbKey =
+      'fbd6f5d44a4f654c4390d423e42acd72f6c7f55b2ed6639560064a60d1737d18';
   // static const String fbKey = '000000000000000';
 
   ///

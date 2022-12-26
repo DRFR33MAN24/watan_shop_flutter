@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "7705066811",
+    "firebase_url": "https://watanshop-6848f-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "watanshop-6848f",
     "storage_bucket": "watanshop-6848f.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "7705066811-gfr8rqai0op6qu9djrfk6ll569dunjnf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sabeal.watanshop",
+            "certificate_hash": "b59e9b37e50d5c4eb8de67f35a5ce597e9fe5b44"
+          }
+        },
         {
           "client_id": "7705066811-m0qb79g1813nrkl5kmacse08ofj7rvin.apps.googleusercontent.com",
           "client_type": 1,

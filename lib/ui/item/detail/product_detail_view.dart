@@ -962,8 +962,10 @@ class _ProductDetailState extends State<ProductDetailView>
                                       name:
                                           provider.itemDetail.data!.isSoldOut ==
                                                   '1'
-                                              ? 'Sold Out'
-                                              : 'Available',
+                                              ? Utils.getString(
+                                                  context, 'item_detail__sold')
+                                              : Utils.getString(
+                                                  context, 'available'),
                                       isStatus: true,
                                     ),
                                   ),

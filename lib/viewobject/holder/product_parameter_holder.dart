@@ -447,6 +447,69 @@ class ProductParameterHolder extends PsHolder<dynamic> {
     return this;
   }
 
+    ProductParameterHolder getElectronicsParameterHolder() {
+    searchTerm = '';
+    catId = '5';
+    subCatId = '';
+    itemTypeId = '';
+    itemPriceTypeId = '';
+    itemCurrencyId = '';
+    itemLocationId = '';
+    itemLocationName = '';
+    itemLocationTownshipId = '';
+    itemLocationTownshipName = '';
+    dealOptionId = '';
+    isSoldOut = '';
+    conditionOfItemId = '';
+    conditionOfItemName = '';
+    maxPrice = '';
+    minPrice = '';
+    brand = '';
+    lat = '';
+    lng = '';
+    mile = '';
+    addedUserId = '';
+    isPaid = '';
+    orderBy = PsConst.FILTERING__ADDED_DATE;
+    orderType = PsConst.FILTERING__DESC;
+    status = '1';
+    isDiscount = '';
+    adType = '';
+
+    return this;
+  }
+    ProductParameterHolder getRealestateParameterHolder() {
+    searchTerm = '';
+    catId = '11';
+    subCatId = '';
+    itemTypeId = '';
+    itemPriceTypeId = '';
+    itemCurrencyId = '';
+    itemLocationId = '';
+    itemLocationName = '';
+    itemLocationTownshipId = '';
+    itemLocationTownshipName = '';
+    dealOptionId = '';
+    isSoldOut = '';
+    conditionOfItemId = '';
+    conditionOfItemName = '';
+    maxPrice = '';
+    minPrice = '';
+    brand = '';
+    lat = '';
+    lng = '';
+    mile = '';
+    addedUserId = '';
+    isPaid = '';
+    orderBy = PsConst.FILTERING__ADDED_DATE;
+    orderType = PsConst.FILTERING__DESC;
+    status = '1';
+    isDiscount = '';
+    adType = '';
+
+    return this;
+  }
+
   ProductParameterHolder resetParameterHolder() {
     searchTerm = '';
     catId = '';
