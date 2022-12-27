@@ -867,7 +867,7 @@ class _SortingRadioViewState extends State<SortingRadioView> {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(left: 12, right: 12),
-            child: Text(Utils.getString(context, 'Sorting'),
+            child: Text(Utils.getString(context, 'sorting'),
                 style: Theme.of(context).textTheme.subtitle2),
           ),
           Row(
@@ -892,7 +892,7 @@ class _SortingRadioViewState extends State<SortingRadioView> {
                     ),
                     Expanded(
                       child: Text(
-                        Utils.getString(context, 'Latest'),
+                        Utils.getString(context, 'latest'),
                         style:
                             Theme.of(context).textTheme.bodyText1!.copyWith(),
                         maxLines: 1,
@@ -918,7 +918,7 @@ class _SortingRadioViewState extends State<SortingRadioView> {
                     ),
                     Expanded(
                       child: Text(
-                        Utils.getString(context, 'Popular'),
+                        Utils.getString(context, 'popular'),
                         style:
                             Theme.of(context).textTheme.bodyText1!.copyWith(),
                         maxLines: 1,
@@ -988,7 +988,7 @@ class _StatusRadioViewState extends State<StatusRadioView> {
                     ),
                     Expanded(
                       child: Text(
-                        Utils.getString(context, 'Sold Out'),
+                        Utils.getString(context, 'sold_out'),
                         style:
                             Theme.of(context).textTheme.bodyText1!.copyWith(),
                         maxLines: 1,
@@ -1059,7 +1059,7 @@ class _ConditionRadioViewState extends State<ConditionRadioView> {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(left: PsDimens.space14),
-            child: Text(Utils.getString(context, 'Condition'),
+            child: Text(Utils.getString(context, 'condition'),
                 style: Theme.of(context).textTheme.subtitle2),
           ),
           Row(
@@ -1082,7 +1082,7 @@ class _ConditionRadioViewState extends State<ConditionRadioView> {
                     ),
                     Expanded(
                       child: Text(
-                        Utils.getString(context, 'New'),
+                        Utils.getString(context, 'new'),
                         style:
                             Theme.of(context).textTheme.bodyText1!.copyWith(),
                         maxLines: 1,
@@ -1106,7 +1106,7 @@ class _ConditionRadioViewState extends State<ConditionRadioView> {
                     ),
                     Expanded(
                       child: Text(
-                        Utils.getString(context, 'Used'),
+                        Utils.getString(context, 'used'),
                         style:
                             Theme.of(context).textTheme.bodyText1!.copyWith(),
                         maxLines: 1,
@@ -1647,7 +1647,7 @@ class _PriceTextWidget extends StatelessWidget {
                   contentPadding: const EdgeInsets.only(
                       left: PsDimens.space8, bottom: PsDimens.space8),
                   border: InputBorder.none,
-                  hintText: Utils.getString(context, 'Min'),
+                  hintText: Utils.getString(context, 'min'),
                   hintStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
                       color: Utils.isLightMode(context)
                           ? PsColors.textPrimaryLightColor
@@ -1672,7 +1672,7 @@ class _PriceTextWidget extends StatelessWidget {
                   contentPadding: const EdgeInsets.only(
                       left: PsDimens.space8, bottom: PsDimens.space8),
                   border: InputBorder.none,
-                  hintText: Utils.getString(context, 'Max'),
+                  hintText: Utils.getString(context, 'max'),
                   hintStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
                       color: Utils.isLightMode(context)
                           ? PsColors.textPrimaryLightColor

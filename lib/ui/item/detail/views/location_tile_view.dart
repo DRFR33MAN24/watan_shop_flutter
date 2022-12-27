@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutterbuyandsell/config/ps_colors.dart';
 import 'package:flutterbuyandsell/constant/ps_constants.dart';
@@ -31,9 +29,10 @@ class _LocationTileViewState extends State<LocationTileView> {
     final PsValueHolder psValueHolder = Provider.of<PsValueHolder>(context);
     final Widget _expansionTileTitleWidget = Text(
         Utils.getString(context, 'location_tile__title'),
-        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-          color: PsColors.textColor2
-        ));
+        style: Theme.of(context)
+            .textTheme
+            .subtitle1!
+            .copyWith(color: PsColors.textColor2));
 
     final Widget _expansionTileLeadingIconWidget = Icon(
       Typicons.location, //SimpleLineIcons.location_pin,
@@ -61,66 +60,68 @@ class _LocationTileViewState extends State<LocationTileView> {
         color: PsColors.cardBackgroundColor,
         borderRadius: const BorderRadius.all(Radius.circular(PsDimens.space8)),
       ),
-      child:
-       PsExpansionTile(
+      child: PsExpansionTile(
         initiallyExpanded: true,
-      //  leading: _expansionTileLeadingWidget,
+        //  leading: _expansionTileLeadingWidget,
         title: _expanionTitleWithLeadingIconWidget,
         children: <Widget>[
           Column(
-             crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               // const Divider(
               //   height: PsDimens.space1,
               // ),
-            //  Row(
-            //    children: <Widget>[
-            //     Padding(
-            //             padding: const EdgeInsets.all(PsDimens.space12),
-            //             child: Icon(
-            //                 Typicons.location, //SimpleLineIcons.location_pin,
-            //                 color: PsColors.secondary400,
-            //               )
-            //           ),
-            //      Padding(
-            //             padding: const EdgeInsets.symmetric(vertical : PsDimens.space12),
-            //             child: Text(
-            //                 Utils.getString(context, 'location_tile__title'),
-            //                style: Theme.of(context).textTheme.subtitle1),
-            //           ),
-            //    ],
-            //  ),
-              if (widget.item!.address != null && widget.item!.address != '') 
+              //  Row(
+              //    children: <Widget>[
+              //     Padding(
+              //             padding: const EdgeInsets.all(PsDimens.space12),
+              //             child: Icon(
+              //                 Typicons.location, //SimpleLineIcons.location_pin,
+              //                 color: PsColors.secondary400,
+              //               )
+              //           ),
+              //      Padding(
+              //             padding: const EdgeInsets.symmetric(vertical : PsDimens.space12),
+              //             child: Text(
+              //                 Utils.getString(context, 'location_tile__title'),
+              //                style: Theme.of(context).textTheme.subtitle1),
+              //           ),
+              //    ],
+              //  ),
+              if (widget.item!.address != null && widget.item!.address != '')
                 Padding(
-                  padding: const EdgeInsets.only(left:PsDimens.space18),
-                        child: Text(
-                            widget.item!.address!,
-                           style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                             color: PsColors.textColor2
-                           )),)
-              else 
+                  padding: const EdgeInsets.only(
+                      left: PsDimens.space18, right: PsDimens.space18),
+                  child: Text(widget.item!.address!,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1!
+                          .copyWith(color: PsColors.textColor2)),
+                )
+              else
                 Center(
-                  child: Text(
-                        '__________________________________',
-                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          color: PsColors.primary100
-                        )),
+                  child: Text('__________________________________',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1!
+                          .copyWith(color: PsColors.primary100)),
                 ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[       
+                children: <Widget>[
                   InkWell(
                       child: Ink(
                         child: Padding(
                           padding: const EdgeInsets.all(PsDimens.space16),
                           child: Text(
-                            Utils.getString(
-                                    context, 'location_tile__view_on_map_button')
+                            Utils.getString(context,
+                                    'location_tile__view_on_map_button')
                                 .toUpperCase(),
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2!
-                                .copyWith(color: PsColors.textColor1,fontSize: 12),
+                                .copyWith(
+                                    color: PsColors.textColor1, fontSize: 12),
                           ),
                         ),
                       ),

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -134,20 +133,19 @@ class _ItemPromoteViewState extends State<ItemPromoteView>
             systemOverlayStyle: SystemUiOverlayStyle(
               statusBarIconBrightness: Utils.getBrightnessForAppBar(context),
             ),
-            iconTheme: IconThemeData(
-              color: PsColors.backArrowColor
+            iconTheme: IconThemeData(color: PsColors.backArrowColor
                 // color: Utils.isLightMode(context)
                 //     ? PsColors.primary500
                 //     : PsColors.primaryDarkWhite
-                    ),
+                ),
             title: Text(
               Utils.getString(context, 'item_promote__entry'),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline6!.copyWith(
-                  fontWeight: FontWeight.bold,
-                //  color: 
-                //  Utils.isLightMode(context)? PsColors.primary500 : PsColors.primaryDarkWhite
-                  //PsColors.primaryDarkWhite
+                    fontWeight: FontWeight.bold,
+                    //  color:
+                    //  Utils.isLightMode(context)? PsColors.primary500 : PsColors.primaryDarkWhite
+                    //PsColors.primaryDarkWhite
                   ),
             ),
           ),
@@ -216,10 +214,10 @@ class AdsStartDateDropDownWidgetState
 
                       if (itemPaidHistoryProvider.selectedDateTime != null) {
                         itemPaidHistoryProvider.selectedDate =
-                            DateFormat.yMMMMd('en_US').format(
+                            DateFormat.yMMMMd('ar_DZ').format(
                                     itemPaidHistoryProvider.selectedDateTime!) +
                                 ' ' +
-                                DateFormat.Hms('en_US').format(
+                                DateFormat.Hms('ar_DZ').format(
                                     itemPaidHistoryProvider.selectedDateTime!);
                       }
                       setState(() {
@@ -286,7 +284,7 @@ class AdsHowManyDayWidgetState extends State<AdsHowManyDayWidget> {
             final ItemPromotionProvider provider =
                 Provider.of<ItemPromotionProvider>(context, listen: false);
 
-        if (provider.selectedDate == '' || provider.selectedDate == null) {
+            if (provider.selectedDate == '' || provider.selectedDate == null) {
               showDialog<dynamic>(
                   context: context,
                   builder: (BuildContext context) {
@@ -364,7 +362,7 @@ class AdsHowManyDayWidgetState extends State<AdsHowManyDayWidget> {
             final ItemPromotionProvider provider =
                 Provider.of<ItemPromotionProvider>(context, listen: false);
 
-        if (provider.selectedDate == '' || provider.selectedDate == null) {
+            if (provider.selectedDate == '' || provider.selectedDate == null) {
               showDialog<dynamic>(
                   context: context,
                   builder: (BuildContext context) {
@@ -450,7 +448,7 @@ class AdsHowManyDayWidgetState extends State<AdsHowManyDayWidget> {
 
             final ItemPromotionProvider provider =
                 Provider.of<ItemPromotionProvider>(context, listen: false);
-        if (provider.selectedDate == '' || provider.selectedDate == null) {
+            if (provider.selectedDate == '' || provider.selectedDate == null) {
               showDialog<dynamic>(
                   context: context,
                   builder: (BuildContext context) {
@@ -584,7 +582,7 @@ class AdsHowManyDayWidgetState extends State<AdsHowManyDayWidget> {
             final ItemPromotionProvider provider =
                 Provider.of<ItemPromotionProvider>(context, listen: false);
 
-        if (provider.selectedDate == '' || provider.selectedDate == null) {
+            if (provider.selectedDate == '' || provider.selectedDate == null) {
               showDialog<dynamic>(
                   context: context,
                   builder: (BuildContext context) {
@@ -671,7 +669,7 @@ class AdsHowManyDayWidgetState extends State<AdsHowManyDayWidget> {
                 Provider.of<UserProvider>(context, listen: false);
             final AppInfoProvider appInfoProvider =
                 Provider.of<AppInfoProvider>(context, listen: false);
-        if (provider.selectedDate == '' || provider.selectedDate == null) {
+            if (provider.selectedDate == '' || provider.selectedDate == null) {
               showDialog<dynamic>(
                   context: context,
                   builder: (BuildContext context) {
@@ -685,7 +683,7 @@ class AdsHowManyDayWidgetState extends State<AdsHowManyDayWidget> {
               if (PsConfig.isDemo) {
                 await callDemoWarningDialog(context);
               }
-              
+
               if (provider.selectedDate != null) {
                 startDate = provider.selectedDate;
               }
@@ -711,7 +709,8 @@ class AdsHowManyDayWidgetState extends State<AdsHowManyDayWidget> {
                     itemPaidHistoryParameterHolder =
                     ItemPaidHistoryParameterHolder(
                         itemId: widget.product.id,
-                        amount: Utils.getPriceFormat(amount!, psValueHolder.priceFormat!),
+                        amount: Utils.getPriceFormat(
+                            amount!, psValueHolder.priceFormat!),
                         howManyDay: howManyDay,
                         paymentMethod: PsConst.PAYMENT_RAZOR_METHOD,
                         paymentMethodNounce: '',
@@ -778,7 +777,7 @@ class AdsHowManyDayWidgetState extends State<AdsHowManyDayWidget> {
                     });
               }
 
-             // ignore: unnecessary_null_comparison
+              // ignore: unnecessary_null_comparison
               if (provider != null) {
                 // Start Razor Payment
                 final Razorpay _razorpay = Razorpay();
@@ -796,7 +795,7 @@ class AdsHowManyDayWidgetState extends State<AdsHowManyDayWidget> {
                   'name': userProvider.user.data!.userName,
                   'currency': psValueHolder.isRazorSupportMultiCurrency!
                       ? appInfoProvider.appInfo.data!.currencyShortForm
-                      :psValueHolder.defaultRazorCurrency,
+                      : psValueHolder.defaultRazorCurrency,
                   'description': '',
                   'prefill': <String, String?>{
                     'contact': userProvider.user.data!.userPhone,
@@ -864,8 +863,7 @@ class AdsHowManyDayWidgetState extends State<AdsHowManyDayWidget> {
                     getFifthChoiceDate = false;
                     getEnterDateCountController.clear();
                     amount = amountByFirstChoice.toString();
-                    howManyDay =
-                        psValueHolder.promoteFirstChoiceDay;
+                    howManyDay = psValueHolder.promoteFirstChoiceDay;
                   });
                 },
                 child: Container(
@@ -910,15 +908,17 @@ class AdsHowManyDayWidgetState extends State<AdsHowManyDayWidget> {
                                   Text(
                                       Utils.getString(context, currencySymbol) +
                                           Utils.getPriceFormat(
-                                              amountByFirstChoice.toString(), psValueHolder.priceFormat!)),
+                                              amountByFirstChoice.toString(),
+                                              psValueHolder.priceFormat!)),
                                 ],
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(
                                     right: PsDimens.space12),
-                                child: Text(psValueHolder.promoteFirstChoiceDay! +
-                                    Utils.getString(
-                                        context, 'item_promote__days')),
+                                child: Text(
+                                    psValueHolder.promoteFirstChoiceDay! +
+                                        Utils.getString(
+                                            context, 'item_promote__days')),
                               ),
                             ],
                           ),
@@ -989,7 +989,8 @@ class AdsHowManyDayWidgetState extends State<AdsHowManyDayWidget> {
                                     Text(Utils.getString(
                                             context, currencySymbol) +
                                         Utils.getPriceFormat(
-                                            amountBySecondChoice.toString(), psValueHolder.priceFormat!)),
+                                            amountBySecondChoice.toString(),
+                                            psValueHolder.priceFormat!)),
                                   ],
                                 ),
                                 Padding(
@@ -1068,15 +1069,17 @@ class AdsHowManyDayWidgetState extends State<AdsHowManyDayWidget> {
                                   Text(
                                       Utils.getString(context, currencySymbol) +
                                           Utils.getPriceFormat(
-                                              amountByThirdChoice.toString(), psValueHolder.priceFormat!)),
+                                              amountByThirdChoice.toString(),
+                                              psValueHolder.priceFormat!)),
                                 ],
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(
                                     right: PsDimens.space12),
-                                child: Text(psValueHolder.promoteThirdChoiceDay! +
-                                    Utils.getString(
-                                        context, 'item_promote__days')),
+                                child: Text(
+                                    psValueHolder.promoteThirdChoiceDay! +
+                                        Utils.getString(
+                                            context, 'item_promote__days')),
                               ),
                             ],
                           ),
@@ -1147,7 +1150,8 @@ class AdsHowManyDayWidgetState extends State<AdsHowManyDayWidget> {
                                     Text(Utils.getString(
                                             context, currencySymbol) +
                                         Utils.getPriceFormat(
-                                            amountByFourthChoice.toString(), psValueHolder.priceFormat!)),
+                                            amountByFourthChoice.toString(),
+                                            psValueHolder.priceFormat!)),
                                   ],
                                 ),
                                 Padding(
@@ -1220,16 +1224,20 @@ class AdsHowManyDayWidgetState extends State<AdsHowManyDayWidget> {
                                   if (getEnterDateCountController.text != '' &&
                                       double.parse(getEnterDateCountController.text) >
                                           0.0)
-                                    Text(Utils.getString(context, currencySymbol) +
-                                        Utils.getPriceFormat((double.parse(
-                                                    getEnterDateCountController
-                                                        .text) *
-                                                double.parse(appInfoprovider
-                                                    .appInfo.data!.oneDay!))
-                                            .toString(), psValueHolder.priceFormat!))
+                                    Text(Utils.getString(
+                                            context, currencySymbol) +
+                                        Utils.getPriceFormat(
+                                            (double.parse(
+                                                        getEnterDateCountController
+                                                            .text) *
+                                                    double.parse(appInfoprovider
+                                                        .appInfo.data!.oneDay!))
+                                                .toString(),
+                                            psValueHolder.priceFormat!))
                                   else
-                                    Text(Utils.getString(context, currencySymbol) +
-                                        getEnterDateCountController.text)
+                                    Text(
+                                        Utils.getString(context, currencySymbol) +
+                                            getEnterDateCountController.text)
                                 ],
                               ),
                               Padding(

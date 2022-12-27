@@ -399,7 +399,7 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
               lazy: false,
               create: (BuildContext context) {
                 _autoProductProvider = AutoProductProvider(
-                    repo: repo2, limit: valueHolder!.discountItemLoadingLimit!);
+                    repo: repo2, limit: 30);
                 _autoProductProvider!.productAutoParameterHolder.mile =
                     valueHolder!.mile;
                 _autoProductProvider!.productAutoParameterHolder
@@ -423,7 +423,7 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
               lazy: false,
               create: (BuildContext context) {
                 _electronicProductProvider = ElectronicProductProvider(
-                    repo: repo2, limit: valueHolder!.discountItemLoadingLimit!);
+                    repo: repo2, limit: 30);
                 _electronicProductProvider!
                     .productElectronicParameterHolder.mile = valueHolder!.mile;
                 _electronicProductProvider!.productElectronicParameterHolder
@@ -449,7 +449,7 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
               lazy: false,
               create: (BuildContext context) {
                 _realestateProductProvider = RealestateProductProvider(
-                    repo: repo2, limit: valueHolder!.discountItemLoadingLimit!);
+                    repo: repo2, limit: 30);
                 _realestateProductProvider!
                     .productRealestateParameterHolder.mile = valueHolder!.mile;
                 _realestateProductProvider!.productRealestateParameterHolder
@@ -475,7 +475,7 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
               lazy: false,
               create: (BuildContext context) {
                 _jobsProductProvider = JobsProductProvider(
-                    repo: repo2, limit: valueHolder!.discountItemLoadingLimit!);
+                    repo: repo2, limit:30);
                 _jobsProductProvider!.productJobsParameterHolder.mile =
                     valueHolder!.mile;
                 _jobsProductProvider!.productJobsParameterHolder

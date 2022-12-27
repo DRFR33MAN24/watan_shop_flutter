@@ -31,21 +31,24 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 class AppLoadingView extends StatelessWidget {
-  Future<dynamic> callDateFunction(AppInfoProvider provider,
-      ClearAllDataProvider? clearAllDataProvider, LanguageProvider languageProvider, BuildContext context) async {
+  Future<dynamic> callDateFunction(
+      AppInfoProvider provider,
+      ClearAllDataProvider? clearAllDataProvider,
+      LanguageProvider languageProvider,
+      BuildContext context) async {
     String? realStartDate = '0';
     String realEndDate = '0';
     if (await Utils.checkInternetConnectivity()) {
       if (provider.psValueHolder == null ||
           provider.psValueHolder!.startDate == null) {
-        realStartDate = 
-            DateFormat('yyyy-MM-dd hh:mm:ss' ).format(DateTime.now());
+        realStartDate =
+            DateFormat('yyyy-MM-dd hh:mm:ss').format(DateTime.now());
       } else {
         realStartDate = provider.psValueHolder!.endDate;
       }
 
       realEndDate =
-       DateFormat('yyyy-MM-dd hh:mm:ss', 'en_US').format(DateTime.now());
+          DateFormat('yyyy-MM-dd hh:mm:ss', 'ar_DZ').format(DateTime.now());
       final AppInfoParameterHolder appInfoParameterHolder =
           AppInfoParameterHolder(
               startDate: realStartDate,
@@ -56,8 +59,12 @@ class AppLoadingView extends StatelessWidget {
           await provider.loadDeleteHistory(appInfoParameterHolder.toMap());
 
       if (_psAppInfo.status == PsStatus.SUCCESS) {
-        if (_psAppInfo.data != null && (_psAppInfo.data!.packageInAppPurchaseKeyInAndroid != null || _psAppInfo.data!.packageInAppPurchaseKeyInIOS != null)) {
-          await provider.replacePackageIAPKeys(_psAppInfo.data!.packageInAppPurchaseKeyInAndroid ?? '', _psAppInfo.data!.packageInAppPurchaseKeyInIOS ?? '');
+        if (_psAppInfo.data != null &&
+            (_psAppInfo.data!.packageInAppPurchaseKeyInAndroid != null ||
+                _psAppInfo.data!.packageInAppPurchaseKeyInIOS != null)) {
+          await provider.replacePackageIAPKeys(
+              _psAppInfo.data!.packageInAppPurchaseKeyInAndroid ?? '',
+              _psAppInfo.data!.packageInAppPurchaseKeyInIOS ?? '');
         }
 
         if (_psAppInfo.data!.appSetting!.isSubLocation != null &&
@@ -76,92 +83,87 @@ class AppLoadingView extends StatelessWidget {
 
         if (_psAppInfo.data!.itemUploadConfig != null) {
           await provider.replaceItemUploadConfig(
-          //  _psAppInfo.data!.itemUploadConfig!.title!,
-          //  _psAppInfo.data!.itemUploadConfig!.description!,
-          //  _psAppInfo.data!.itemUploadConfig!.price!,
-          //  _psAppInfo.data!.itemUploadConfig!.itemCurrencyId!,
-          //  _psAppInfo.data!.itemUploadConfig!.locationId!,
-          //  _psAppInfo.data!.itemUploadConfig!.categoryId!,
-          //  _psAppInfo.data!.itemUploadConfig!.image!,
-            _psAppInfo.data!.itemUploadConfig!.address ?? '',
-            _psAppInfo.data!.itemUploadConfig!.brand ?? '',
-            _psAppInfo.data!.itemUploadConfig!.latitude ?? '',
-            _psAppInfo.data!.itemUploadConfig!.longitude ?? '',
-            _psAppInfo.data!.itemUploadConfig!.businessMode ?? '',
-            _psAppInfo.data!.itemUploadConfig!.subCatId ?? '',
-            _psAppInfo.data!.itemUploadConfig!.typeId ?? '',
-            _psAppInfo.data!.itemUploadConfig!.priceTypeId ?? '',
-            _psAppInfo.data!.itemUploadConfig!.conditionOfItemId ?? '',
-            _psAppInfo.data!.itemUploadConfig!.dealOptionId ?? '0',
-            _psAppInfo.data!.itemUploadConfig!.dealOptionRemark ?? '0',
-            _psAppInfo.data!.itemUploadConfig!.highlightInfo ?? '0',
-            _psAppInfo.data!.itemUploadConfig!.video ?? '0',
-            _psAppInfo.data!.itemUploadConfig!.videoIcon ?? '0',
-            _psAppInfo.data!.itemUploadConfig!.discountRateByPercentage ?? ''
-
-          );
+              //  _psAppInfo.data!.itemUploadConfig!.title!,
+              //  _psAppInfo.data!.itemUploadConfig!.description!,
+              //  _psAppInfo.data!.itemUploadConfig!.price!,
+              //  _psAppInfo.data!.itemUploadConfig!.itemCurrencyId!,
+              //  _psAppInfo.data!.itemUploadConfig!.locationId!,
+              //  _psAppInfo.data!.itemUploadConfig!.categoryId!,
+              //  _psAppInfo.data!.itemUploadConfig!.image!,
+              _psAppInfo.data!.itemUploadConfig!.address ?? '',
+              _psAppInfo.data!.itemUploadConfig!.brand ?? '',
+              _psAppInfo.data!.itemUploadConfig!.latitude ?? '',
+              _psAppInfo.data!.itemUploadConfig!.longitude ?? '',
+              _psAppInfo.data!.itemUploadConfig!.businessMode ?? '',
+              _psAppInfo.data!.itemUploadConfig!.subCatId ?? '',
+              _psAppInfo.data!.itemUploadConfig!.typeId ?? '',
+              _psAppInfo.data!.itemUploadConfig!.priceTypeId ?? '',
+              _psAppInfo.data!.itemUploadConfig!.conditionOfItemId ?? '',
+              _psAppInfo.data!.itemUploadConfig!.dealOptionId ?? '0',
+              _psAppInfo.data!.itemUploadConfig!.dealOptionRemark ?? '0',
+              _psAppInfo.data!.itemUploadConfig!.highlightInfo ?? '0',
+              _psAppInfo.data!.itemUploadConfig!.video ?? '0',
+              _psAppInfo.data!.itemUploadConfig!.videoIcon ?? '0',
+              _psAppInfo.data!.itemUploadConfig!.discountRateByPercentage ??
+                  '');
         }
 
         if (_psAppInfo.data!.psMobileConfigSetting != null) {
           await provider.replaceMobileConfigSetting(
-            _psAppInfo.data!.psMobileConfigSetting!
-          );
+              _psAppInfo.data!.psMobileConfigSetting!);
 
-         if(provider.psValueHolder!.isUserAlradyChoose != true) { 
-          if (!languageProvider.isUserChangesLocalLanguage() && 
-                _psAppInfo.data!.psMobileConfigSetting!.defaultLanguage != null) {
-            final Language languageFromApi = _psAppInfo.data!.psMobileConfigSetting!.defaultLanguage!;
-            await languageProvider.addLanguage(languageFromApi);
-            EasyLocalization.of(context)?.setLocale(Locale(languageFromApi.languageCode!, languageFromApi.countryCode));
+          if (provider.psValueHolder!.isUserAlradyChoose != true) {
+            if (!languageProvider.isUserChangesLocalLanguage() &&
+                _psAppInfo.data!.psMobileConfigSetting!.defaultLanguage !=
+                    null) {
+              final Language languageFromApi =
+                  _psAppInfo.data!.psMobileConfigSetting!.defaultLanguage!;
+              await languageProvider.addLanguage(languageFromApi);
+              EasyLocalization.of(context)?.setLocale(Locale(
+                  languageFromApi.languageCode!, languageFromApi.countryCode));
+            }
           }
-         } 
 
-          if (_psAppInfo.data!.psMobileConfigSetting!.excludedLanguages != null) {
+          if (_psAppInfo.data!.psMobileConfigSetting!.excludedLanguages !=
+              null) {
             await languageProvider.replaceExcludedLanguages(
-              _psAppInfo.data!.psMobileConfigSetting!.excludedLanguages!
-            );
+                _psAppInfo.data!.psMobileConfigSetting!.excludedLanguages!);
           }
-          
         }
-        
+
         if (_psAppInfo.data!.appSetting != null) {
           if (_psAppInfo.data!.appSetting!.isBlockedDisabled != null) {
             await provider.replaceIsBlockeFeatureDisabled(
-                _psAppInfo.data!.appSetting!.isBlockedDisabled!
-              ); 
+                _psAppInfo.data!.appSetting!.isBlockedDisabled!);
           }
 
           if (_psAppInfo.data!.appSetting!.isPaidApp != null) {
-            await provider.replaceIsPaidApp(
-              _psAppInfo.data!.appSetting!.isPaidApp!
-              );
+            await provider
+                .replaceIsPaidApp(_psAppInfo.data!.appSetting!.isPaidApp!);
           }
 
-          if (_psAppInfo.data!.appSetting!.isSubCatSubscribe != null ) {
-             await provider.replaceIsSubCatSubscribe(
-              _psAppInfo.data!.appSetting!.isSubCatSubscribe!
-              );  
+          if (_psAppInfo.data!.appSetting!.isSubCatSubscribe != null) {
+            await provider.replaceIsSubCatSubscribe(
+                _psAppInfo.data!.appSetting!.isSubCatSubscribe!);
           }
 
           if (_psAppInfo.data!.appSetting!.isSubLocation != null) {
-          await provider.replaceIsSubLocation(
-              _psAppInfo.data!.appSetting!.isSubLocation!);    
+            await provider.replaceIsSubLocation(
+                _psAppInfo.data!.appSetting!.isSubLocation!);
           }
 
           if (_psAppInfo.data!.appSetting!.maxImageCount != null) {
             await provider.replaceMaxImageCount(
-              int.parse(_psAppInfo.data!.appSetting!.maxImageCount!)
-            );
+                int.parse(_psAppInfo.data!.appSetting!.maxImageCount!));
           }
 
-          if (_psAppInfo.data!.appSetting!.adType!= null) {
-            await provider.replaceAdType(
-              _psAppInfo.data!.appSetting!.adType! );
+          if (_psAppInfo.data!.appSetting!.adType != null) {
+            await provider.replaceAdType(_psAppInfo.data!.appSetting!.adType!);
           }
 
           if (_psAppInfo.data!.appSetting!.promoCellNo != null) {
-            await provider.replacePromoCellNo(
-             _psAppInfo.data!.appSetting!.promoCellNo!);
+            await provider
+                .replacePromoCellNo(_psAppInfo.data!.appSetting!.promoCellNo!);
           }
         }
 
@@ -237,34 +239,35 @@ class AppLoadingView extends StatelessWidget {
         if (valueHolder.isToShowIntroSlider == true) {
           Navigator.pushReplacementNamed(context, RoutePaths.introSlider,
               arguments: 0);
-        } else { 
-              if (valueHolder.isForceLogin == true && Utils.checkUserLoginId(valueHolder) == 'nologinuser') {            
-                   Navigator.pushReplacementNamed(
-                       context, RoutePaths.login_container);
-              } else {
-                    if(valueHolder.isLanguageConfig == true && Utils.checkUserLoginId(valueHolder) == 'nologinuser'){
-                     Navigator.pushReplacementNamed(
-                         context, RoutePaths.languagesetting);
-                       }else{
-          if (provider.isSubLocation && valueHolder.locationId != null) {
-            Navigator.pushReplacementNamed(
-              context,
-              RoutePaths.home,
-            );
-          } else if (!provider.isSubLocation &&
-              valueHolder.locationId != null) {
-            Navigator.pushReplacementNamed(
-              context,
-              RoutePaths.home,
-            );
+        } else {
+          if (valueHolder.isForceLogin == true &&
+              Utils.checkUserLoginId(valueHolder) == 'nologinuser') {
+            Navigator.pushReplacementNamed(context, RoutePaths.login_container);
           } else {
-            Navigator.pushReplacementNamed(
-              context,
-              RoutePaths.itemLocationList,
-            );
-          }
-                       }
+            if (valueHolder.isLanguageConfig == true &&
+                Utils.checkUserLoginId(valueHolder) == 'nologinuser') {
+              Navigator.pushReplacementNamed(
+                  context, RoutePaths.languagesetting);
+            } else {
+              if (provider.isSubLocation && valueHolder.locationId != null) {
+                Navigator.pushReplacementNamed(
+                  context,
+                  RoutePaths.home,
+                );
+              } else if (!provider.isSubLocation &&
+                  valueHolder.locationId != null) {
+                Navigator.pushReplacementNamed(
+                  context,
+                  RoutePaths.home,
+                );
+              } else {
+                Navigator.pushReplacementNamed(
+                  context,
+                  RoutePaths.itemLocationList,
+                );
               }
+            }
+          }
         }
       }
     } else {
@@ -275,34 +278,34 @@ class AppLoadingView extends StatelessWidget {
         Navigator.pushReplacementNamed(context, RoutePaths.introSlider,
             arguments: 0);
       } else {
-             if (valueHolder.isForceLogin == true && Utils.checkUserLoginId(valueHolder) == 'nologinuser') {            
-                   Navigator.pushReplacementNamed(
-                       context, RoutePaths.login_container);
+        if (valueHolder.isForceLogin == true &&
+            Utils.checkUserLoginId(valueHolder) == 'nologinuser') {
+          Navigator.pushReplacementNamed(context, RoutePaths.login_container);
         } else {
-           if(valueHolder.isLanguageConfig == true && Utils.checkUserLoginId(valueHolder) == 'nologinuser'){
-                     Navigator.pushReplacementNamed(
-                         context, RoutePaths.languagesetting);
-             }else{
-        if (provider.isSubLocation &&
-            provider.psValueHolder!.locationId != null) {
-          Navigator.pushReplacementNamed(
-            context,
-            RoutePaths.home,
-          );
-        } else if (!provider.isSubLocation &&
-            provider.psValueHolder!.locationId != null) {
-          Navigator.pushReplacementNamed(
-            context,
-            RoutePaths.home,
-          );
-        } else {
-          Navigator.pushReplacementNamed(
-            context,
-            RoutePaths.itemLocationList,
-          );
+          if (valueHolder.isLanguageConfig == true &&
+              Utils.checkUserLoginId(valueHolder) == 'nologinuser') {
+            Navigator.pushReplacementNamed(context, RoutePaths.languagesetting);
+          } else {
+            if (provider.isSubLocation &&
+                provider.psValueHolder!.locationId != null) {
+              Navigator.pushReplacementNamed(
+                context,
+                RoutePaths.home,
+              );
+            } else if (!provider.isSubLocation &&
+                provider.psValueHolder!.locationId != null) {
+              Navigator.pushReplacementNamed(
+                context,
+                RoutePaths.home,
+              );
+            } else {
+              Navigator.pushReplacementNamed(
+                context,
+                RoutePaths.itemLocationList,
+              );
+            }
+          }
         }
-                       }
-              }
       }
     }
   }
@@ -348,34 +351,34 @@ class AppLoadingView extends StatelessWidget {
         Navigator.pushReplacementNamed(context, RoutePaths.introSlider,
             arguments: 0);
       } else {
-             if (valueHolder.isForceLogin == true && Utils.checkUserLoginId(valueHolder) == 'nologinuser') {            
-                   Navigator.pushReplacementNamed(
-                       context, RoutePaths.login_container);
-              } else {
-               if(valueHolder.isLanguageConfig == true && Utils.checkUserLoginId(valueHolder) == 'nologinuser'){
-                     Navigator.pushReplacementNamed(
-                         context, RoutePaths.languagesetting);
-                       }else{
-                 if (appInfoProvider.isSubLocation && valueHolder.locationId != null) {
-               Navigator.pushReplacementNamed(
-                 context,
-                 RoutePaths.home,
-               );
-        } else if (!appInfoProvider.isSubLocation &&
-            valueHolder.locationId != null) {
-          Navigator.pushReplacementNamed(
-            context,
-            RoutePaths.home,
-          );
+        if (valueHolder.isForceLogin == true &&
+            Utils.checkUserLoginId(valueHolder) == 'nologinuser') {
+          Navigator.pushReplacementNamed(context, RoutePaths.login_container);
         } else {
-          Navigator.pushReplacementNamed(
-            context,
-            RoutePaths.itemLocationList,
-          );
+          if (valueHolder.isLanguageConfig == true &&
+              Utils.checkUserLoginId(valueHolder) == 'nologinuser') {
+            Navigator.pushReplacementNamed(context, RoutePaths.languagesetting);
+          } else {
+            if (appInfoProvider.isSubLocation &&
+                valueHolder.locationId != null) {
+              Navigator.pushReplacementNamed(
+                context,
+                RoutePaths.home,
+              );
+            } else if (!appInfoProvider.isSubLocation &&
+                valueHolder.locationId != null) {
+              Navigator.pushReplacementNamed(
+                context,
+                RoutePaths.home,
+              );
+            } else {
+              Navigator.pushReplacementNamed(
+                context,
+                RoutePaths.itemLocationList,
+              );
+            }
+          }
         }
-                       }
-              }
-
       }
     }
   }
@@ -404,33 +407,34 @@ class AppLoadingView extends StatelessWidget {
         Navigator.pushReplacementNamed(context, RoutePaths.introSlider,
             arguments: 0);
       } else {
-             if (valueHolder.isForceLogin == true && Utils.checkUserLoginId(valueHolder) == 'nologinuser') {            
-                   Navigator.pushReplacementNamed(
-                       context, RoutePaths.login_container);
-              } else {
-              if(valueHolder.isLanguageConfig == true && Utils.checkUserLoginId(valueHolder) == 'nologinuser'){
-                     Navigator.pushReplacementNamed(
-                         context, RoutePaths.languagesetting);
-                       }else{
-                   if (appInfoProvider.isSubLocation && valueHolder.locationId != null) {
-                     Navigator.pushReplacementNamed(
-                       context,
-                       RoutePaths.home,
-                     );
-        } else if (!appInfoProvider.isSubLocation &&
-            valueHolder.locationId != null) {
-          Navigator.pushReplacementNamed(
-            context,
-            RoutePaths.home,
-          );
+        if (valueHolder.isForceLogin == true &&
+            Utils.checkUserLoginId(valueHolder) == 'nologinuser') {
+          Navigator.pushReplacementNamed(context, RoutePaths.login_container);
         } else {
-          Navigator.pushReplacementNamed(
-            context,
-            RoutePaths.itemLocationList,
-          );
+          if (valueHolder.isLanguageConfig == true &&
+              Utils.checkUserLoginId(valueHolder) == 'nologinuser') {
+            Navigator.pushReplacementNamed(context, RoutePaths.languagesetting);
+          } else {
+            if (appInfoProvider.isSubLocation &&
+                valueHolder.locationId != null) {
+              Navigator.pushReplacementNamed(
+                context,
+                RoutePaths.home,
+              );
+            } else if (!appInfoProvider.isSubLocation &&
+                valueHolder.locationId != null) {
+              Navigator.pushReplacementNamed(
+                context,
+                RoutePaths.home,
+              );
+            } else {
+              Navigator.pushReplacementNamed(
+                context,
+                RoutePaths.itemLocationList,
+              );
+            }
+          }
         }
-                       }
-              }
       }
     }
   }
@@ -457,36 +461,36 @@ class AppLoadingView extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, RoutePaths.introSlider,
                     arguments: 0);
               } else {
-              if (valueHolder.isForceLogin == true && Utils.checkUserLoginId(valueHolder) == 'nologinuser') {           
-                   Navigator.pushReplacementNamed(
-                       context, RoutePaths.login_container);
-              } else {
-                 if(valueHolder.isLanguageConfig == true && Utils.checkUserLoginId(valueHolder) == 'nologinuser'){
-                     Navigator.pushReplacementNamed(
-                         context, RoutePaths.languagesetting);
-                       }else{
-                 if (appInfoProvider.isSubLocation &&
-                    valueHolder.locationId != null) {
+                if (valueHolder.isForceLogin == true &&
+                    Utils.checkUserLoginId(valueHolder) == 'nologinuser') {
                   Navigator.pushReplacementNamed(
-                    context,
-                    RoutePaths.home,
-                  );
-                } else if (!appInfoProvider.isSubLocation &&
-                    valueHolder.locationId != null) {
-                  Navigator.pushReplacementNamed(
-                    context,
-                    RoutePaths.home,
-                  );
+                      context, RoutePaths.login_container);
                 } else {
-                  Navigator.pushReplacementNamed(
-                    context,
-                    RoutePaths.itemLocationList,
-                  );
+                  if (valueHolder.isLanguageConfig == true &&
+                      Utils.checkUserLoginId(valueHolder) == 'nologinuser') {
+                    Navigator.pushReplacementNamed(
+                        context, RoutePaths.languagesetting);
+                  } else {
+                    if (appInfoProvider.isSubLocation &&
+                        valueHolder.locationId != null) {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        RoutePaths.home,
+                      );
+                    } else if (!appInfoProvider.isSubLocation &&
+                        valueHolder.locationId != null) {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        RoutePaths.home,
+                      );
+                    } else {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        RoutePaths.itemLocationList,
+                      );
+                    }
+                  }
                 }
-                       }
-                
-                
-              }
               }
             },
             onUpdateTap: () async {
@@ -497,34 +501,36 @@ class AppLoadingView extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, RoutePaths.introSlider,
                     arguments: 0);
               } else {
-                     if (valueHolder.isForceLogin == true && Utils.checkUserLoginId(valueHolder) == 'nologinuser') {            
-                   Navigator.pushReplacementNamed(
-                       context, RoutePaths.login_container);
-              } else {
-                if(valueHolder.isLanguageConfig == true && Utils.checkUserLoginId(valueHolder) == 'nologinuser'){
-                     Navigator.pushReplacementNamed(
-                         context, RoutePaths.languagesetting);
-                       }else{
-                if (appInfoProvider.isSubLocation &&
-                    valueHolder.locationId != null) {
+                if (valueHolder.isForceLogin == true &&
+                    Utils.checkUserLoginId(valueHolder) == 'nologinuser') {
                   Navigator.pushReplacementNamed(
-                    context,
-                    RoutePaths.home,
-                  );
-                } else if (!appInfoProvider.isSubLocation &&
-                    valueHolder.locationId != null) {
-                  Navigator.pushReplacementNamed(
-                    context,
-                    RoutePaths.home,
-                  );
+                      context, RoutePaths.login_container);
                 } else {
-                  Navigator.pushReplacementNamed(
-                    context,
-                    RoutePaths.itemLocationList,
-                  );
+                  if (valueHolder.isLanguageConfig == true &&
+                      Utils.checkUserLoginId(valueHolder) == 'nologinuser') {
+                    Navigator.pushReplacementNamed(
+                        context, RoutePaths.languagesetting);
+                  } else {
+                    if (appInfoProvider.isSubLocation &&
+                        valueHolder.locationId != null) {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        RoutePaths.home,
+                      );
+                    } else if (!appInfoProvider.isSubLocation &&
+                        valueHolder.locationId != null) {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        RoutePaths.home,
+                      );
+                    } else {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        RoutePaths.itemLocationList,
+                      );
+                    }
+                  }
                 }
-                       }
-              }
               }
 
               if (Platform.isIOS) {
@@ -575,7 +581,8 @@ class AppLoadingView extends StatelessWidget {
               provider =
                   AppInfoProvider(repo: repo1, psValueHolder: valueHolder);
 
-              callDateFunction(provider, clearAllDataProvider, languageProvider, context);
+              callDateFunction(
+                  provider, clearAllDataProvider, languageProvider, context);
 
               return provider;
             }),
@@ -606,7 +613,10 @@ class AppLoadingView extends StatelessWidget {
                       Text(
                         Utils.getString(context, 'app_name'),
                         style: Theme.of(context).textTheme.headline6!.copyWith(
-                            fontWeight: FontWeight.bold, color: Utils.isLightMode(context) ? PsColors.primary500 : PsColors.primaryDarkWhite),
+                            fontWeight: FontWeight.bold,
+                            color: Utils.isLightMode(context)
+                                ? PsColors.primary500
+                                : PsColors.primaryDarkWhite),
                       ),
                       const SizedBox(
                         height: PsDimens.space8,

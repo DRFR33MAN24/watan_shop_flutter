@@ -90,8 +90,8 @@ class _InAppPurchaseViewState extends State<InAppPurchaseView> {
           startDate = itemPromotionProvider!.selectedDate;
         }
         // final DateTime dateTime = DateTime.now();
-        final int resultStartTimeStamp =
-            Utils.getTimeStampDividedByOneThousand(itemPromotionProvider!.selectedDateTime!);
+        final int resultStartTimeStamp = Utils.getTimeStampDividedByOneThousand(
+            itemPromotionProvider!.selectedDateTime!);
 
         if (await Utils.checkInternetConnectivity()) {
           final ItemPaidHistoryParameterHolder itemPaidHistoryParameterHolder =
@@ -323,19 +323,20 @@ class _InAppPurchaseViewState extends State<InAppPurchaseView> {
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarIconBrightness: Utils.getBrightnessForAppBar(context),
           ),
-          iconTheme: Theme.of(context).iconTheme.copyWith(
-            color: PsColors.backArrowColor
-              // color: Utils.isLightMode(context)
-              //     ? PsColors.primary500
-              //     : PsColors.primaryDarkWhite
+          iconTheme: Theme.of(context)
+              .iconTheme
+              .copyWith(color: PsColors.backArrowColor
+                  // color: Utils.isLightMode(context)
+                  //     ? PsColors.primary500
+                  //     : PsColors.primaryDarkWhite
                   ),
           title: Text(
             Utils.getString(
                 context, 'item_promote__purchase_promotion_packages'),
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headline6!.copyWith(
-                fontWeight: FontWeight.bold, 
-              //  color: Utils.isLightMode(context)? PsColors.primary500 : PsColors.primaryDarkWhite
+                  fontWeight: FontWeight.bold,
+                  //  color: Utils.isLightMode(context)? PsColors.primary500 : PsColors.primaryDarkWhite
                 ),
           )),
       body: PsWidgetWithMultiProvider(
@@ -366,17 +367,18 @@ class _InAppPurchaseViewState extends State<InAppPurchaseView> {
                       isStar: true,
                       onTap: () async {
                         await DatePicker.showDateTimePicker(context,
-                            minTime: DateTime.now(), onConfirm: (DateTime date) {
+                            minTime: DateTime.now(),
+                            onConfirm: (DateTime date) {
                           itemPromotionProvider!.selectedDateTime = date;
                         }, locale: LocaleType.en);
 
                         if (itemPromotionProvider!.selectedDateTime != null) {
-                          itemPromotionProvider!.selectedDate =
-                              DateFormat.yMMMMd('en_US').format(
-                                      itemPromotionProvider!.selectedDateTime!) +
-                                  ' ' +
-                                  DateFormat.Hms('en_US').format(
-                                      itemPromotionProvider!.selectedDateTime!);
+                          itemPromotionProvider!
+                              .selectedDate = DateFormat.yMMMMd('ar_DZ').format(
+                                  itemPromotionProvider!.selectedDateTime!) +
+                              ' ' +
+                              DateFormat.Hms('ar_DZ').format(
+                                  itemPromotionProvider!.selectedDateTime!);
                         }
                         setState(() {
                           startDateController.text =
@@ -455,7 +457,8 @@ class _InAppPurchaseViewState extends State<InAppPurchaseView> {
                                     .copyWith(color: PsColors.baseColor),
                               ),
                               onPressed: () {
-                                if (itemPromotionProvider!.selectedDate == null) {
+                                if (itemPromotionProvider!.selectedDate ==
+                                    null) {
                                   showDialog<dynamic>(
                                       context: context,
                                       builder: (BuildContext context) {

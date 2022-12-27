@@ -1828,24 +1828,27 @@ class _AllControllerTextWidgetState extends State<AllControllerTextWidget> {
               padding: const EdgeInsets.only(right: 18, left: 18),
               child: Container(
                 height: 250,
-                child: googlemap.GoogleMap(
-                    onMapCreated: widget.updateMapController as void Function(
-                        googlemap.GoogleMapController)?,
-                    initialCameraPosition: kGooglePlex,
-                    circles: <googlemap.Circle>{}..add(googlemap.Circle(
-                        circleId: googlemap.CircleId(
-                            widget.userInputAddress.toString()),
-                        center: googlemap.LatLng(
-                            _latlng!.latitude, _latlng!.longitude),
-                        radius: 50,
-                        fillColor: Colors.blue.withOpacity(0.7),
-                        strokeWidth: 3,
-                        strokeColor: Colors.redAccent,
-                      )),
-                    onTap: (googlemap.LatLng latLngr) {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                      _handleGoogleMapTap(_latlng, widget.googleMapController);
-                    }),
+                child: Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: googlemap.GoogleMap(
+                        onMapCreated: widget.updateMapController as void
+                            Function(googlemap.GoogleMapController)?,
+                        initialCameraPosition: kGooglePlex,
+                        circles: <googlemap.Circle>{}..add(googlemap.Circle(
+                            circleId: googlemap.CircleId(
+                                widget.userInputAddress.toString()),
+                            center: googlemap.LatLng(
+                                _latlng!.latitude, _latlng!.longitude),
+                            radius: 50,
+                            fillColor: Colors.blue.withOpacity(0.7),
+                            strokeWidth: 3,
+                            strokeColor: Colors.redAccent,
+                          )),
+                        onTap: (googlemap.LatLng latLngr) {
+                          FocusScope.of(context).requestFocus(FocusNode());
+                          _handleGoogleMapTap(
+                              _latlng, widget.googleMapController);
+                        })),
               ),
             ),
           ],
