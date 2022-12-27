@@ -48,7 +48,7 @@ class AppLoadingView extends StatelessWidget {
       }
 
       realEndDate =
-          DateFormat('yyyy-MM-dd hh:mm:ss', 'ar_DZ').format(DateTime.now());
+          DateFormat('yyyy-MM-dd hh:mm:ss', 'ar_SA').format(DateTime.now());
       final AppInfoParameterHolder appInfoParameterHolder =
           AppInfoParameterHolder(
               startDate: realStartDate,

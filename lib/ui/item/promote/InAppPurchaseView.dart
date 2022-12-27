@@ -374,10 +374,10 @@ class _InAppPurchaseViewState extends State<InAppPurchaseView> {
 
                         if (itemPromotionProvider!.selectedDateTime != null) {
                           itemPromotionProvider!
-                              .selectedDate = DateFormat.yMMMMd('ar_DZ').format(
+                              .selectedDate = DateFormat.yMMMMd('ar_SA').format(
                                   itemPromotionProvider!.selectedDateTime!) +
                               ' ' +
-                              DateFormat.Hms('ar_DZ').format(
+                              DateFormat.Hms('ar_SA').format(
                                   itemPromotionProvider!.selectedDateTime!);
                         }
                         setState(() {
