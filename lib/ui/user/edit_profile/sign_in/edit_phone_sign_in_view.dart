@@ -284,6 +284,7 @@ class __SendButtonWidgetState extends State<_SendButtonWidget> {
           titleText: Utils.getString(context, 'edit_phone_btn'),
           onPressed: () async {
             await PsProgressDialog.showDialog(context);
+            PsProgressDialog.dismissDialog();
             //await verifyPhone();
           }),
     );
