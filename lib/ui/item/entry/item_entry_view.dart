@@ -1825,12 +1825,11 @@ class _AllControllerTextWidgetState extends State<AllControllerTextWidget> {
             //   },
             // ),
             Padding(
-              padding: const EdgeInsets.only(right: 18, left: 18),
+              padding: const EdgeInsetsDirectional.only(end: 18),
               child: Container(
                 height: 250,
-                child: Directionality(
-                    textDirection: TextDirection.ltr,
-                    child: googlemap.GoogleMap(
+                
+
                         onMapCreated: widget.updateMapController as void
                             Function(googlemap.GoogleMapController)?,
                         initialCameraPosition: kGooglePlex,
@@ -1848,7 +1847,7 @@ class _AllControllerTextWidgetState extends State<AllControllerTextWidget> {
                           FocusScope.of(context).requestFocus(FocusNode());
                           _handleGoogleMapTap(
                               _latlng, widget.googleMapController);
-                        })),
+                        }),
               ),
             ),
           ],
