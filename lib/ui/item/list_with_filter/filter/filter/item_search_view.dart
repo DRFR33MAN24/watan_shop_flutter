@@ -965,7 +965,7 @@ class _StatusRadioViewState extends State<StatusRadioView> {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(left: 12, right: 12),
-            child: Text(Utils.getString(context, 'Status'),
+            child: Text(Utils.getString(context, 'status'),
                 style: Theme.of(context).textTheme.subtitle2),
           ),
           Row(
