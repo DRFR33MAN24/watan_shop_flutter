@@ -1,6 +1,5 @@
-
-
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterbuyandsell/config/ps_colors.dart';
 import 'package:flutterbuyandsell/config/ps_config.dart';
@@ -115,9 +114,11 @@ class _HeaderIconAndTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final Widget _textWidget = Text(
       Utils.getString(context, 'app_name'),
-      style: Theme.of(context).textTheme.subtitle1!.copyWith(
-           color: PsColors.activeColor // color: PsColors.primary500,
-          ),
+      style: Theme.of(context)
+          .textTheme
+          .subtitle1!
+          .copyWith(color: PsColors.activeColor // color: PsColors.primary500,
+              ),
     );
 
     final Widget _imageWidget = Container(
@@ -159,7 +160,7 @@ class _CardWidget extends StatelessWidget {
     return Column(
       children: <Widget>[
         Text(
-          'Enter your new phone number',
+          Utils.getString(context, 'edit_phone_new_phone'),
           style: Theme.of(context).textTheme.bodyText2,
         ),
         const SizedBox(height: 16),
@@ -262,6 +263,7 @@ class __SendButtonWidgetState extends State<_SendButtonWidget> {
             );
           });
     };
+
     await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: widget.phoneController.text,
         codeAutoRetrievalTimeout: autoRetrieve,
@@ -276,7 +278,9 @@ class __SendButtonWidgetState extends State<_SendButtonWidget> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-          left: PsDimens.space32, right: PsDimens.space32,bottom:PsDimens.space32 ),
+          left: PsDimens.space32,
+          right: PsDimens.space32,
+          bottom: PsDimens.space32),
       child: PSButtonWidget(
           colorData: PsColors.buttonColor,
           hasShadow: true,
@@ -284,8 +288,8 @@ class __SendButtonWidgetState extends State<_SendButtonWidget> {
           titleText: Utils.getString(context, 'edit_phone_btn'),
           onPressed: () async {
             await PsProgressDialog.showDialog(context);
-            PsProgressDialog.dismissDialog();
-            //await verifyPhone();
+
+            await verifyPhone();
           }),
     );
   }

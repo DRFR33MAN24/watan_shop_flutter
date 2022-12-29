@@ -1802,6 +1802,8 @@ class _AllControllerTextWidgetState extends State<AllControllerTextWidget> {
         )
       else if (Utils.showUI(valueHolder!.latitude))
         Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             // CurrentLocationWidget(
             //   androidFusedLocation: true,
@@ -1824,32 +1826,27 @@ class _AllControllerTextWidgetState extends State<AllControllerTextWidget> {
             //     });
             //   },
             // ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(end: 18),
-              child: Container(
-                height: 250,
-                
-
-                        onMapCreated: widget.updateMapController as void
-                            Function(googlemap.GoogleMapController)?,
-                        initialCameraPosition: kGooglePlex,
-                        circles: <googlemap.Circle>{}..add(googlemap.Circle(
-                            circleId: googlemap.CircleId(
-                                widget.userInputAddress.toString()),
-                            center: googlemap.LatLng(
-                                _latlng!.latitude, _latlng!.longitude),
-                            radius: 50,
-                            fillColor: Colors.blue.withOpacity(0.7),
-                            strokeWidth: 3,
-                            strokeColor: Colors.redAccent,
-                          )),
-                        onTap: (googlemap.LatLng latLngr) {
-                          FocusScope.of(context).requestFocus(FocusNode());
-                          _handleGoogleMapTap(
-                              _latlng, widget.googleMapController);
-                        }),
-              ),
-            ),
+            Container(
+              height: 250,
+              child: googlemap.GoogleMap(
+                  onMapCreated: widget.updateMapController as void Function(
+                      googlemap.GoogleMapController)?,
+                  initialCameraPosition: kGooglePlex,
+                  circles: <googlemap.Circle>{}..add(googlemap.Circle(
+                      circleId: googlemap.CircleId(
+                          widget.userInputAddress.toString()),
+                      center: googlemap.LatLng(
+                          _latlng!.latitude, _latlng!.longitude),
+                      radius: 50,
+                      fillColor: Colors.blue.withOpacity(0.7),
+                      strokeWidth: 3,
+                      strokeColor: Colors.redAccent,
+                    )),
+                  onTap: (googlemap.LatLng latLngr) {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                    _handleGoogleMapTap(_latlng, widget.googleMapController);
+                  }),
+            )
           ],
         ),
       // PsTextFieldWidget(
@@ -2412,7 +2409,7 @@ class ImageUploadHorizontalListState extends State<ImageUploadHorizontalList> {
         Padding(
           padding: const EdgeInsets.only(left: 6.0, bottom: 12.0),
           child: Text(
-            Utils.getString(context, 'Image'),
+            Utils.getString(context, 'image'),
             style: Theme.of(context)
                 .textTheme
                 .subtitle1

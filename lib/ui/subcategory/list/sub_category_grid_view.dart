@@ -312,7 +312,7 @@ class _ModelGridViewState extends State<SubCategoryGridView>
                                 ),
                                 Container(
                                   margin: const EdgeInsets.only(left: 20),
-                                  child: Text(Utils.getString(context, 'Sort'),
+                                  child: Text(Utils.getString(context, 'sort'),
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyText1!

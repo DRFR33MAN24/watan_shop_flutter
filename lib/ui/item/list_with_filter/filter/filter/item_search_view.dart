@@ -691,7 +691,7 @@ class _ItemSearchViewState extends State<ItemSearchView> {
                           child: PSButtonWidgetWithIconRoundCorner(
                             hasShadow: false,
                             colorData: PsColors.baseColor,
-                            titleText: Utils.getString(context, 'Reset'),
+                            titleText: Utils.getString(context, 'reset'),
                             onPressed: () async {
                               print('Click Clear Button');
                               userInputItemNameTextEditingController.text = '';

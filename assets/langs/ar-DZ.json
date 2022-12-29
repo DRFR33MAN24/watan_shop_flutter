@@ -186,8 +186,8 @@
   "setting__terms_and_condition_statement": "بيان الشروط والأحكام",
   "setting__faq": "أسئلة مكررة",
   "setting__faq_statement": "تحقق من الأسئلة المتداولة هنا",
-  "setting__notification_setting": " إعداد إعلام",
-  "setting__control_setting": " إعداد السيطرة الإخطار",
+  "setting__notification_setting": " إعداد الاشعارات",
+  "setting__control_setting": "التحكم بالاشعارات",
   "setting__camera_setting": "إعداد الكاميرا",
   "setting__camera_control_setting": "ضبط التحكم للكاميرا",
   "setting__change_mode": " تغيير الوضع (أبيض / داكن)",
@@ -712,6 +712,8 @@
   "min": "ادنى",
   "max": "اعلى",
   "sold_out": "تم البيع",
+  "reset": "اعادة تعيين",
+  "image": "صورة",
 
   "demo_warning_description": "هذا هو التطبيق التجريبي. يرجى عدم إدخال أي بيانات دفع حقيقية أو معلومات شخصية. فقط استخدم بيانات الدفع المرسلة.",
   "dialog_understand": "موافق"

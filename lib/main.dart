@@ -15,6 +15,7 @@ import 'package:flutterbuyandsell/repository/ps_theme_repository.dart';
 import 'package:flutterbuyandsell/utils/utils.dart';
 import 'package:flutterbuyandsell/viewobject/common/language.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:intl/intl_standalone.dart';
 // import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 // import 'package:in_app_purchase_ios/in_app_purchase_ios.dart';
 import 'package:provider/provider.dart';
@@ -122,7 +123,7 @@ await EasyLocalization.ensureInitialized();
 
 //svg loading done before use 
 await precachePicture(ExactAssetPicture(SvgPicture.svgStringDecoderBuilder, 'assets/images/loaction_illustration.svg'), null);
-
+await findSystemLocale();
 runApp(EasyLocalization(
       path: 'assets/langs',
       saveLocale: true,

@@ -173,7 +173,7 @@ class _MorePostTitleWidget extends StatelessWidget {
             softWrap: false,
             textAlign: TextAlign.left,
             style: Theme.of(context).textTheme.bodyText1!.copyWith(
-              color: PsColors.textColor2,
+                color: PsColors.textColor2,
                 //color: PsColors.secondary400,
                 fontWeight: FontWeight.bold),
           ),
@@ -233,10 +233,9 @@ class _MorePendingPostWidgetState extends State<_MorePendingPostWidget> {
                         style: Theme.of(context)
                             .textTheme
                             .subtitle1
-                            ?.copyWith(
-                              color: PsColors.textColor1
-                              //color: PsColors.primary500
-                            )),
+                            ?.copyWith(color: PsColors.textColor1
+                                //color: PsColors.primary500
+                                )),
                     const SizedBox(
                       height: PsDimens.space8,
                     ),
@@ -603,14 +602,12 @@ class _MoreSettingAndPrivacyTitleWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Expanded(
-            child: Text(
-              Utils.getString(context, 'more__setting_and_privacy_title'),
-              softWrap: false,
-              textAlign: TextAlign.left,
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  color: PsColors.textColor2, fontWeight: FontWeight.bold),
-            ),
+          Text(
+            Utils.getString(context, 'more__setting_and_privacy_title'),
+            softWrap: false,
+            textAlign: TextAlign.left,
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                color: PsColors.textColor2, fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -714,7 +711,7 @@ class _MoreDeactivateAccWidget extends StatelessWidget {
         showDialog<dynamic>(
             context: context,
             builder: (BuildContext context) {
-          return ConfirmDialogView(
+              return ConfirmDialogView(
                   description: Utils.getString(
                       context, 'profile__deactivate_confirm_text'),
                   leftButtonText: Utils.getString(context, 'dialog__cancel'),
