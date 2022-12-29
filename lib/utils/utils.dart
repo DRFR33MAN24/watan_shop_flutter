@@ -156,7 +156,7 @@ mixin Utils {
   }
 
   static DateTime getDateOnlyFromTimeStamp(int timeStamp) {
-    final DateFormat formatter = DateFormat('yyyy-MM-dd', 'ar_SA');
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
     final DateTime datetimeMessage =
         DateTime.fromMillisecondsSinceEpoch(timeStamp, isUtc: true);
     final String s = formatter.format(datetimeMessage);
@@ -170,7 +170,7 @@ mixin Utils {
     final DateTime dateTime2 =
         DateTime.fromMillisecondsSinceEpoch(timeStamp, isUtc: true);
     final DateTime dateTime = dateTime2.toLocal();
-    final DateFormat format = DateFormat.yMMMMd('ar_SA'); //"6:00 AM"
+    final DateFormat format = DateFormat.yMMMMd(); //"6:00 AM"
     return format.format(dateTime);
   }
 
@@ -182,13 +182,13 @@ mixin Utils {
     final DateTime dateTime2 =
         DateTime.fromMillisecondsSinceEpoch(timeStamp, isUtc: true);
     final DateTime dateTime = dateTime2.toLocal();
-    final DateFormat format = DateFormat.jm('ar_SA'); //"6:00 AM"
+    final DateFormat format = DateFormat.jm(); //"6:00 AM"
     return format.format(dateTime);
   }
 
   static String getTimeString() {
     final DateTime dateTime = DateTime.now();
-    final DateFormat format = DateFormat.Hms('ar_SA');
+    final DateFormat format = DateFormat.Hms();
     return format.format(dateTime);
   }
 
