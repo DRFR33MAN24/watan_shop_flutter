@@ -20,12 +20,14 @@ import 'package:flutterbuyandsell/provider/chat/seller_chat_history_list_provide
 import 'package:flutterbuyandsell/provider/chat/user_unread_message_provider.dart';
 import 'package:flutterbuyandsell/provider/common/notification_provider.dart';
 import 'package:flutterbuyandsell/provider/delete_task/delete_task_provider.dart';
+import 'package:flutterbuyandsell/provider/item_location/item_location_provider.dart';
 import 'package:flutterbuyandsell/provider/user/user_provider.dart';
 import 'package:flutterbuyandsell/repository/Common/notification_repository.dart';
 import 'package:flutterbuyandsell/repository/app_info_repository.dart';
 import 'package:flutterbuyandsell/repository/category_repository.dart';
 import 'package:flutterbuyandsell/repository/chat_history_repository.dart';
 import 'package:flutterbuyandsell/repository/delete_task_repository.dart';
+import 'package:flutterbuyandsell/repository/item_location_repository.dart';
 import 'package:flutterbuyandsell/repository/product_repository.dart';
 import 'package:flutterbuyandsell/repository/user_repository.dart';
 import 'package:flutterbuyandsell/repository/user_unread_message_repository.dart';
@@ -79,6 +81,7 @@ import 'package:fluttericon/iconic_icons.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DashboardView extends StatefulWidget {
   @override
@@ -109,6 +112,15 @@ class _HomeViewState extends State<DashboardView>
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
   bool isResumed = false;
+
+  void chatWithUs() async {
+    String contact = "+905316677990";
+    String url = "whatsapp://send?phone=" + contact + "&text=مرحبا";
+
+    if (await canLaunch(url)) {
+      launch(url);
+    }
+  }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -246,7 +258,7 @@ class _HomeViewState extends State<DashboardView>
         }
       }
     }
-     FirebaseDynamicLinks.instance.onLink;
+    FirebaseDynamicLinks.instance.onLink;
     // FirebaseDynamicLinks.instance.onLink(
     //     onSuccess: (PendingDynamicLinkData? dynamicLink) async {
     //   // ignore: prefer_final_locals
@@ -968,6 +980,16 @@ class _HomeViewState extends State<DashboardView>
                 //   ),
                 // ),
                 IconButton(
+                  icon: Icon(Iconic.chat, color: PsColors.buttonColor
+                      // Utils.isLightMode(context)
+                      //     ? PsColors.primary500
+                      //     : PsColors.primary300,
+                      ),
+                  onPressed: () {
+                    chatWithUs();
+                  },
+                ),
+                IconButton(
                   icon: Icon(Iconic.book_open, color: PsColors.buttonColor
                       // Utils.isLightMode(context)
                       //     ? PsColors.primary500
@@ -980,21 +1002,7 @@ class _HomeViewState extends State<DashboardView>
                     );
                   },
                 ),
-                IconButton(
-                  icon: Icon(Iconic.location_inv, color: PsColors.buttonColor
-                      // Utils.isLightMode(context)
-                      //     ? PsColors.primary500
-                      //     : PsColors.primary300,
-                      ),
-                  onPressed: () {
-                    searchCityNameController.text = '';
-                    searchTownshipNameController.text = '';
-                    Navigator.pushNamed(
-                      context,
-                      RoutePaths.itemLocationList,
-                    );
-                  },
-                ),
+                LocationPicker()
               ],
             ),
           ],
@@ -1947,17 +1955,19 @@ class _HomeViewState extends State<DashboardView>
                     animationController: animationController);
               } else if (_currentIndex ==
                   PsConst.REQUEST_CODE__MENU_LANGUAGE_FRAGMENT) {
-                return LanguageSettingView(  animationController: animationController,);
+                return LanguageSettingView(
+                  animationController: animationController,
+                );
                 // animationController: animationController,
-                    // languageIsChanged: () {
-                    //   // _currentIndex = PsConst.REQUEST_CODE__MENU_LANGUAGE_FRAGMENT;
-                    //   // appBarTitle = Utils.getString(
-                    //   //     context, 'home__menu_drawer_language');
+                // languageIsChanged: () {
+                //   // _currentIndex = PsConst.REQUEST_CODE__MENU_LANGUAGE_FRAGMENT;
+                //   // appBarTitle = Utils.getString(
+                //   //     context, 'home__menu_drawer_language');
 
-                    //   //updateSelectedIndexWithAnimation(
-                    //   //  '', PsConst.REQUEST_CODE__MENU_LANGUAGE_FRAGMENT);
-                    //   // setState(() {});
-                    // });
+                //   //updateSelectedIndexWithAnimation(
+                //   //  '', PsConst.REQUEST_CODE__MENU_LANGUAGE_FRAGMENT);
+                //   // setState(() {});
+                // });
               } else if (_currentIndex ==
                   PsConst.REQUEST_CODE__MENU_CONTACT_US_FRAGMENT) {
                 return ContactUsView(animationController: animationController);
@@ -2022,6 +2032,61 @@ class _HomeViewState extends State<DashboardView>
         ),
       ),
     );
+  }
+}
+
+class LocationPicker extends StatelessWidget {
+  const LocationPicker({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    late ItemLocationProvider _itemLocationProvider;
+    PsValueHolder? valueHolder = Provider.of<PsValueHolder>(context);
+    ItemLocationRepository? repo1 =
+        Provider.of<ItemLocationRepository>(context);
+    return MultiProvider(
+        providers: <SingleChildWidget>[
+          ChangeNotifierProvider<ItemLocationProvider?>(
+              lazy: false,
+              create: (BuildContext context) {
+                final ItemLocationProvider provider = ItemLocationProvider(
+                    repo: repo1,
+                    psValueHolder: valueHolder,
+                    limit: valueHolder!.defaultLoadingLimit!);
+
+                provider.latestLocationParameterHolder.keyword = '';
+                provider.loadItemLocationList(
+                    provider.latestLocationParameterHolder.toMap(),
+                    Utils.checkUserLoginId(provider.psValueHolder!));
+                _itemLocationProvider = provider;
+                return _itemLocationProvider;
+              }),
+        ],
+        child: Consumer<ItemLocationProvider>(builder: (BuildContext context,
+            ItemLocationProvider provider, Widget? child) {
+          return Row(
+            children: [
+              Text(provider.selectedCityName),
+              IconButton(
+                icon: Icon(Iconic.location_inv, color: PsColors.buttonColor
+                    // Utils.isLightMode(context)
+                    //     ? PsColors.primary500
+                    //     : PsColors.primary300,
+                    ),
+                onPressed: () {
+                  searchCityNameController.text = '';
+                  searchTownshipNameController.text = '';
+                  Navigator.pushNamed(
+                    context,
+                    RoutePaths.itemLocationList,
+                  );
+                },
+              ),
+            ],
+          );
+        }));
   }
 }
 

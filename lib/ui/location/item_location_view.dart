@@ -159,11 +159,27 @@ class _ItemLocationListViewWidgetState
                       left: PsDimens.space28,
                       top: PsDimens.space16,
                       right: PsDimens.space28),
-                  child: Text(Utils.getString(context, 'select_your_location'),
-                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                          color: Utils.isLightMode(context)
-                              ? PsColors.secondary400
-                              : PsColors.primaryDarkWhite)),
+                  child: Row(
+                    children: [
+                      Text(Utils.getString(context, 'select_your_location'),
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle1!
+                              .copyWith(
+                                  color: Utils.isLightMode(context)
+                                      ? PsColors.secondary400
+                                      : PsColors.primaryDarkWhite)),
+                      Text(
+                          Utils.getString(context, 'select_your_location_note'),
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle2!
+                              .copyWith(
+                                  color: Utils.isLightMode(context)
+                                      ? PsColors.secondary400
+                                      : PsColors.primaryDarkWhite)),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: PsDimens.space8,

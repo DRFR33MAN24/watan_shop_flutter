@@ -4,7 +4,7 @@ import 'package:flutterbuyandsell/config/ps_colors.dart';
 import 'package:flutterbuyandsell/constant/ps_constants.dart';
 import 'package:flutterbuyandsell/constant/ps_dimens.dart';
 import 'package:flutterbuyandsell/constant/route_paths.dart';
-import 'package:flutterbuyandsell/provider/product/discount_product_provider.dart';
+import 'package:flutterbuyandsell/provider/product/auto_product_provider.dart';
 import 'package:flutterbuyandsell/ui/common/ps_frame_loading_widget.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/my_header_widget.dart';
 import 'package:flutterbuyandsell/ui/item/item/product_horizontal_list_item.dart';
@@ -32,8 +32,8 @@ class HomeAutoProductHorizontalListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Consumer<DiscountProductProvider>(
-        builder: (BuildContext context, DiscountProductProvider productProvider,
+      child: Consumer<AutoProductProvider>(
+        builder: (BuildContext context, AutoProductProvider productProvider,
             Widget? child) {
           return AnimatedBuilder(
             animation: animationController!,

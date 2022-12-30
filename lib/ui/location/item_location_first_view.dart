@@ -208,13 +208,21 @@ class _ItemLocationListViewWidgetState
               message: provider.itemLocationList.message);
         }),
         Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(Utils.getString(context, 'select_your_location'),
-              style: Theme.of(context).textTheme.headline5!.copyWith(
-                  color: Utils.isLightMode(context)
-                      ? PsColors.secondary400
-                      : PsColors.primaryDarkWhite)),
-        ),
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Text(Utils.getString(context, 'select_your_location'),
+                    style: Theme.of(context).textTheme.headline5!.copyWith(
+                        color: Utils.isLightMode(context)
+                            ? PsColors.secondary400
+                            : PsColors.primaryDarkWhite)),
+                Text(Utils.getString(context, 'select_your_location_note'),
+                    style: Theme.of(context).textTheme.headline6!.copyWith(
+                        color: Utils.isLightMode(context)
+                            ? PsColors.secondary400
+                            : PsColors.primaryDarkWhite)),
+              ],
+            )),
         Expanded(
           child: RefreshIndicator(
             child: MediaQuery.removePadding(

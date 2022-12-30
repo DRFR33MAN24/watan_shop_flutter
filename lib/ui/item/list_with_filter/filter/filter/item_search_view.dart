@@ -690,7 +690,7 @@ class _ItemSearchViewState extends State<ItemSearchView> {
                           // height: _containerMaxHeight,
                           child: PSButtonWidgetWithIconRoundCorner(
                             hasShadow: false,
-                            colorData: PsColors.baseColor,
+                            colorData: PsColors.buttonColor,
                             titleText: Utils.getString(context, 'reset'),
                             onPressed: () async {
                               print('Click Clear Button');

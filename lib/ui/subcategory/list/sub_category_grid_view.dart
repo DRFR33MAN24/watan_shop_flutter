@@ -167,7 +167,7 @@ class _ModelGridViewState extends State<SubCategoryGridView>
                         builder: (BuildContext contet) {
                           return SuccessDialog(
                             message: Utils.getString(
-                                context, 'Successful Subscription'),
+                                context, 'successful_subscription'),
                             onPressed: () {},
                           );
                         });

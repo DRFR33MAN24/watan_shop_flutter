@@ -65,9 +65,7 @@ Future<void> main() async {
     Utils.psPrint(e.toString());
   }
 
-
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-
 
   // FirebaseMessaging.onBackgroundMessage(Utils.myBackgroundMessageHandler);
 
@@ -114,17 +112,19 @@ Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
     Utils.cameras = await availableCameras();
     print(Utils.cameras);
-    
   } on CameraException catch (e) {
     Utils.psPrint(e.toString());
   }
-  
-await EasyLocalization.ensureInitialized();
 
-//svg loading done before use 
-await precachePicture(ExactAssetPicture(SvgPicture.svgStringDecoderBuilder, 'assets/images/loaction_illustration.svg'), null);
-await findSystemLocale();
-runApp(EasyLocalization(
+  await EasyLocalization.ensureInitialized();
+
+//svg loading done before use
+  await precachePicture(
+      ExactAssetPicture(SvgPicture.svgStringDecoderBuilder,
+          'assets/images/loaction_illustration.svg'),
+      null);
+  await findSystemLocale();
+  runApp(EasyLocalization(
       path: 'assets/langs',
       saveLocale: true,
       startLocale: PsConfig.defaultLanguage.toLocale(),
@@ -198,7 +198,7 @@ class _PSAppState extends State<PSApp> {
     // init Color
     PsColors.loadColor(context);
     print('*** ${Utils.convertColorToString(PsColors.primary500)}');
-   // Utils.psPrint(EasyLocalization.of(context)!.locale.languageCode);
+    // Utils.psPrint(EasyLocalization.of(context)!.locale.languageCode);
 
     return MultiProvider(
         providers: <SingleChildWidget>[
@@ -216,7 +216,7 @@ class _PSAppState extends State<PSApp> {
             themedWidgetBuilder: (BuildContext context, ThemeData theme) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                title: 'Panacea-Soft',
+                title: 'Watan Shop',
                 theme: theme,
                 initialRoute: '/',
                 onGenerateRoute: router.generateRoute,
@@ -235,6 +235,4 @@ class _PSAppState extends State<PSApp> {
               );
             }));
   }
-  
-
 }
