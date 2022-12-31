@@ -156,7 +156,7 @@ mixin Utils {
   }
 
   static DateTime getDateOnlyFromTimeStamp(int timeStamp) {
-    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    final DateFormat formatter = DateFormat('yyyy-MM-dd', "en_US");
     final DateTime datetimeMessage =
         DateTime.fromMillisecondsSinceEpoch(timeStamp, isUtc: true);
     final String s = formatter.format(datetimeMessage);

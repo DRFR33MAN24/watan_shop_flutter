@@ -214,10 +214,10 @@ class AdsStartDateDropDownWidgetState
 
                       if (itemPaidHistoryProvider.selectedDateTime != null) {
                         itemPaidHistoryProvider.selectedDate =
-                            DateFormat.yMMMMd().format(
+                            DateFormat.yMMMMd("en_US").format(
                                     itemPaidHistoryProvider.selectedDateTime!) +
                                 ' ' +
-                                DateFormat.Hms().format(
+                                DateFormat.Hms("en_US").format(
                                     itemPaidHistoryProvider.selectedDateTime!);
                       }
                       setState(() {

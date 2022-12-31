@@ -124,7 +124,7 @@ Future<void> main() async {
       ExactAssetPicture(SvgPicture.svgStringDecoderBuilder,
           'assets/images/loaction_illustration.svg'),
       null);
-  await findSystemLocale();
+  // await findSystemLocale();
   runApp(EasyLocalization(
       path: 'assets/langs',
       saveLocale: true,
