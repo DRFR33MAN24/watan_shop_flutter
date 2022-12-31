@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/foundation.dart';
 import 'package:flutterbuyandsell/repository/Common/ps_repository.dart';
 import 'package:flutterbuyandsell/viewobject/ps_mobile_config_setting.dart';
@@ -65,12 +63,14 @@ class PsProvider extends ChangeNotifier {
     await psRepository!.replaceMaxImageCount(maxImageCount);
   }
 
-  Future<void> replaceMobileConfigSetting(PSMobileConfigSetting psMobileConfigSetting) async {
+  Future<void> replaceMobileConfigSetting(
+      PSMobileConfigSetting psMobileConfigSetting) async {
     limit = int.parse(psMobileConfigSetting.defaultLoadingLimit ?? '30');
     await psRepository!.replaceMobileConfigSetting(psMobileConfigSetting);
   }
 
-  Future<void> replaceIsBlockeFeatureDisabled(String isBlockedFeatueDisabled) async {
+  Future<void> replaceIsBlockeFeatureDisabled(
+      String isBlockedFeatueDisabled) async {
     await psRepository!.replaceisBlockedFeatueDisabled(isBlockedFeatueDisabled);
   }
 
@@ -78,24 +78,48 @@ class PsProvider extends ChangeNotifier {
     await psRepository!.replaceIsPaidApp(isPaidApp);
   }
 
-    Future<void> replaceIsSubCatSubscribe(String isSubCatSubscribe) async {
+  Future<void> replaceIsSubCatSubscribe(String isSubCatSubscribe) async {
     await psRepository!.replaceIsSubCatSubscribe(isSubCatSubscribe);
   }
 
   Future<void> replaceDefaultCurrency(
       String defaultCurrencyId, String defaultCurrency) async {
-    await psRepository!.replaceDefaultCurrency(
-        defaultCurrencyId, defaultCurrency);
+    await psRepository!
+        .replaceDefaultCurrency(defaultCurrencyId, defaultCurrency);
   }
 
-  Future<void> replaceItemUploadConfig( String address, String brand, String latitude, String longitude,
-    String businessMode, String subCatId, String typeId, String priceTypeId,
-    String conditionOfItemId, String dealOptionId, String dealOptionRemark, String highlightInfo,
-    String video, String videoIcon,String discountRateByPercentage) async {
-
-    await psRepository!.replaceItemUploadConfig(address, brand,
-      latitude, longitude, businessMode, subCatId, typeId, priceTypeId,
-      conditionOfItemId, dealOptionId, dealOptionRemark, highlightInfo, video, videoIcon,discountRateByPercentage);
+  Future<void> replaceItemUploadConfig(
+      String address,
+      String brand,
+      String latitude,
+      String longitude,
+      String businessMode,
+      String subCatId,
+      String typeId,
+      String priceTypeId,
+      String conditionOfItemId,
+      String dealOptionId,
+      String dealOptionRemark,
+      String highlightInfo,
+      String video,
+      String videoIcon,
+      String discountRateByPercentage) async {
+    await psRepository!.replaceItemUploadConfig(
+        address,
+        brand,
+        latitude,
+        longitude,
+        businessMode,
+        subCatId,
+        typeId,
+        priceTypeId,
+        conditionOfItemId,
+        dealOptionId,
+        dealOptionRemark,
+        highlightInfo,
+        video,
+        videoIcon,
+        discountRateByPercentage);
   }
 
   Future<void> replaceNotiSetting(bool notiSetting) async {
@@ -128,8 +152,10 @@ class PsProvider extends ChangeNotifier {
     await psRepository!.replaceDate(startDate, endDate);
   }
 
-  Future<void> replacePackageIAPKeys(String packageAndroidKeyList, String packageIOSKeyList) async {
-    await psRepository!.replacePackageIAPKeys(packageAndroidKeyList, packageIOSKeyList);
+  Future<void> replacePackageIAPKeys(
+      String packageAndroidKeyList, String packageIOSKeyList) async {
+    await psRepository!
+        .replacePackageIAPKeys(packageAndroidKeyList, packageIOSKeyList);
   }
 
   Future<void> replaceVerifyUserData(
@@ -205,11 +231,11 @@ class PsProvider extends ChangeNotifier {
     await psRepository!.replacePublishKey(pubKey);
   }
 
-    Future<void> replaceAdType(String adType) async {
+  Future<void> replaceAdType(String adType) async {
     await psRepository!.replaceAdType(adType);
   }
 
-    Future<void> replacePromoCellNo(String promoCellNo) async {
+  Future<void> replacePromoCellNo(String promoCellNo) async {
     await psRepository!.replacePromoCellNo(promoCellNo);
   }
 
@@ -217,7 +243,7 @@ class PsProvider extends ChangeNotifier {
     await psRepository!.replaceDetailOpenCount(count);
   }
 
-    Future<void> replaceIsUserAlreadyChoose(bool isUserAlreadyChoose) async {
+  Future<void> replaceIsUserAlreadyChoose(bool isUserAlreadyChoose) async {
     await psRepository!.replaceIsUserAlreadyChoose(isUserAlreadyChoose);
   }
 }

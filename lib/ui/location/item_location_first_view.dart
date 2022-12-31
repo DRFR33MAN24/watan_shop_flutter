@@ -5,6 +5,7 @@ import 'package:flutterbuyandsell/config/ps_config.dart';
 import 'package:flutterbuyandsell/constant/ps_constants.dart';
 import 'package:flutterbuyandsell/constant/route_paths.dart';
 import 'package:flutterbuyandsell/provider/item_location/item_location_provider.dart';
+import 'package:flutterbuyandsell/provider/simple_ui_provider.dart';
 import 'package:flutterbuyandsell/repository/item_location_repository.dart';
 import 'package:flutterbuyandsell/ui/common/ps_ui_widget.dart';
 import 'package:flutterbuyandsell/ui/common/search_bar_view.dart';
@@ -196,6 +197,8 @@ class _ItemLocationListViewWidgetState
   Widget build(BuildContext context) {
     valueHolder = Provider.of<PsValueHolder>(context);
     final ItemLocationProvider _provider = Provider.of(context, listen: false);
+    //final SimpleUIProvider simpleUIProvider =
+    Provider.of<SimpleUIProvider>(context, listen: false);
     _widget ??= Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.max,
@@ -217,7 +220,7 @@ class _ItemLocationListViewWidgetState
                             ? PsColors.secondary400
                             : PsColors.primaryDarkWhite)),
                 Text(Utils.getString(context, 'select_your_location_note'),
-                    style: Theme.of(context).textTheme.headline6!.copyWith(
+                    style: Theme.of(context).textTheme.caption!.copyWith(
                         color: Utils.isLightMode(context)
                             ? PsColors.secondary400
                             : PsColors.primaryDarkWhite)),
@@ -267,6 +270,7 @@ class _ItemLocationListViewWidgetState
                               // _provider
                               //     .itemLocationList.data![index -1]);
                               if (index == 0) {
+                                // simpleUIProvider.changeLocationName("");
                                 await _provider.replaceItemLocationData(
                                     '',
                                     Utils.getString(
@@ -293,10 +297,14 @@ class _ItemLocationListViewWidgetState
                                     context, RoutePaths.home);
                                 // }
                               } else {
+                                //simpleUIProvider.changeLocationName(
+                                //  dataList[index - 1].name!);
+
                                 Navigator.pop(
                                     context,
                                     _provider
                                         .itemLocationList.data![index - 1]);
+
                                 await _provider.replaceItemLocationData(
                                     dataList[index - 1].id,
                                     dataList[index - 1].name!,
@@ -321,6 +329,7 @@ class _ItemLocationListViewWidgetState
                   }),
             ),
             onRefresh: () {
+              //simpleUIProvider.changeLocationName("");
               return _provider.resetItemLocationList(
                   _provider.latestLocationParameterHolder.toMap(),
                   _provider.psValueHolder!.loginUserId);

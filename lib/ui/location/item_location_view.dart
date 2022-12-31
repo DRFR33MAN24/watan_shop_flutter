@@ -5,6 +5,7 @@ import 'package:flutterbuyandsell/constant/ps_constants.dart';
 import 'package:flutterbuyandsell/constant/ps_dimens.dart';
 import 'package:flutterbuyandsell/constant/route_paths.dart';
 import 'package:flutterbuyandsell/provider/item_location/item_location_provider.dart';
+import 'package:flutterbuyandsell/provider/simple_ui_provider.dart';
 import 'package:flutterbuyandsell/repository/item_location_repository.dart';
 import 'package:flutterbuyandsell/ui/common/base/ps_widget_with_appbar_no_app_bar_title.dart';
 import 'package:flutterbuyandsell/ui/common/dialog/error_dialog.dart';
@@ -125,10 +126,13 @@ class _ItemLocationListViewWidgetState
   Widget build(BuildContext context) {
     final PsValueHolder valueHolder = Provider.of<PsValueHolder>(context);
     final ItemLocationProvider _provider = Provider.of(context, listen: false);
+    final SimpleUIProvider simpleUIProvider =
+        Provider.of<SimpleUIProvider>(context, listen: false);
     if (valueHolder.locationId != null && valueHolder.locationId != '') {
       searchCityNameController.text = valueHolder.locactionName ?? '';
       _provider.itemLocationId = valueHolder.locationId;
       _provider.itemLocationName = valueHolder.locactionName;
+      //simpleUIProvider.changeLocationName(valueHolder.locactionName!);
       _provider.itemLocationLat = valueHolder.locationLat;
       _provider.itemLocationLng = valueHolder.locationLng;
 
@@ -171,13 +175,10 @@ class _ItemLocationListViewWidgetState
                                       : PsColors.primaryDarkWhite)),
                       Text(
                           Utils.getString(context, 'select_your_location_note'),
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle2!
-                              .copyWith(
-                                  color: Utils.isLightMode(context)
-                                      ? PsColors.secondary400
-                                      : PsColors.primaryDarkWhite)),
+                          style: Theme.of(context).textTheme.caption!.copyWith(
+                              color: Utils.isLightMode(context)
+                                  ? PsColors.secondary400
+                                  : PsColors.primaryDarkWhite)),
                     ],
                   ),
                 ),
@@ -212,7 +213,8 @@ class _ItemLocationListViewWidgetState
                             _provider.itemLocationLat = itemLocationResult.lat;
                             _provider.itemLocationLng = itemLocationResult.lng;
                           });
-
+                          simpleUIProvider
+                              .changeLocationName(itemLocationResult.name!);
                           _provider.itemLocationTownshipId = '';
                           _provider.itemLocationTownshipName = '';
                           _provider.itemLocationTownshipLat = '';
@@ -284,6 +286,7 @@ class _ItemLocationListViewWidgetState
                 InkWell(
                   onTap: () async {
                     if (_provider.itemLocationId == '') {
+                      simpleUIProvider.changeLocationName("");
                       await _provider.replaceItemLocationData(
                           '',
                           Utils.getString(
@@ -307,12 +310,15 @@ class _ItemLocationListViewWidgetState
                       //       );
                       //     });
                     } else {
+                      simpleUIProvider
+                          .changeLocationName(_provider.itemLocationName!);
                       await _provider.replaceItemLocationData(
                         _provider.itemLocationId!,
                         _provider.itemLocationName!,
                         _provider.itemLocationLat!,
                         _provider.itemLocationLng!,
                       );
+
                       await _provider.replaceItemLocationTownshipData(
                           _provider.itemLocationTownshipId!,
                           _provider.itemLocationId!,

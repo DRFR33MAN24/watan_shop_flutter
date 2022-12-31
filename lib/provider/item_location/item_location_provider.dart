@@ -133,6 +133,8 @@ class ItemLocationProvider extends PsProvider {
     isLoading = false;
   }
 
+
+
   String getCityIdWithName(String name) {
     if (itemLocationList.data == null) {
       return '';
@@ -144,8 +146,6 @@ class ItemLocationProvider extends PsProvider {
         cityId = item.id;
       }
     }
-
-   
 
     return cityId;
   }

@@ -21,6 +21,7 @@ import 'package:flutterbuyandsell/provider/chat/user_unread_message_provider.dar
 import 'package:flutterbuyandsell/provider/common/notification_provider.dart';
 import 'package:flutterbuyandsell/provider/delete_task/delete_task_provider.dart';
 import 'package:flutterbuyandsell/provider/item_location/item_location_provider.dart';
+import 'package:flutterbuyandsell/provider/simple_ui_provider.dart';
 import 'package:flutterbuyandsell/provider/user/user_provider.dart';
 import 'package:flutterbuyandsell/repository/Common/notification_repository.dart';
 import 'package:flutterbuyandsell/repository/app_info_repository.dart';
@@ -70,9 +71,11 @@ import 'package:flutterbuyandsell/viewobject/api_status.dart';
 import 'package:flutterbuyandsell/viewobject/common/ps_value_holder.dart';
 import 'package:flutterbuyandsell/viewobject/holder/chat_history_parameter_holder.dart';
 import 'package:flutterbuyandsell/viewobject/holder/intent_holder/product_detail_intent_holder.dart';
+import 'package:flutterbuyandsell/viewobject/holder/location_parameter_holder.dart';
 import 'package:flutterbuyandsell/viewobject/holder/product_parameter_holder.dart';
 import 'package:flutterbuyandsell/viewobject/holder/user_logout_parameter_holder.dart';
 import 'package:flutterbuyandsell/viewobject/holder/user_unread_message_parameter_holder.dart';
+import 'package:flutterbuyandsell/viewobject/item_location.dart';
 import 'package:flutterbuyandsell/viewobject/product.dart';
 import 'package:flutterbuyandsell/viewobject/user.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
@@ -1002,7 +1005,7 @@ class _HomeViewState extends State<DashboardView>
                     );
                   },
                 ),
-                LocationPicker()
+                new LocationPicker()
               ],
             ),
           ],
@@ -2042,51 +2045,31 @@ class LocationPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late ItemLocationProvider _itemLocationProvider;
-    PsValueHolder? valueHolder = Provider.of<PsValueHolder>(context);
-    ItemLocationRepository? repo1 =
-        Provider.of<ItemLocationRepository>(context);
-    return MultiProvider(
-        providers: <SingleChildWidget>[
-          ChangeNotifierProvider<ItemLocationProvider?>(
-              lazy: false,
-              create: (BuildContext context) {
-                final ItemLocationProvider provider = ItemLocationProvider(
-                    repo: repo1,
-                    psValueHolder: valueHolder,
-                    limit: valueHolder!.defaultLoadingLimit!);
-
-                provider.latestLocationParameterHolder.keyword = '';
-                provider.loadItemLocationList(
-                    provider.latestLocationParameterHolder.toMap(),
-                    Utils.checkUserLoginId(provider.psValueHolder!));
-                _itemLocationProvider = provider;
-                return _itemLocationProvider;
-              }),
-        ],
-        child: Consumer<ItemLocationProvider>(builder: (BuildContext context,
-            ItemLocationProvider provider, Widget? child) {
-          return Row(
-            children: [
-              Text(provider.selectedCityName),
-              IconButton(
-                icon: Icon(Iconic.location_inv, color: PsColors.buttonColor
-                    // Utils.isLightMode(context)
-                    //     ? PsColors.primary500
-                    //     : PsColors.primary300,
-                    ),
-                onPressed: () {
-                  searchCityNameController.text = '';
-                  searchTownshipNameController.text = '';
-                  Navigator.pushNamed(
-                    context,
-                    RoutePaths.itemLocationList,
-                  );
-                },
-              ),
-            ],
-          );
-        }));
+    return Consumer<SimpleUIProvider>(
+        builder: (context, provider, child) => Row(
+              children: [
+                Text(provider.locationName,
+                    style: Theme.of(context).textTheme.caption!.copyWith(
+                        color: Utils.isLightMode(context)
+                            ? PsColors.secondary400
+                            : PsColors.primaryDarkWhite)),
+                IconButton(
+                  icon: Icon(Iconic.location_inv, color: PsColors.buttonColor
+                      // Utils.isLightMode(context)
+                      //     ? PsColors.primary500
+                      //     : PsColors.primary300,
+                      ),
+                  onPressed: () {
+                    searchCityNameController.text = '';
+                    searchTownshipNameController.text = '';
+                    Navigator.pushNamed(
+                      context,
+                      RoutePaths.itemLocationList,
+                    );
+                  },
+                ),
+              ],
+            ));
   }
 }
 

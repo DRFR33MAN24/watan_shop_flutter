@@ -11,6 +11,7 @@ import 'package:flutterbuyandsell/config/ps_theme_data.dart';
 import 'package:flutterbuyandsell/constant/router.dart' as router;
 import 'package:flutterbuyandsell/provider/common/ps_theme_provider.dart';
 import 'package:flutterbuyandsell/provider/ps_provider_dependencies.dart';
+import 'package:flutterbuyandsell/provider/simple_ui_provider.dart';
 import 'package:flutterbuyandsell/repository/ps_theme_repository.dart';
 import 'package:flutterbuyandsell/utils/utils.dart';
 import 'package:flutterbuyandsell/viewobject/common/language.dart';
@@ -203,6 +204,8 @@ class _PSAppState extends State<PSApp> {
     return MultiProvider(
         providers: <SingleChildWidget>[
           ...providers,
+          ChangeNotifierProvider<SimpleUIProvider>(
+              create: (_) => SimpleUIProvider()),
         ],
         child: ThemeManager(
             defaultBrightnessPreference: BrightnessPreference.light,
