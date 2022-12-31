@@ -983,7 +983,7 @@ class _HomeViewState extends State<DashboardView>
                 //   ),
                 // ),
                 IconButton(
-                  icon: Icon(Iconic.chat, color: PsColors.buttonColor
+                  icon: Icon(FontAwesome.whatsapp, color: PsColors.buttonColor
                       // Utils.isLightMode(context)
                       //     ? PsColors.primary500
                       //     : PsColors.primary300,
