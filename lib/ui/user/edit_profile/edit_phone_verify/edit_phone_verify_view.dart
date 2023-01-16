@@ -137,20 +137,20 @@ class __TextFieldAndButtonWidgetState extends State<_TextFieldAndButtonWidget> {
         const SizedBox(
           height: PsDimens.space40,
         ),
-        TextField(
-          textAlign: TextAlign.center,
-          controller: codeController,
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: Utils.getString(
-                context, 'email_verify__enter_verification_code'),
-            hintStyle: Theme.of(context)
-                .textTheme
-                .bodyText2!
-                .copyWith(color: PsColors.textPrimaryLightColor),
-          ),
-          style: Theme.of(context).textTheme.headline4,
-        ),
+        // TextField(
+        //   textAlign: TextAlign.center,
+        //   controller: codeController,
+        //   decoration: InputDecoration(
+        //     border: InputBorder.none,
+        //     hintText: Utils.getString(
+        //         context, 'email_verify__enter_verification_code'),
+        //     hintStyle: Theme.of(context)
+        //         .textTheme
+        //         .bodyText2!
+        //         .copyWith(color: PsColors.textPrimaryLightColor),
+        //   ),
+        //   style: Theme.of(context).textTheme.headline4,
+        // ),
         const SizedBox(
           height: PsDimens.space16,
         ),
@@ -160,47 +160,48 @@ class __TextFieldAndButtonWidgetState extends State<_TextFieldAndButtonWidget> {
           child: PSButtonWidget(
             hasShadow: true,
             width: double.infinity,
-            titleText: Utils.getString(context, 'email_verify__submit'),
+            titleText: Utils.getString(context, 'logout_dialog__confirm'),
             onPressed: () async {
-              if (codeController.text.isEmpty) {
-                callWarningDialog(context,
-                    Utils.getString(context, 'warning_dialog__code_require'));
-              } else if (codeController.text.length != 6) {
-                callWarningDialog(context, 'Verification OTP code is wrong');
-              } else {
-                final fb_auth.User? user =
-                    fb_auth.FirebaseAuth.instance.currentUser;
+              // if (codeController.text.isEmpty) {
+              //   callWarningDialog(context,
+              //       Utils.getString(context, 'warning_dialog__code_require'));
+              // } else if (codeController.text.length != 6) {
+              //   callWarningDialog(context, 'Verification OTP code is wrong');
+              // } else {
+              final fb_auth.User? user =
+                  fb_auth.FirebaseAuth.instance.currentUser;
 
-                if (user != null) {
-                  print('correct code');
-                  callApi(widget.provider, user, widget.phoneNumber, context);
-                } else {
-                  final fb_auth.AuthCredential credential =
-                      fb_auth.PhoneAuthProvider.credential(
-                          verificationId: widget.phoneId!,
-                          smsCode: codeController.text);
-
-                  try {
-                    await fb_auth.FirebaseAuth.instance
-                        .signInWithCredential(credential)
-                        .then((fb_auth.UserCredential user) async {
-                      print('correct code again');
-                      callApi(widget.provider, user.user, widget.phoneNumber,
-                          context);
-                    });
-                  } on Exception {
-                    print('show error');
-                    showDialog<dynamic>(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return ErrorDialog(
-                            message: Utils.getString(
-                                context, 'error_dialog__code_wrong'),
-                          );
-                        });
-                  }
-                }
+              if (user != null) {
+                print('correct code');
+                callApi(widget.provider, user, widget.phoneNumber, context);
               }
+              //    else {
+              //     final fb_auth.AuthCredential credential =
+              //         fb_auth.PhoneAuthProvider.credential(
+              //             verificationId: widget.phoneId!,
+              //             smsCode: codeController.text);
+
+              //     try {
+              //       await fb_auth.FirebaseAuth.instance
+              //           .signInWithCredential(credential)
+              //           .then((fb_auth.UserCredential user) async {
+              //         print('correct code again');
+              //         callApi(widget.provider, user.user, widget.phoneNumber,
+              //             context);
+              //       });
+              //     } on Exception {
+              //       print('show error');
+              //       showDialog<dynamic>(
+              //           context: context,
+              //           builder: (BuildContext context) {
+              //             return ErrorDialog(
+              //               message: Utils.getString(
+              //                   context, 'error_dialog__code_wrong'),
+              //             );
+              //           });
+              //     }
+              //   }
+              // }
             },
           ),
         )
@@ -232,7 +233,7 @@ class _HeaderTextWidget extends StatelessWidget {
                   height: PsDimens.space28,
                 ),
                 Text(
-                  Utils.getString(context, 'phone_signin__title1'),
+                  Utils.getString(context, 'phone_confirm__title1'),
                   textAlign: TextAlign.center,
                   style: Theme.of(context)
                       .textTheme
@@ -252,11 +253,11 @@ class _HeaderTextWidget extends StatelessWidget {
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            width: 90,
-            height: 90,
+            width: 60,
+            height: 80,
             child: const CircleAvatar(
               backgroundImage:
-                  ExactAssetImage('assets/images/verify_email_icon.jpg'),
+                  ExactAssetImage('assets/images/baseline_check_green_24.png'),
             ),
           ),
         )

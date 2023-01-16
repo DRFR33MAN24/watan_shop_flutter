@@ -398,8 +398,8 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
           ChangeNotifierProvider<AutoProductProvider>(
               lazy: false,
               create: (BuildContext context) {
-                _autoProductProvider = AutoProductProvider(
-                    repo: repo2, limit: 30);
+                _autoProductProvider =
+                    AutoProductProvider(repo: repo2, limit: 30);
                 _autoProductProvider!.productAutoParameterHolder.mile =
                     valueHolder!.mile;
                 _autoProductProvider!.productAutoParameterHolder
@@ -422,8 +422,8 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
           ChangeNotifierProvider<ElectronicProductProvider>(
               lazy: false,
               create: (BuildContext context) {
-                _electronicProductProvider = ElectronicProductProvider(
-                    repo: repo2, limit: 30);
+                _electronicProductProvider =
+                    ElectronicProductProvider(repo: repo2, limit: 30);
                 _electronicProductProvider!
                     .productElectronicParameterHolder.mile = valueHolder!.mile;
                 _electronicProductProvider!.productElectronicParameterHolder
@@ -448,8 +448,8 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
           ChangeNotifierProvider<RealestateProductProvider>(
               lazy: false,
               create: (BuildContext context) {
-                _realestateProductProvider = RealestateProductProvider(
-                    repo: repo2, limit: 30);
+                _realestateProductProvider =
+                    RealestateProductProvider(repo: repo2, limit: 30);
                 _realestateProductProvider!
                     .productRealestateParameterHolder.mile = valueHolder!.mile;
                 _realestateProductProvider!.productRealestateParameterHolder
@@ -474,8 +474,8 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
           ChangeNotifierProvider<JobsProductProvider>(
               lazy: false,
               create: (BuildContext context) {
-                _jobsProductProvider = JobsProductProvider(
-                    repo: repo2, limit:30);
+                _jobsProductProvider =
+                    JobsProductProvider(repo: repo2, limit: 30);
                 _jobsProductProvider!.productJobsParameterHolder.mile =
                     valueHolder!.mile;
                 _jobsProductProvider!.productJobsParameterHolder
@@ -816,6 +816,15 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                               curve: Interval((1 / count) * 2, 1.0,
                                   curve: Curves.fastOutSlowIn))), //animation
                     ),
+                    HomePaidAdProductHorizontalListWidget(
+                      psValueHolder: valueHolder,
+                      animationController: widget.animationController,
+                      animation: Tween<double>(begin: 0.0, end: 1.0).animate(
+                          CurvedAnimation(
+                              parent: widget.animationController,
+                              curve: Interval((1 / count) * 4, 1.0,
+                                  curve: Curves.fastOutSlowIn))),
+                    ),
                     RecentProductHorizontalListWidget(
                       psValueHolder: valueHolder,
                       animationController:
@@ -824,6 +833,16 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                           CurvedAnimation(
                               parent: widget.animationController,
                               curve: Interval((1 / count) * 3, 1.0,
+                                  curve: Curves.fastOutSlowIn))), //animation
+                    ),
+                    HomeDiscountProductHorizontalListWidget(
+                      psValueHolder: valueHolder,
+                      animationController:
+                          widget.animationController, //animationController,
+                      animation: Tween<double>(begin: 0.0, end: 1.0).animate(
+                          CurvedAnimation(
+                              parent: widget.animationController,
+                              curve: Interval((1 / count) * 4, 1.0,
                                   curve: Curves.fastOutSlowIn))), //animation
                     ),
                     HomePopularProductHorizontalListWidget(
@@ -885,25 +904,6 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                               parent: widget.animationController,
                               curve: Interval((1 / count) * 3, 1.0,
                                   curve: Curves.fastOutSlowIn))), //animation
-                    ),
-                    HomeDiscountProductHorizontalListWidget(
-                      psValueHolder: valueHolder,
-                      animationController:
-                          widget.animationController, //animationController,
-                      animation: Tween<double>(begin: 0.0, end: 1.0).animate(
-                          CurvedAnimation(
-                              parent: widget.animationController,
-                              curve: Interval((1 / count) * 4, 1.0,
-                                  curve: Curves.fastOutSlowIn))), //animation
-                    ),
-                    HomePaidAdProductHorizontalListWidget(
-                      psValueHolder: valueHolder,
-                      animationController: widget.animationController,
-                      animation: Tween<double>(begin: 0.0, end: 1.0).animate(
-                          CurvedAnimation(
-                              parent: widget.animationController,
-                              curve: Interval((1 / count) * 4, 1.0,
-                                  curve: Curves.fastOutSlowIn))),
                     ),
                     _HomeItemListFromFollowersHorizontalListWidget(
                       animationController:

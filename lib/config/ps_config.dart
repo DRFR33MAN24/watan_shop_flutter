@@ -115,7 +115,7 @@ class PsConfig {
   /// 2) Declare at pubspec.yaml
   /// 3) Update your font family name at below
   ///
-  static const String ps_default_font_family = 'ElMessiri';
+  static const String ps_default_font_family = 'Cairo';
 
   static const String ps_app_db_name = 'ps_db.db';
 

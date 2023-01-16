@@ -1005,7 +1005,7 @@ class _HomeViewState extends State<DashboardView>
                     );
                   },
                 ),
-                new LocationPicker()
+                LocationPicker()
               ],
             ),
           ],
@@ -2045,6 +2045,7 @@ class LocationPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('LocationPicker building...............');
     return Consumer<SimpleUIProvider>(
         builder: (context, provider, child) => Row(
               children: [

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterbuyandsell/config/ps_colors.dart';
 import 'package:flutterbuyandsell/config/ps_config.dart';
@@ -274,6 +275,16 @@ class __SendButtonWidgetState extends State<_SendButtonWidget> {
     return verificationId;
   }
 
+  Future<void> changePhoneNumber(String message) async {
+    final HttpsCallable callable =
+        FirebaseFunctions.instance.httpsCallable('changePhoneNumber');
+
+    final HttpsCallableResult resp =
+        await callable.call<HttpsCallableResult>(<String, dynamic>{
+      'phone': message,
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -288,8 +299,19 @@ class __SendButtonWidgetState extends State<_SendButtonWidget> {
           titleText: Utils.getString(context, 'edit_phone_btn'),
           onPressed: () async {
             await PsProgressDialog.showDialog(context);
-
-            await verifyPhone();
+            //await changePhoneNumber(widget.phoneController.text);
+            // await verifyPhone();
+            PsProgressDialog.dismissDialog();
+            print('pressed change phone ');
+            final dynamic returnEditPhone = await Navigator.pushNamed(
+                context, RoutePaths.edit_phone_verify_container,
+                arguments: VerifyPhoneIntentHolder(
+                    userName: '',
+                    phoneNumber: widget.phoneController.text,
+                    phoneId: ''));
+            if (returnEditPhone != null && returnEditPhone is String) {
+              Navigator.pop(context, returnEditPhone);
+            }
           }),
     );
   }

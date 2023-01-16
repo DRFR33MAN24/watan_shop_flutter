@@ -11,7 +11,7 @@ description: A new Flutter Buy Sell store application.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 3.6.0+36
+version: 3.7.0+37
 publish_to: none
 
 # CCV 3.5 = 3.5.0+35
@@ -134,6 +134,8 @@ dependencies:
   camera: 0.10.0+1
   app_tracking_transparency: 2.0.2+4
   firebase_crashlytics: ^2.8.8
+  cloud_functions: ^3.3.9
+  in_app_update: ^4.0.1
 
 dev_dependencies:
   flutter_test:
@@ -226,6 +228,13 @@ flutter:
         - asset: assets/fonts/ElMessiri-Bold.ttf
         - asset: assets/fonts/ElMessiri-SemiBold.ttf
         - asset: assets/fonts/ElMessiri-Medium.ttf
+
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/Cairo-Regular.ttf
+        - asset: assets/fonts/Cairo-Bold.ttf
+        - asset: assets/fonts/Cairo-SemiBold.ttf
+        - asset: assets/fonts/Cairo-Medium.ttf
 
   # fonts:
   #   - family: Schyler

@@ -129,6 +129,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
       return MaterialPageRoute<dynamic>(
           settings: const RouteSettings(name: RoutePaths.home),
+          maintainState: false,
           builder: (BuildContext context) {
             return DashboardView();
           });
@@ -147,7 +148,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         return ItemEntryLocationTownshipView(cityId: cityId);
       });
 
-      case '${RoutePaths.itemLocationTownshipFirst}':
+    case '${RoutePaths.itemLocationTownshipFirst}':
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
         final String cityId = (args as String? ?? String) as String;
@@ -176,7 +177,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case '${RoutePaths.force_update}':
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
-        final PSAppVersion psAppVersion = (args as PSAppVersion? ?? PSAppVersion) as PSAppVersion;
+        final PSAppVersion psAppVersion =
+            (args as PSAppVersion? ?? PSAppVersion) as PSAppVersion;
         return ForceUpdateView(psAppVersion: psAppVersion);
       });
 
@@ -216,7 +218,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         final Object? args = settings.arguments;
 
         final VerifyPhoneIntentHolder verifyPhoneIntentParameterHolder =
-            (args as VerifyPhoneIntentHolder? ?? VerifyPhoneIntentHolder) as VerifyPhoneIntentHolder;
+            (args as VerifyPhoneIntentHolder? ?? VerifyPhoneIntentHolder)
+                as VerifyPhoneIntentHolder;
         return VerifyPhoneContainerView(
           userName: verifyPhoneIntentParameterHolder.userName,
           phoneNumber: verifyPhoneIntentParameterHolder.phoneNumber,
@@ -229,7 +232,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         final Object? args = settings.arguments;
 
         final VerifyPhoneIntentHolder verifyPhoneIntentParameterHolder =
-            (args as VerifyPhoneIntentHolder? ?? VerifyPhoneIntentHolder) as VerifyPhoneIntentHolder;
+            (args as VerifyPhoneIntentHolder? ?? VerifyPhoneIntentHolder)
+                as VerifyPhoneIntentHolder;
         return EditPhoneVerifyContainerView(
           userName: verifyPhoneIntentParameterHolder.userName,
           phoneNumber: verifyPhoneIntentParameterHolder.phoneNumber,
@@ -249,7 +253,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         return LanguageListView();
       });
 
-          case '${RoutePaths.languagesetting}':
+    case '${RoutePaths.languagesetting}':
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         return LanguageSettingContainerView();
       });
@@ -283,14 +287,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute<dynamic>(
           builder: (BuildContext context) => FollowerUserListView());
 
-     case '${RoutePaths.detailfollowingUserList}':
+    case '${RoutePaths.detailfollowingUserList}':
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
         final String userId = (args as String? ?? String) as String;
         return DetailFollowingUserListView(userId: userId);
       });
 
-           case '${RoutePaths.detailfollowerUserList}':
+    case '${RoutePaths.detailfollowerUserList}':
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
         final String userId = (args as String? ?? String) as String;
@@ -303,7 +307,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           builder: (BuildContext context) {
             final Object? args = settings.arguments;
             final ChatHistoryIntentHolder chatHistoryIntentHolder =
-                (args as ChatHistoryIntentHolder? ?? ChatHistoryIntentHolder) as ChatHistoryIntentHolder;
+                (args as ChatHistoryIntentHolder? ?? ChatHistoryIntentHolder)
+                    as ChatHistoryIntentHolder;
             return ChatView(
               chatFlag: chatHistoryIntentHolder.chatFlag,
               itemId: chatHistoryIntentHolder.itemId,
@@ -351,36 +356,33 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case '${RoutePaths.filterProductList}':
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
-        final ProductListIntentHolder holder =
-            args as ProductListIntentHolder ;
+        final ProductListIntentHolder holder = args as ProductListIntentHolder;
         return ProductListWithFilterContainerView(
             appBarTitle: holder.appBarTitle,
-            productParameterHolder:
-                holder.productParameterHolder,
+            productParameterHolder: holder.productParameterHolder,
             tabTitleItem: Utils.getString(context, 'search_filter__item'),
-            tabTitleAccount: Utils.getString(context, 'search_filter__account')
-          );
+            tabTitleAccount:
+                Utils.getString(context, 'search_filter__account'));
       });
 
-          case '${RoutePaths.nearestProductList}':
+    case '${RoutePaths.nearestProductList}':
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
-        final ProductListIntentHolder holder =
-            args as ProductListIntentHolder ;
+        final ProductListIntentHolder holder = args as ProductListIntentHolder;
         return NearestProductListView(
             appBarTitle: holder.appBarTitle,
-            productParameterHolder:
-                holder.productParameterHolder,
+            productParameterHolder: holder.productParameterHolder,
             tabTitleItem: Utils.getString(context, 'search_filter__item'),
-            tabTitleAccount: Utils.getString(context, 'search_filter__account')
-          );
+            tabTitleAccount:
+                Utils.getString(context, 'search_filter__account'));
       });
 
     case '${RoutePaths.filterLocationList}':
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
         final LocationParameterHolder locationParameterHolder =
-            (args as LocationParameterHolder? ?? LocationParameterHolder) as LocationParameterHolder;
+            (args as LocationParameterHolder? ?? LocationParameterHolder)
+                as LocationParameterHolder;
         return FilterLocationView(
             locationParameterHolder: locationParameterHolder);
       });
@@ -396,11 +398,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case '${RoutePaths.termsAndCondition}':
       return MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => const SettingTermsAndCondition()); 
+          builder: (BuildContext context) => const SettingTermsAndCondition());
 
     case '${RoutePaths.faq}':
       return MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => const SettingFAQView());       
+          builder: (BuildContext context) => const SettingFAQView());
 
     case '${RoutePaths.blogList}':
       return MaterialPageRoute<dynamic>(
@@ -428,7 +430,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
         final ItemListIntentHolder itemEntryIntentHolder =
-            (args as ItemListIntentHolder? ?? ItemListIntentHolder) as ItemListIntentHolder;
+            (args as ItemListIntentHolder? ?? ItemListIntentHolder)
+                as ItemListIntentHolder;
         return UserItemListView(
           addedUserId: itemEntryIntentHolder.userId,
           status: itemEntryIntentHolder.status,
@@ -439,7 +442,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
         final ItemListIntentHolder itemEntryIntentHolder =
-            (args as ItemListIntentHolder? ?? ItemListIntentHolder) as ItemListIntentHolder;
+            (args as ItemListIntentHolder? ?? ItemListIntentHolder)
+                as ItemListIntentHolder;
         return UserItemListForProfileView(
           addedUserId: itemEntryIntentHolder.userId,
           status: itemEntryIntentHolder.status,
@@ -463,7 +467,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case '${RoutePaths.productDetail}':
       final Object? args = settings.arguments;
       final ProductDetailIntentHolder holder =
-          (args as ProductDetailIntentHolder? ?? ProductDetailIntentHolder) as ProductDetailIntentHolder;
+          (args as ProductDetailIntentHolder? ?? ProductDetailIntentHolder)
+              as ProductDetailIntentHolder;
 
       // return MaterialPageRoute<Widget>(builder: (BuildContext context) {
       //   return ProductDetailView(
@@ -499,7 +504,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
         final ProductParameterHolder productParameterHolder =
-            (args as ProductParameterHolder? ?? ProductParameterHolder) as ProductParameterHolder;
+            (args as ProductParameterHolder? ?? ProductParameterHolder)
+                as ProductParameterHolder;
         return ItemSearchView(productParameterHolder: productParameterHolder);
       });
 
@@ -507,7 +513,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
         final ProductParameterHolder productParameterHolder =
-            (args as ProductParameterHolder? ?? ProductParameterHolder) as ProductParameterHolder;
+            (args as ProductParameterHolder? ?? ProductParameterHolder)
+                as ProductParameterHolder;
         return MapFilterView(productParameterHolder: productParameterHolder);
       });
 
@@ -515,7 +522,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
         final ProductParameterHolder productParameterHolder =
-            (args as ProductParameterHolder? ?? ProductParameterHolder) as ProductParameterHolder;
+            (args as ProductParameterHolder? ?? ProductParameterHolder)
+                as ProductParameterHolder;
         return GoogleMapFilterView(
             productParameterHolder: productParameterHolder);
       });
@@ -524,7 +532,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
         final MapPinIntentHolder mapPinIntentHolder =
-            (args as MapPinIntentHolder? ?? MapPinIntentHolder) as MapPinIntentHolder;
+            (args as MapPinIntentHolder? ?? MapPinIntentHolder)
+                as MapPinIntentHolder;
         return MapPinView(
           flag: mapPinIntentHolder.flag,
           maplat: mapPinIntentHolder.mapLat,
@@ -536,7 +545,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
         final MapPinIntentHolder mapPinIntentHolder =
-            (args as MapPinIntentHolder? ?? MapPinIntentHolder) as MapPinIntentHolder;
+            (args as MapPinIntentHolder? ?? MapPinIntentHolder)
+                as MapPinIntentHolder;
         return GoogleMapPinView(
           flag: mapPinIntentHolder.flag,
           maplat: mapPinIntentHolder.mapLat,
@@ -553,10 +563,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     //     );
     //   });
 
-        case '${RoutePaths.packageTransactionHistoryList}':
+    case '${RoutePaths.packageTransactionHistoryList}':
       return MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) =>
-               BuyAdTransactionContainerView());
+          builder: (BuildContext context) => BuyAdTransactionContainerView());
 
     case '${RoutePaths.favouriteProductList}':
       return MaterialPageRoute<dynamic>(
@@ -591,14 +600,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case '${RoutePaths.galleryDetail}':
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
-        final DefaultPhoto selectedDefaultImage = (args as DefaultPhoto? ?? DefaultPhoto) as DefaultPhoto;
+        final DefaultPhoto selectedDefaultImage =
+            (args as DefaultPhoto? ?? DefaultPhoto) as DefaultPhoto;
         return GalleryView(selectedDefaultImage: selectedDefaultImage);
       });
 
-      case '${RoutePaths.video}':
+    case '${RoutePaths.video}':
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
-        final String videoPath = args as String ;
+        final String videoPath = args as String;
         return PlayerVideoView(videoPath);
       });
 
@@ -633,7 +643,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           builder: (BuildContext context) {
             final Object? args = settings.arguments;
 
-            final UserIntentHolder userIntentHolder = (args as UserIntentHolder? ?? UserIntentHolder) as UserIntentHolder;
+            final UserIntentHolder userIntentHolder =
+                (args as UserIntentHolder? ?? UserIntentHolder)
+                    as UserIntentHolder;
             return UserDetailView(
               userName: userIntentHolder.userName,
               userId: userIntentHolder.userId,
@@ -644,7 +656,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
         final SafetyTipsIntentHolder safetyTipsIntentHolder =
-            (args as SafetyTipsIntentHolder? ?? SafetyTipsIntentHolder) as SafetyTipsIntentHolder;
+            (args as SafetyTipsIntentHolder? ?? SafetyTipsIntentHolder)
+                as SafetyTipsIntentHolder;
         return SafetyTipsView(
           animationController: safetyTipsIntentHolder.animationController,
           safetyTips: safetyTipsIntentHolder.safetyTips,
@@ -652,14 +665,17 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       });
 
     case '${RoutePaths.itemLocationList}':
-      return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-        return ItemLocationContainerView();
-      });
+      return MaterialPageRoute<dynamic>(
+          maintainState: false,
+          builder: (BuildContext context) {
+            return ItemLocationContainerView();
+          });
     case '${RoutePaths.itemEntry}':
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
         final ItemEntryIntentHolder itemEntryIntentHolder =
-            (args as ItemEntryIntentHolder? ?? ItemEntryIntentHolder) as ItemEntryIntentHolder;
+            (args as ItemEntryIntentHolder? ?? ItemEntryIntentHolder)
+                as ItemEntryIntentHolder;
         return ItemEntryContainerView(
           flag: itemEntryIntentHolder.flag,
           item: itemEntryIntentHolder.item,
@@ -679,7 +695,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case '${RoutePaths.itemType}':
       return MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => const TypeListView(showAllText: true,));
+          builder: (BuildContext context) => const TypeListView(
+                showAllText: true,
+              ));
 
     case '${RoutePaths.itemCondition}':
       return MaterialPageRoute<dynamic>(
@@ -701,17 +719,18 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute<dynamic>(
           builder: (BuildContext context) => ItemSoldOutView());
 
-
     case '${RoutePaths.itemSoldOutProductList}':
       return MaterialPageRoute<dynamic>(
           builder: (BuildContext context) => SoldOutProductListView());
 
     case '${RoutePaths.itemLocation}':
       return MaterialPageRoute<dynamic>(
+          maintainState: false,
           builder: (BuildContext context) => ItemEntryLocationView());
 
     case '${RoutePaths.itemLocationFirst}':
       return MaterialPageRoute<dynamic>(
+          maintainState: false,
           builder: (BuildContext context) => ItemLocationFirstView());
 
     case '${RoutePaths.itemPromote}':
@@ -723,7 +742,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case '${RoutePaths.choosePayment}':
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-        final Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
+        final Map<String, dynamic> args =
+            settings.arguments as Map<String, dynamic>;
         final Product? product = args['product'];
         final PSAppInfo appInfo = args['appInfo'];
         Utils.psPrint(appInfo.inAppPurchasedPrdIdAndroid);
@@ -740,11 +760,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case '${RoutePaths.itemListFromFollower}':
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-        final Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
+        final Map<String, dynamic> args =
+            settings.arguments as Map<String, dynamic>;
         // final String loginUserId = (args as String? ?? String) as String;
         // final FollowUserItemParameterHolder holder = (args as FollowUserItemParameterHolder? ?? FollowUserItemParameterHolder) as FollowUserItemParameterHolder;
         final String loginUserId = args['userId'];
-        final FollowUserItemParameterHolder holder = args['holder'];       
+        final FollowUserItemParameterHolder holder = args['holder'];
         return UserItemFollowerListView(
           loginUserId: loginUserId,
           holder: holder,
@@ -753,7 +774,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case '${RoutePaths.inAppPurchase}':
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-        final Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
+        final Map<String, dynamic> args =
+            settings.arguments as Map<String, dynamic>;
         // final String itemId = args ?? String;
         final String? itemId = args['productId'];
         final PSAppInfo? appInfo = args['appInfo'];
@@ -763,16 +785,19 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case '${RoutePaths.buyPackage}':
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-        final Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
+        final Map<String, dynamic> args =
+            settings.arguments as Map<String, dynamic>;
         final String androidKeyList = args['android'];
         final String iosKeyList = args['ios'];
-        return PackageShopInAppPurchaseView(androidKeyList: androidKeyList, iosKeyList: iosKeyList);
-      }); 
+        return PackageShopInAppPurchaseView(
+            androidKeyList: androidKeyList, iosKeyList: iosKeyList);
+      });
 
     case '${RoutePaths.creditCard}':
       final Object? args = settings.arguments;
 
-      final PaidHistoryHolder paidHistoryHolder = (args as PaidHistoryHolder? ?? PaidHistoryHolder) as PaidHistoryHolder;
+      final PaidHistoryHolder paidHistoryHolder = (args as PaidHistoryHolder? ??
+          PaidHistoryHolder) as PaidHistoryHolder;
       return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
               CreditCardView(
@@ -790,7 +815,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       final Object? args = settings.arguments;
 
       final PayStackInterntHolder payStackInterntHolder =
-          (args as PayStackInterntHolder? ?? PayStackInterntHolder) as PayStackInterntHolder;
+          (args as PayStackInterntHolder? ?? PayStackInterntHolder)
+              as PayStackInterntHolder;
       return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
               PayStackView(
@@ -810,7 +836,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case '${RoutePaths.offlinePayment}':
       final Object? args = settings.arguments;
 
-      final PaidHistoryHolder paidHistoryHolder = (args as PaidHistoryHolder? ?? PaidHistoryHolder) as PaidHistoryHolder;
+      final PaidHistoryHolder paidHistoryHolder = (args as PaidHistoryHolder? ??
+          PaidHistoryHolder) as PaidHistoryHolder;
       return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
               OfflinePaymentView(

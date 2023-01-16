@@ -1,6 +1,5 @@
-
-
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutterbuyandsell/config/ps_colors.dart';
 import 'package:flutterbuyandsell/config/ps_config.dart';
@@ -76,44 +75,44 @@ class _PhoneSignInViewState extends State<PhoneSignInView>
             children: <Widget>[
               SingleChildScrollView(
                   child: Container(
-                    height: 900,
-                     color: PsColors.baseColor,
-                    child: AnimatedBuilder(
-                        animation: animationController,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            _HeaderIconAndTextWidget(),
-                            _CardWidget(
-                              nameController: nameController,
-                              phoneController: phoneController,
-                            ),
-                            const SizedBox(
-                              height: PsDimens.space8,
-                            ),
-                            _SendButtonWidget(
-                              provider: provider,
-                              nameController: nameController,
-                              phoneController: phoneController,
-                              phoneSignInSelected: widget.phoneSignInSelected,
-                            ),
-                            const SizedBox(
-                              height: PsDimens.space16,
-                            ),
-                            _TextWidget(
-                                goToLoginSelected: widget.goToLoginSelected),
-                          ],
+                height: 900,
+                color: PsColors.baseColor,
+                child: AnimatedBuilder(
+                    animation: animationController,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        _HeaderIconAndTextWidget(),
+                        _CardWidget(
+                          nameController: nameController,
+                          phoneController: phoneController,
                         ),
-                        builder: (BuildContext context, Widget? child) {
-                          return FadeTransition(
-                            opacity: animation,
-                            child: Transform(
-                                transform: Matrix4.translationValues(
-                                    0.0, 100 * (1.0 - animation.value), 0.0),
-                                child: child),
-                          );
-                        }),
-                  ))
+                        const SizedBox(
+                          height: PsDimens.space8,
+                        ),
+                        _SendButtonWidget(
+                          provider: provider,
+                          nameController: nameController,
+                          phoneController: phoneController,
+                          phoneSignInSelected: widget.phoneSignInSelected,
+                        ),
+                        const SizedBox(
+                          height: PsDimens.space16,
+                        ),
+                        _TextWidget(
+                            goToLoginSelected: widget.goToLoginSelected),
+                      ],
+                    ),
+                    builder: (BuildContext context, Widget? child) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: Transform(
+                            transform: Matrix4.translationValues(
+                                0.0, 100 * (1.0 - animation.value), 0.0),
+                            child: child),
+                      );
+                    }),
+              ))
             ],
           );
         }),
@@ -171,7 +170,7 @@ class _HeaderIconAndTextWidget extends StatelessWidget {
 
     final Widget _imageWidget = Container(
       width: 80,
-      height:80,
+      height: 80,
       child: Image.asset(
         'assets/images/flutter_buy_and_sell_logo.png',
       ),
@@ -208,65 +207,63 @@ class _CardWidget extends StatelessWidget {
         top: PsDimens.space4,
         bottom: PsDimens.space4);
     return Column(
-        children: <Widget>[
-          Container(
-            margin: _marginEdgeInsetsforCard,
-            child: TextField(
-              controller: nameController,
-              style: Theme.of(context).textTheme.bodyText1,
-              decoration: InputDecoration(
+      children: <Widget>[
+        Container(
+          margin: _marginEdgeInsetsforCard,
+          child: TextField(
+            controller: nameController,
+            style: Theme.of(context).textTheme.bodyText1,
+            decoration: InputDecoration(
                 border: const OutlineInputBorder(
-                          borderRadius:  BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide.none,
-                          
-                        ),
-                      filled: true,
-                      fillColor: PsColors.cardBackgroundColor,
-                  hintText: Utils.getString(context, 'register__user_name'),
-                  hintStyle: Theme.of(context)
-                      .textTheme
-                      .bodyText2!
-                      .copyWith(color: Utils.isLightMode(context)? PsColors.textPrimaryLightColor: PsColors.primaryDarkGrey),
-                  prefixIcon: Icon(Icons.people,
-                      color: Theme.of(context).iconTheme.color)),
-            ),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                fillColor: PsColors.cardBackgroundColor,
+                hintText: Utils.getString(context, 'register__user_name'),
+                hintStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
+                    color: Utils.isLightMode(context)
+                        ? PsColors.textPrimaryLightColor
+                        : PsColors.primaryDarkGrey),
+                prefixIcon: Icon(Icons.people,
+                    color: Theme.of(context).iconTheme.color)),
           ),
-          const Divider(
-            height: PsDimens.space1,
-          ),
-          Container(
-            margin: _marginEdgeInsetsforCard,
-            child: Directionality(
-                textDirection: Directionality.of(context) == TextDirection.ltr
-                    ? TextDirection.ltr
-                    : TextDirection.rtl,
-                child: TextField(
-                  controller: phoneController,
-                  textDirection: TextDirection.ltr,
-                  textAlign: Directionality.of(context) == TextDirection.ltr
-                      ? TextAlign.left
-                      : TextAlign.right,
-                  style: Theme.of(context).textTheme.button!.copyWith(),
-                  keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(
+        ),
+        const Divider(
+          height: PsDimens.space1,
+        ),
+        Container(
+          margin: _marginEdgeInsetsforCard,
+          child: Directionality(
+              textDirection: Directionality.of(context) == TextDirection.ltr
+                  ? TextDirection.ltr
+                  : TextDirection.rtl,
+              child: TextField(
+                controller: phoneController,
+                textDirection: TextDirection.ltr,
+                textAlign: Directionality.of(context) == TextDirection.ltr
+                    ? TextAlign.left
+                    : TextAlign.right,
+                style: Theme.of(context).textTheme.button!.copyWith(),
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
                     border: const OutlineInputBorder(
-                          borderRadius:  BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide.none,
-                          
-                        ),
-                      filled: true,
-                      fillColor: PsColors.cardBackgroundColor,
-                      hintText: '+959123456789',
-                      hintStyle: Theme.of(context)
-                          .textTheme
-                          .button!
-                          .copyWith(color: Utils.isLightMode(context)? PsColors.textPrimaryLightColor: PsColors.primaryDarkGrey),
-                      prefixIcon: Icon(Icons.phone,
-                          color: Theme.of(context).iconTheme.color)),
-                  // keyboardType: TextInputType.number,
-                )),
-          ),
-        ],
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: PsColors.cardBackgroundColor,
+                    hintText: '+959123456789',
+                    hintStyle: Theme.of(context).textTheme.button!.copyWith(
+                        color: Utils.isLightMode(context)
+                            ? PsColors.textPrimaryLightColor
+                            : PsColors.primaryDarkGrey),
+                    prefixIcon: Icon(Icons.phone,
+                        color: Theme.of(context).iconTheme.color)),
+                // keyboardType: TextInputType.number,
+              )),
+        ),
+      ],
     );
   }
 }
