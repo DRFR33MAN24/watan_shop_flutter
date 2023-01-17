@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -65,10 +63,10 @@ class _LoginViewState extends State<LoginView> {
         print(provider.getCurrentFirebaseUser());
         return provider;
       },
-      child: Consumer<UserProvider>(
-          builder: (BuildContext context, UserProvider provider, Widget? child) {
+      child: Consumer<UserProvider>(builder:
+          (BuildContext context, UserProvider provider, Widget? child) {
         return Container(
-        //  color: PsColors.primaryDarkWhite,
+          //  color: PsColors.primaryDarkWhite,
           child: AnimatedBuilder(
             animation: widget.animationController!,
             child: Column(
@@ -80,11 +78,11 @@ class _LoginViewState extends State<LoginView> {
                   onProfileSelected: widget.onProfileSelected,
                 ),
                 // _spacingWidget,
-                
+
                 const SizedBox(
                   height: PsDimens.space10,
                 ),
-           
+
                 _ForgotPasswordAndRegisterWidget(
                   provider: provider,
                   animationController: widget.animationController,
@@ -95,10 +93,10 @@ class _LoginViewState extends State<LoginView> {
                 //   height: PsDimens.space8,
                 // ),
                 _DividerORWidget(),
-                  const SizedBox(
+                const SizedBox(
                   height: PsDimens.space14,
                 ),
-                     _TermsAndConCheckbox(
+                _TermsAndConCheckbox(
                   provider: provider,
                   onCheckBoxClick: () {
                     setState(() {
@@ -106,7 +104,7 @@ class _LoginViewState extends State<LoginView> {
                     });
                   },
                 ),
-                 const SizedBox(
+                const SizedBox(
                   height: PsDimens.space10,
                 ),
                 if (psValueHolder!.showPhoneLogin!)
@@ -165,7 +163,7 @@ class __TermsAndConCheckboxState extends State<_TermsAndConCheckbox> {
           width: PsDimens.space20,
         ),
         Checkbox(
-           side: BorderSide(color: PsColors.primary500),
+          side: BorderSide(color: PsColors.primary500),
           checkColor: PsColors.baseColor,
           activeColor: PsColors.activeColor,
           value: widget.provider.isCheckBoxSelect,
@@ -177,9 +175,10 @@ class __TermsAndConCheckboxState extends State<_TermsAndConCheckbox> {
           child: InkWell(
             child: Text(
               Utils.getString(context, 'login__agree_privacy'),
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                color: PsColors.textColor2
-              ),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1!
+                  .copyWith(color: PsColors.textColor2),
             ),
             onTap: () {
               widget.onCheckBoxClick();
@@ -272,56 +271,55 @@ class __CardWidgetState extends State<_TextFieldAndSignInButtonWidget> {
         //   child: Column(
         //     children: <Widget>[
 
-              Container(
-                margin: _marginEdgeInsetsforCard,
-                child: TextField(
-                  controller: emailController,
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(),
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration( 
-                      // border: InputBorder.none,
-                   border: const OutlineInputBorder(
-                          borderRadius:  BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide.none,
-                          
-                        ),
-                      filled: true,
-                      fillColor: PsColors.cardBackgroundColor,
-                      hintText: Utils.getString(context, 'login__email'),
-                      hintStyle: Theme.of(context)
-                          .textTheme
-                          .bodyText2!
-                          .copyWith(color: Utils.isLightMode(context)? PsColors.textPrimaryLightColor: PsColors.primaryDarkGrey),
-                      prefixIcon: Icon(Icons.email,
-                          color: Theme.of(context).iconTheme.color)),
+        Container(
+          margin: _marginEdgeInsetsforCard,
+          child: TextField(
+            controller: emailController,
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(),
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(
+                // border: InputBorder.none,
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  borderSide: BorderSide.none,
                 ),
-              ),
-              const SizedBox(
-                height: PsDimens.space10,
-              ),
-              Container(
-                margin: _marginEdgeInsetsforCard,
-                child: TextField(
-                  controller: passwordController,
-                  obscureText: true,
-                  style: Theme.of(context).textTheme.button!.copyWith(),
-                  decoration: InputDecoration(
-                               border: const OutlineInputBorder(
-                          borderRadius:  BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide.none,                          
-                        ),
-                      filled: true,
-                      fillColor: PsColors.cardBackgroundColor,
-                      hintText: Utils.getString(context, 'login__password'),
-                      hintStyle: Theme.of(context)
-                          .textTheme
-                          .button!
-                          .copyWith(color:  Utils.isLightMode(context)? PsColors.textPrimaryLightColor: PsColors.primaryDarkGrey),
-                      prefixIcon: Icon(Icons.lock,
-                          color: Theme.of(context).iconTheme.color)),
-                  // keyboardType: TextInputType.number,
+                filled: true,
+                fillColor: PsColors.cardBackgroundColor,
+                hintText: Utils.getString(context, 'login__email'),
+                hintStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
+                    color: Utils.isLightMode(context)
+                        ? PsColors.textPrimaryLightColor
+                        : PsColors.primaryDarkGrey),
+                prefixIcon: Icon(Icons.email,
+                    color: Theme.of(context).iconTheme.color)),
+          ),
+        ),
+        const SizedBox(
+          height: PsDimens.space10,
+        ),
+        Container(
+          margin: _marginEdgeInsetsforCard,
+          child: TextField(
+            controller: passwordController,
+            obscureText: true,
+            style: Theme.of(context).textTheme.button!.copyWith(),
+            decoration: InputDecoration(
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  borderSide: BorderSide.none,
                 ),
-              ),
+                filled: true,
+                fillColor: PsColors.cardBackgroundColor,
+                hintText: Utils.getString(context, 'login__password'),
+                hintStyle: Theme.of(context).textTheme.button!.copyWith(
+                    color: Utils.isLightMode(context)
+                        ? PsColors.textPrimaryLightColor
+                        : PsColors.primaryDarkGrey),
+                prefixIcon:
+                    Icon(Icons.lock, color: Theme.of(context).iconTheme.color)),
+            // keyboardType: TextInputType.number,
+          ),
+        ),
         //     ],
         //   ),
         // ),
@@ -381,7 +379,9 @@ class _DividerORWidget extends StatelessWidget {
     final Widget _dividerWidget = Expanded(
       child: Divider(
         height: PsDimens.space2,
-        color: Utils.isLightMode(context)? PsColors.secondary400 : PsColors.primaryDarkWhite,
+        color: Utils.isLightMode(context)
+            ? PsColors.secondary400
+            : PsColors.primaryDarkWhite,
       ),
     );
 
@@ -390,9 +390,11 @@ class _DividerORWidget extends StatelessWidget {
     );
 
     final Widget _textWidget = Text(
-      'OR',
+      Utils.getString(context, "or"),
       style: Theme.of(context).textTheme.subtitle1!.copyWith(
-            color: Utils.isLightMode(context)? PsColors.secondary400 : PsColors.primaryDarkWhite,
+            color: Utils.isLightMode(context)
+                ? PsColors.secondary400
+                : PsColors.primaryDarkWhite,
           ),
     );
     return Row(
@@ -436,17 +438,16 @@ class __LoginWithPhoneWidgetState extends State<_LoginWithPhoneWidget> {
             if (widget.onPhoneSignInSelected != null) {
               widget.onPhoneSignInSelected!();
             } else {
-              if(valueHolder.isForceLogin!){
-                
-            await  Navigator.pushNamed(
-                context,
-                RoutePaths.user_phone_signin_container,
-              );
-              }else{
-            await  Navigator.pushReplacementNamed(
-                context,
-                RoutePaths.user_phone_signin_container,
-              );
+              if (valueHolder.isForceLogin!) {
+                await Navigator.pushNamed(
+                  context,
+                  RoutePaths.user_phone_signin_container,
+                );
+              } else {
+                await Navigator.pushReplacementNamed(
+                  context,
+                  RoutePaths.user_phone_signin_container,
+                );
               }
             }
           } else {
@@ -585,18 +586,18 @@ class __ForgotPasswordAndRegisterWidgetState
     extends State<_ForgotPasswordAndRegisterWidget> {
   @override
   Widget build(BuildContext context) {
-     final PsValueHolder valueHolder = Provider.of<PsValueHolder>(context);
+    final PsValueHolder valueHolder = Provider.of<PsValueHolder>(context);
     return Container(
-      padding: const EdgeInsets.only(bottom: PsDimens.space4),
-      margin: const EdgeInsets.all(PsDimens.space12),
-      child: Column(
-        children: <Widget>[
-          InkWell(
-            onTap: (){
-             if (widget.onForgotPasswordSelected != null) {
-                  widget.onForgotPasswordSelected!();
-                } else {
-                  if (valueHolder.isForceLogin!) {
+        padding: const EdgeInsets.only(bottom: PsDimens.space4),
+        margin: const EdgeInsets.all(PsDimens.space12),
+        child: Column(
+          children: <Widget>[
+            InkWell(
+                onTap: () {
+                  if (widget.onForgotPasswordSelected != null) {
+                    widget.onForgotPasswordSelected!();
+                  } else {
+                    if (valueHolder.isForceLogin!) {
                       Navigator.pushNamed(
                         context,
                         RoutePaths.user_forgot_password_container,
@@ -607,22 +608,22 @@ class __ForgotPasswordAndRegisterWidgetState
                         RoutePaths.user_forgot_password_container,
                       );
                     }
-                }
-            },
-            child: Text(
-                  Utils.getString(context, 'login__forgot_password'),
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.button!.copyWith(
-                        color: PsColors.textColor3,
-                      ))),
-        const SizedBox(
-          height: PsDimens.space10,),
-           InkWell(
-             onTap: ()  async{
+                  }
+                },
+                child: Text(Utils.getString(context, 'login__forgot_password'),
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.button!.copyWith(
+                          color: PsColors.textColor3,
+                        ))),
+            const SizedBox(
+              height: PsDimens.space10,
+            ),
+            InkWell(
+              onTap: () async {
                 if (widget.onSignInSelected != null) {
                   widget.onSignInSelected!();
                 } else {
-                   dynamic returnData ;
+                  dynamic returnData;
                   if (valueHolder.isForceLogin!) {
                     await Navigator.pushNamed(
                       context,
@@ -646,16 +647,14 @@ class __ForgotPasswordAndRegisterWidgetState
                     Navigator.pop(context, user);
                   }
                 }
-            },
-             child: Text(
-                    Utils.getString(context, 'login__sign_up'),
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.button!.copyWith(
-                          color: PsColors.textColor3,
-                        )),
-           ),
-        ],
-      )
-    );
+              },
+              child: Text(Utils.getString(context, 'login__sign_up'),
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.button!.copyWith(
+                        color: PsColors.textColor3,
+                      )),
+            ),
+          ],
+        ));
   }
 }

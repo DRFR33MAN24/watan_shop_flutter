@@ -317,6 +317,324 @@ class _ProductDetailState extends State<ProductDetailView>
                       (BuildContext context,
                           MarkSoldOutItemProvider markSoldOutItemProvider,
                           Widget? child) {
+                    if (provider.itemDetail.data!.catId == '13') {
+                      return Container(
+                        color: PsColors.baseColor,
+                        child: Stack(
+                          children: <Widget>[
+                            CustomScrollView(slivers: <Widget>[
+                              SliverAppBar(
+                                automaticallyImplyLeading: true,
+                                systemOverlayStyle: SystemUiOverlayStyle(
+                                  statusBarIconBrightness:
+                                      Utils.getBrightnessForAppBar(context),
+                                ),
+                                expandedHeight: PsDimens.space700,
+                                iconTheme: Theme.of(context)
+                                    .iconTheme
+                                    .copyWith(color: PsColors.primaryDarkWhite),
+                                leading: PsBackButtonWithCircleBgWidget(
+                                    isReadyToShow: isReadyToShowAppBarIcons),
+                                floating: false,
+                                pinned: false,
+                                stretch: true,
+                                actions: <Widget>[
+                                  Visibility(
+                                    visible: isReadyToShowAppBarIcons,
+                                    child: _PopUpMenuWidget(
+                                        context: context,
+                                        itemDetailProvider: provider,
+                                        userProvider: userProvider,
+                                        itemId: provider.itemDetail.data!.id,
+                                        itemUserId: provider
+                                            .itemDetail.data!.user!.userId,
+                                        addedUserId: provider
+                                            .itemDetail.data!.addedUserId,
+                                        reportedUserId:
+                                            psValueHolder!.loginUserId,
+                                        loginUserId: psValueHolder!.loginUserId,
+                                        itemTitle:
+                                            provider.itemDetail.data!.title,
+                                        itemImage: provider.itemDetail.data!
+                                            .defaultPhoto!.imgPath),
+                                  ),
+                                ],
+                                backgroundColor: PsColors.primaryDarkDark,
+                                flexibleSpace: FlexibleSpaceBar(
+                                  background: Container(
+                                    color: PsColors.backgroundColor,
+                                    child: Stack(
+                                      alignment: Alignment.bottomRight,
+                                      children: <Widget>[
+                                        // PsNetworkImage(
+                                        //   photoKey:
+                                        //       widget.heroTagImage! + '_ignore',
+                                        //   defaultPhoto: provider
+                                        //       .itemDetail.data!.defaultPhoto,
+                                        //   width: double.infinity,
+                                        //   height: PsDimens.space300,
+                                        //   boxfit: BoxFit.cover,
+                                        //   imageAspectRation:
+                                        //       PsConst.Aspect_Ratio_full_image,
+                                        //   onTap: () {
+
+                                        ProductDetailGalleryView(
+                                          selectedDefaultImage:
+                                              currentDefaultPhoto!,
+                                          isHaveVideo: isHaveVideo,
+                                          onImageTap: () {
+                                            Navigator.pushNamed(
+                                                context, RoutePaths.galleryGrid,
+                                                arguments:
+                                                    provider.itemDetail.data);
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              // SliverList(
+                              //   delegate: SliverChildListDelegate(<Widget>[
+                              //     Container(
+                              //       color: PsColors.baseColor,
+                              //       child: Column(children: <Widget>[
+                              //         _HeaderBoxWidget(
+                              //           itemDetail: provider,
+                              //           galleryProvider: galleryProvider,
+                              //           product: provider.itemDetail.data,
+                              //           heroTagTitle: widget.heroTagTitle,
+                              //           favouriteProvider: favouriteProvider!,
+                              //         ),
+                              //       ]),
+                              //     )
+                              //   ]),
+                              // ),
+                              // SliverGrid.extent(
+                              //     maxCrossAxisExtent: 300.0,
+                              //     childAspectRatio: 3.1,
+                              //     children: <Widget>[
+                              //       if (Utils.showUI(psValueHolder?.typeId) &&
+                              //           provider.itemDetail.data!.itemType!
+                              //                   .name !=
+                              //               '')
+                              //         Container(
+                              //           color: PsColors.baseColor,
+                              //           padding: const EdgeInsets.only(
+                              //               left: PsDimens.space12,
+                              //               top: PsDimens.space4,
+                              //               right: PsDimens.space12,
+                              //               bottom: PsDimens.space4),
+                              //           child: _IconsAndTitleTextWidget(
+                              //             title: Utils.getString(
+                              //                 context, 'item_entry__type'),
+                              //             name:
+                              //                 '${provider.itemDetail.data!.itemType!.name}',
+                              //             isStatus: false,
+                              //           ),
+                              //         ),
+                              //       Container(
+                              //         color: PsColors.baseColor,
+                              //         padding: const EdgeInsets.only(
+                              //             left: PsDimens.space12,
+                              //             top: PsDimens.space4,
+                              //             right: PsDimens.space12,
+                              //             bottom: PsDimens.space4),
+                              //         child: _IconsAndTitleTextWidget(
+                              //           title:
+                              //               Utils.getString(context, 'status'),
+                              //           name: provider.itemDetail.data!
+                              //                       .isSoldOut ==
+                              //                   '1'
+                              //               ? Utils.getString(
+                              //                   context, 'item_detail__sold')
+                              //               : Utils.getString(
+                              //                   context, 'available'),
+                              //           isStatus: true,
+                              //         ),
+                              //       ),
+                              //       if (provider
+                              //               .itemDetail.data!.addedDateStr !=
+                              //           '')
+                              //         Container(
+                              //           color: PsColors.baseColor,
+                              //           padding: const EdgeInsets.only(
+                              //               left: PsDimens.space12,
+                              //               top: PsDimens.space4,
+                              //               right: PsDimens.space12,
+                              //               bottom: PsDimens.space4),
+                              //           child: _IconsAndTitleTextWidget(
+                              //             title: Utils.getString(
+                              //                 context, 'posted_on'),
+                              //             name:
+                              //                 '${provider.itemDetail.data!.addedDateStr}',
+                              //             isStatus: false,
+                              //           ),
+                              //         ),
+                              //       if (Utils.showUI(
+                              //               psValueHolder?.conditionOfItemId) &&
+                              //           provider.itemDetail.data!
+                              //                   .conditionOfItem!.name !=
+                              //               '')
+                              //         Container(
+                              //           color: PsColors.baseColor,
+                              //           padding: const EdgeInsets.only(
+                              //               left: PsDimens.space12,
+                              //               top: PsDimens.space4,
+                              //               right: PsDimens.space12,
+                              //               bottom: PsDimens.space4),
+                              //           child: _IconsAndTitleTextWidget(
+                              //             title: Utils.getString(context,
+                              //                 'item_entry__item_condition'),
+                              //             name:
+                              //                 '${provider.itemDetail.data!.conditionOfItem!.name}',
+                              //             isStatus: false,
+                              //           ),
+                              //         ),
+                              //       if (Utils.showUI(psValueHolder?.brand) &&
+                              //           provider.itemDetail.data!.brand != '')
+                              //         Container(
+                              //           color: PsColors.baseColor,
+                              //           padding: const EdgeInsets.only(
+                              //               left: PsDimens.space12,
+                              //               top: PsDimens.space4,
+                              //               right: PsDimens.space12,
+                              //               bottom: PsDimens.space4),
+                              //           child: _IconsAndTitleTextWidget(
+                              //             title:
+                              //                 Utils.getString(context, 'brand'),
+                              //             name:
+                              //                 '${provider.itemDetail.data!.brand}',
+                              //             isStatus: false,
+                              //           ),
+                              //         ),
+                              //       if (Utils.showUI(
+                              //               psValueHolder?.dealOptionId) &&
+                              //           provider.itemDetail.data!.dealOption!
+                              //                   .name !=
+                              //               '')
+                              //         Container(
+                              //           color: PsColors.baseColor,
+                              //           padding: const EdgeInsets.only(
+                              //               left: PsDimens.space12,
+                              //               top: PsDimens.space4,
+                              //               right: PsDimens.space12,
+                              //               bottom: PsDimens.space4),
+                              //           child: _IconsAndTitleTextWidget(
+                              //             title: Utils.getString(context,
+                              //                 'item_entry__deal_option'),
+                              //             name:
+                              //                 '${provider.itemDetail.data!.dealOption!.name}',
+                              //             isStatus: false,
+                              //           ),
+                              //         ),
+                              //       if (Utils.showUI(
+                              //               psValueHolder?.dealOptionRemark) &&
+                              //           provider.itemDetail.data!
+                              //                   .dealOptionRemark !=
+                              //               '')
+                              //         Container(
+                              //           color: PsColors.baseColor,
+                              //           padding: const EdgeInsets.only(
+                              //               left: PsDimens.space12,
+                              //               top: PsDimens.space4,
+                              //               right: PsDimens.space12,
+                              //               bottom: PsDimens.space4),
+                              //           child: _IconsAndTitleTextWidget(
+                              //             title: Utils.getString(
+                              //                 context, 'item_entry__remark'),
+                              //             name:
+                              //                 '${provider.itemDetail.data!.dealOptionRemark}',
+                              //             isStatus: false,
+                              //           ),
+                              //         )
+                              //     ]),
+                              // SliverList(
+                              //   delegate: SliverChildListDelegate(<Widget>[
+                              //     Container(
+                              //       color: PsColors.baseColor,
+                              //       child: Column(children: <Widget>[
+                              //         _DetailWidget(itemDetail: provider),
+                              //         const SizedBox(
+                              //           height: PsDimens.space10,
+                              //         ),
+                              //         SellerInfoTileView(
+                              //           itemDetail: provider,
+                              //         ),
+                              //         // if (provider.itemDetail.data!.isOwner ==
+                              //         //         PsConst.ONE &&
+                              //         //     provider.itemDetail.data!.status ==
+                              //         //         PsConst.ONE &&
+                              //         //     (provider.itemDetail.data!.paidStatus ==
+                              //         //             PsConst.ADSNOTAVAILABLE ||
+                              //         //         provider.itemDetail.data!
+                              //         //                 .paidStatus ==
+                              //         //             PsConst.ADSFINISHED) &&
+                              //         //     appInfoProvider!.appInfo.data != null &&
+                              //         //     !isAllPaymentDisable(appInfoProvider!))
+                              //         //   PromoteTileView(
+                              //         //     animationController: animationController,
+                              //         //     product: provider.itemDetail.data,
+                              //         //     provider: provider,
+                              //         //   )
+                              //         // else
+                              //         //   Container(),
+                              //         SafetyTipsTileView(
+                              //             animationController:
+                              //                 animationController),
+                              //         if (Utils.showUI(psValueHolder!.address))
+                              //           LocationTileView(
+                              //               item: provider.itemDetail.data),
+                              //         // GettingThisTileView(
+                              //         //     detailOption:
+                              //         //         provider.itemDetail.data!.dealOption,
+                              //         //     address:
+                              //         //         provider.itemDetail.data!.address),
+                              //         TermsAndConditionTileView(
+                              //             animationController:
+                              //                 animationController),
+                              //         FAQTileView(
+                              //             animationController:
+                              //                 animationController),
+                              //         if (provider.itemDetail.data!
+                              //                     .addedUserId !=
+                              //                 null &&
+                              //             provider.itemDetail.data!
+                              //                     .addedUserId ==
+                              //                 psValueHolder!.loginUserId)
+                              //           StatisticTileView(
+                              //             provider,
+                              //           ),
+                              //         const SizedBox(
+                              //           height: PsDimens.space80,
+                              //         ),
+                              //       ]),
+                              //     )
+                              //   ]),
+                              // ),
+                            ]),
+                            if (provider.itemDetail.data!.addedUserId != null &&
+                                provider.itemDetail.data!.addedUserId ==
+                                    psValueHolder!.loginUserId)
+                              _EditAndDeleteButtonWidget(
+                                provider: provider,
+                                markSoldOutItemProvider:
+                                    markSoldOutItemProvider,
+                                appInfoprovider: appInfoProvider!,
+                                product: provider.itemDetail.data,
+                                markSoldOutItemHolder: markSoldOutItemHolder,
+                              )
+                            else
+                              _CallAndChatButtonWidget(
+                                provider: provider,
+                                favouriteItemRepo: productRepo,
+                                psValueHolder: psValueHolder,
+                              ),
+                          ],
+                        ),
+                      );
+                    }
+
                     return Container(
                       color: PsColors.baseColor,
                       child: Stack(
@@ -1946,7 +2264,9 @@ class __CallAndChatButtonWidgetState extends State<_CallAndChatButtonWidget> {
               alignment: Alignment.bottomCenter,
               child: SizedBox(
                 width: double.infinity,
-                height: PsDimens.space72,
+                height: widget.provider.itemDetail.data!.catId == '13'
+                    ? PsDimens.space140
+                    : PsDimens.space72,
                 child: Container(
                   decoration: BoxDecoration(
                     color: PsColors.baseColor,
@@ -1970,82 +2290,184 @@ class __CallAndChatButtonWidgetState extends State<_CallAndChatButtonWidget> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        top: PsDimens.space16,
-                        right: PsDimens.space16,
-                        bottom: PsDimens.space16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        if (widget.provider.itemDetail.data!.user!.userPhone !=
-                                null &&
-                            widget.provider.itemDetail.data!.user!.userPhone !=
-                                '' &&
-                            widget.provider.itemDetail.data!.user!
-                                    .isShowPhone ==
-                                '1')
-                          Visibility(
-                              visible: true,
-                              child: Container(
-                                margin: const EdgeInsets.only(
-                                    left: PsDimens.space16,
-                                    right: PsDimens.space16),
-                                child: PSButtonWithIconWidget(
-                                  colorData: PsColors.buttonColor,
-                                  hasShadow: false,
-                                  icon: Icons.call,
-                                  iconColor: PsColors.textColor4,
-                                  width: 150,
-                                  titleText: Utils.getString(
-                                      context, 'item_detail__call'),
-                                  onPressed: () async {
-                                    if (await canLaunchUrl(Uri.parse(
-                                        'tel://${widget.provider.itemDetail.data!.user!.userPhone}'))) {
-                                      await launchUrl(Uri.parse(
-                                          'tel://${widget.provider.itemDetail.data!.user!.userPhone}'));
-                                    } else {
-                                      throw 'Could not Call Phone';
-                                    }
-                                  },
+                        top: PsDimens.space8,
+                        right: PsDimens.space8,
+                        bottom: PsDimens.space8),
+                    child: widget.provider.itemDetail.data!.catId == '13'
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              if (widget.provider.itemDetail.data!.user!
+                                          .userPhone !=
+                                      null &&
+                                  widget.provider.itemDetail.data!.user!
+                                          .userPhone !=
+                                      '' &&
+                                  widget.provider.itemDetail.data!.user!
+                                          .isShowPhone ==
+                                      '1')
+                                Visibility(
+                                    visible: true,
+                                    child: Container(
+                                      margin: const EdgeInsets.only(
+                                          left: PsDimens.space16,
+                                          right: PsDimens.space16),
+                                      child: PSButtonWithIconWidget(
+                                        colorData: PsColors.buttonColor,
+                                        hasShadow: false,
+                                        icon: Icons.call,
+                                        iconColor: PsColors.textColor4,
+                                        width: 150,
+                                        titleText: Utils.getString(
+                                            context, 'item_detail__call'),
+                                        onPressed: () async {
+                                          if (await canLaunchUrl(Uri.parse(
+                                              'tel://${widget.provider.itemDetail.data!.user!.userPhone}'))) {
+                                            await launchUrl(Uri.parse(
+                                                'tel://${widget.provider.itemDetail.data!.user!.userPhone}'));
+                                          } else {
+                                            throw 'Could not Call Phone';
+                                          }
+                                        },
+                                      ),
+                                    ))
+                              else
+                                Visibility(
+                                    visible: true,
+                                    child: Container(
+                                      margin: const EdgeInsets.only(
+                                          left: PsDimens.space8,
+                                          right: PsDimens.space8),
+                                      width: 320,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          PSButtonWithIconWidget(
+                                            colorData: PsColors.buttonColor,
+                                            hasShadow: false,
+                                            icon: Icons.call,
+                                            iconColor: PsColors.textColor4,
+                                            width: 150,
+                                            titleText: Utils.getString(
+                                                context, 'item_detail__call'),
+                                            onPressed: () async {
+                                              if (await canLaunchUrl(Uri.parse(
+                                                  'tel://${widget.provider.itemDetail.data!.user!.userPhone}'))) {
+                                                await launchUrl(Uri.parse(
+                                                    'tel://${widget.provider.itemDetail.data!.user!.userPhone}'));
+                                              } else {
+                                                throw 'Could not Call Phone';
+                                              }
+                                            },
+                                          ),
+                                          PSButtonWithIconWidget(
+                                            colorData:
+                                                PsColors.buttonGreenColor,
+                                            hasShadow: false,
+                                            icon: Icons.whatsapp,
+                                            iconColor: PsColors.textColor4,
+                                            width: 150,
+                                            titleText: 'WhatsApp',
+                                            onPressed: () async {
+                                              if (await canLaunchUrl(Uri.parse(
+                                                  'tel://${widget.provider.itemDetail.data!.user!.userPhone}'))) {
+                                                await launchUrl(Uri.parse(
+                                                    'tel://${widget.provider.itemDetail.data!.user!.userPhone}'));
+                                              } else {
+                                                throw 'Could not Call Phone';
+                                              }
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ))
+                            ],
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              if (widget.provider.itemDetail.data!.user!
+                                          .userPhone !=
+                                      null &&
+                                  widget.provider.itemDetail.data!.user!
+                                          .userPhone !=
+                                      '' &&
+                                  widget.provider.itemDetail.data!.user!
+                                          .isShowPhone ==
+                                      '1')
+                                Visibility(
+                                    visible: true,
+                                    child: Container(
+                                      margin: const EdgeInsets.only(
+                                          left: PsDimens.space16,
+                                          right: PsDimens.space16),
+                                      child: PSButtonWithIconWidget(
+                                        colorData: PsColors.buttonColor,
+                                        hasShadow: false,
+                                        icon: Icons.call,
+                                        iconColor: PsColors.textColor4,
+                                        width: 150,
+                                        titleText: Utils.getString(
+                                            context, 'item_detail__call'),
+                                        onPressed: () async {
+                                          if (await canLaunchUrl(Uri.parse(
+                                              'tel://${widget.provider.itemDetail.data!.user!.userPhone}'))) {
+                                            await launchUrl(Uri.parse(
+                                                'tel://${widget.provider.itemDetail.data!.user!.userPhone}'));
+                                          } else {
+                                            throw 'Could not Call Phone';
+                                          }
+                                        },
+                                      ),
+                                    ))
+                              else
+                                const SizedBox(
+                                  width: PsDimens.space16,
                                 ),
-                              ))
-                        else
-                          const SizedBox(
-                            width: PsDimens.space16,
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 20, right: 10),
+                                  child: PSButtonWithIconWidget(
+                                    hasShadow: false,
+                                    colorData: PsColors.buttonColor,
+                                    icon: Icons.chat,
+                                    iconColor: PsColors.textColor4,
+                                    width: double.infinity,
+                                    titleText: Utils.getString(
+                                        context, 'item_detail__chat'),
+                                    onPressed: () async {
+                                      if (await Utils
+                                          .checkInternetConnectivity()) {
+                                        Utils.navigateOnUserVerificationView(
+                                            widget.provider, context, () async {
+                                          Navigator.pushNamed(
+                                              context, RoutePaths.chatView,
+                                              arguments:
+                                                  ChatHistoryIntentHolder(
+                                                chatFlag:
+                                                    PsConst.CHAT_FROM_SELLER,
+                                                itemId: widget.provider
+                                                    .itemDetail.data!.id,
+                                                buyerUserId: widget
+                                                    .psValueHolder!.loginUserId,
+                                                sellerUserId: widget
+                                                    .provider
+                                                    .itemDetail
+                                                    .data!
+                                                    .addedUserId,
+                                              ));
+                                        });
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 10),
-                            child: PSButtonWithIconWidget(
-                              hasShadow: false,
-                              colorData: PsColors.buttonColor,
-                              icon: Icons.chat,
-                              iconColor: PsColors.textColor4,
-                              width: double.infinity,
-                              titleText:
-                                  Utils.getString(context, 'item_detail__chat'),
-                              onPressed: () async {
-                                if (await Utils.checkInternetConnectivity()) {
-                                  Utils.navigateOnUserVerificationView(
-                                      widget.provider, context, () async {
-                                    Navigator.pushNamed(
-                                        context, RoutePaths.chatView,
-                                        arguments: ChatHistoryIntentHolder(
-                                          chatFlag: PsConst.CHAT_FROM_SELLER,
-                                          itemId: widget
-                                              .provider.itemDetail.data!.id,
-                                          buyerUserId:
-                                              widget.psValueHolder!.loginUserId,
-                                          sellerUserId: widget.provider
-                                              .itemDetail.data!.addedUserId,
-                                        ));
-                                  });
-                                }
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
                 ),
               ),

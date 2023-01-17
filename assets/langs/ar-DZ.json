@@ -719,5 +719,7 @@
 
   "demo_warning_description": "هذا هو التطبيق التجريبي. يرجى عدم إدخال أي بيانات دفع حقيقية أو معلومات شخصية. فقط استخدم بيانات الدفع المرسلة.",
   "dialog_understand": "موافق",
-  "phone_confirm__title1": "تأكيد رقم الهاتف"
+  "phone_confirm__title1": "تأكيد رقم الهاتف",
+  "or": "او",
+  "home__drawer_menu_private_item": "خاص"
 }

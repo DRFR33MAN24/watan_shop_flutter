@@ -5,8 +5,6 @@
 /// www.panacea-soft.com
 ///
 
-
-
 class PsDimens {
   // General Spacing
   static const double space1 = 1;
@@ -62,4 +60,5 @@ class PsDimens {
   static const double space340 = 340;
   static const double space360 = 360;
   static const double space380 = 380;
+  static const double space700 = 700;
 }

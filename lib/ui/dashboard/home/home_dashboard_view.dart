@@ -13,6 +13,7 @@ import 'package:flutterbuyandsell/provider/blog/blog_provider.dart';
 import 'package:flutterbuyandsell/provider/category/category_provider.dart';
 import 'package:flutterbuyandsell/provider/chat/user_unread_message_provider.dart';
 import 'package:flutterbuyandsell/provider/product/auto_product_provider.dart';
+import 'package:flutterbuyandsell/provider/product/private_product_provider.dart';
 import 'package:flutterbuyandsell/provider/product/discount_product_provider.dart';
 import 'package:flutterbuyandsell/provider/product/electronic_product_provider.dart';
 import 'package:flutterbuyandsell/provider/product/item_list_from_followers_provider.dart';
@@ -37,6 +38,7 @@ import 'package:flutterbuyandsell/ui/common/ps_frame_loading_widget.dart';
 import 'package:flutterbuyandsell/ui/common/ps_textfield_widget_with_icon.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/blog_product_slider.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/home_auto_product_horizontal_list_widget.dart';
+import 'package:flutterbuyandsell/ui/dashboard/home/widgets/home_private_product_list_widget.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/home_discount_product_horizontal_list_widget.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/home_electronic_product_horizontal_list_widget.dart';
 import 'package:flutterbuyandsell/ui/dashboard/home/widgets/home_jobs_product_horizontal_list_widget.dart';
@@ -94,6 +96,7 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
   PopularProductProvider? _popularProductProvider;
   DiscountProductProvider? _discountProductProvider;
   AutoProductProvider? _autoProductProvider;
+  PrivateProductProvider? _privateProductProvider;
   RealestateProductProvider? _realestateProductProvider;
   JobsProductProvider? _jobsProductProvider;
   ElectronicProductProvider? _electronicProductProvider;
@@ -419,6 +422,29 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                     _autoProductProvider!.productAutoParameterHolder);
                 return _autoProductProvider!;
               }),
+          ChangeNotifierProvider<PrivateProductProvider>(
+              lazy: false,
+              create: (BuildContext context) {
+                _privateProductProvider =
+                    PrivateProductProvider(repo: repo2, limit: 30);
+
+                _privateProductProvider!.productPrivateParameterHolder
+                    .itemLocationId = valueHolder!.locationId;
+                _privateProductProvider!.productPrivateParameterHolder
+                    .itemLocationName = valueHolder!.locactionName;
+                if (valueHolder!.isSubLocation == PsConst.ONE) {
+                  _privateProductProvider!.productPrivateParameterHolder
+                      .itemLocationTownshipId = valueHolder!.locationTownshipId;
+                  _privateProductProvider!.productPrivateParameterHolder
+                          .itemLocationTownshipName =
+                      valueHolder!.locationTownshipName;
+                }
+                final String? loginUserId =
+                    Utils.checkUserLoginId(valueHolder!);
+                _privateProductProvider!.loadProductList(loginUserId,
+                    _privateProductProvider!.productPrivateParameterHolder);
+                return _privateProductProvider!;
+              }),
           ChangeNotifierProvider<ElectronicProductProvider>(
               lazy: false,
               create: (BuildContext context) {
@@ -726,6 +752,9 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                   _autoProductProvider!.resetProductList(loginUserId,
                       _autoProductProvider!.productAutoParameterHolder);
 
+                  _privateProductProvider!.resetProductList(loginUserId,
+                      _privateProductProvider!.productPrivateParameterHolder);
+
                   _realestateProductProvider!.resetProductList(
                       loginUserId,
                       _realestateProductProvider!
@@ -814,6 +843,16 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget> {
                           CurvedAnimation(
                               parent: widget.animationController,
                               curve: Interval((1 / count) * 2, 1.0,
+                                  curve: Curves.fastOutSlowIn))), //animation
+                    ),
+                    HomePrivateProductListWidget(
+                      psValueHolder: valueHolder,
+                      animationController:
+                          widget.animationController, //animationController,
+                      animation: Tween<double>(begin: 0.0, end: 1.0).animate(
+                          CurvedAnimation(
+                              parent: widget.animationController,
+                              curve: Interval((1 / count) * 4, 1.0,
                                   curve: Curves.fastOutSlowIn))), //animation
                     ),
                     HomePaidAdProductHorizontalListWidget(

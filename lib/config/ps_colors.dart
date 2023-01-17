@@ -134,6 +134,7 @@ class PsColors {
   /// Button Color
   ///
   static Color? buttonColor;
+  static Color? buttonGreenColor;
   static Color? bottomNavigationSelectedColor;
   static Color? backArrowColor;
 
@@ -316,8 +317,8 @@ class PsColors {
 
     ///
     ///Primary dark Color
-    ///
     primaryDarkDark = _c_primary_dark_dark;
+
     primaryDarkAccent = _c_primary_dark_accent;
     primaryDarkWhite = _c_primary_dark_white;
     primaryDarkGrey = _c_primary_dark_grey;
@@ -357,6 +358,7 @@ class PsColors {
     /// Button Color
     ///
     buttonColor = const Color(0xFFffb0b1);
+    buttonGreenColor = const Color.fromARGB(255, 0, 255, 85);
     bottomNavigationSelectedColor = const Color(0xFFffb0b1);
     activeColor = const Color(0xFFffb0b1);
     backArrowColor = const Color(0xFFffb0b1);
@@ -463,6 +465,7 @@ class PsColors {
     /// Button Color
     ///
     buttonColor = primary500;
+    buttonGreenColor = const Color.fromARGB(255, 0, 255, 85);
     bottomNavigationSelectedColor = primary500;
     activeColor = primary500;
     backArrowColor = primary500;

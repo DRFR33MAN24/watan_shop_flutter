@@ -11,7 +11,7 @@ class PsConfig {
   /// AppVersion
   /// For your app, you need to change according based on your app version
 
-  static const String app_version = '3.5';
+  static const String app_version = '3.8';
 
   ///
   /// API Key

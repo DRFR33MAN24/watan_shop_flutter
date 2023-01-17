@@ -59,6 +59,9 @@ class CategoryRepository extends PsRepository {
     if (isConnectedToInternet) {
       final PsResource<List<Category>> _resource = await _psApiService
           .getCategoryList(jsonMap, loginUserId, limit, offset);
+      // Test category filteration.
+      _resource.data!
+          .removeWhere((Category element) => element.catName == 'خاص');
 
       if (_resource.status == PsStatus.SUCCESS) {
         // Delete and Insert Map Dao

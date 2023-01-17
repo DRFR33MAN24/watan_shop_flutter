@@ -363,8 +363,9 @@ mixin Utils {
   static dynamic launchURL() async {
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
     print(packageInfo.packageName);
-    final Uri url = Uri.parse(
-        'https://play.google.com/store/apps/details?id=${packageInfo.packageName}');
+    final Uri url = Uri.parse('market://details?id=${packageInfo.packageName}');
+
+    //'https://play.google.com/store/apps/details?id=${packageInfo.packageName}');
     // 'https://play.google.com/store/apps/details?id=${packageInfo.packageName}';
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
