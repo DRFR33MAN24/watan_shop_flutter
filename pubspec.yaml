@@ -11,7 +11,7 @@ description: A new Flutter Buy Sell store application.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 3.7.0+37
+version: 3.8.0+38
 publish_to: none
 
 # CCV 3.5 = 3.5.0+35
@@ -135,7 +135,6 @@ dependencies:
   app_tracking_transparency: 2.0.2+4
   firebase_crashlytics: ^2.8.8
   cloud_functions: ^3.3.9
-  in_app_update: ^4.0.1
 
 dev_dependencies:
   flutter_test:

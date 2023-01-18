@@ -99,15 +99,17 @@ ThemeData themeData(ThemeData baseTheme) {
           subtitle2: TextStyle(
               color: PsColors.secondary500,
               fontFamily: PsConfig.ps_default_font_family,
-              fontWeight: FontWeight.bold),
+              fontWeight: FontWeight.bold,
+              fontSize: 12),
           bodyText1: TextStyle(
             color: PsColors.secondary500,
             fontFamily: PsConfig.ps_default_font_family,
           ),
           bodyText2: TextStyle(
-              color: PsColors.secondary500,
-              fontFamily: PsConfig.ps_default_font_family,
-              fontWeight: FontWeight.bold),
+            color: PsColors.secondary500,
+            fontFamily: PsConfig.ps_default_font_family,
+            fontWeight: FontWeight.bold,
+          ),
           button: TextStyle(
               color: PsColors.secondary500,
               fontFamily: PsConfig.ps_default_font_family),

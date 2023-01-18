@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutterbuyandsell/config/ps_colors.dart';
 import 'package:flutterbuyandsell/constant/ps_constants.dart';
@@ -9,7 +7,10 @@ import 'package:flutterbuyandsell/viewobject/common/ps_value_holder.dart';
 
 class CategoryViewItem extends StatefulWidget {
   const CategoryViewItem(
-      {Key? key, this.selectedData, this.category, required this.onCategoryClick})
+      {Key? key,
+      this.selectedData,
+      this.category,
+      required this.onCategoryClick})
       : super(key: key);
   final dynamic selectedData;
   final Category? category;
@@ -34,7 +35,6 @@ class _CategoryViewItem extends State<CategoryViewItem> {
 
   @override
   Widget build(BuildContext context) {
-
     return GestureDetector(
       onTap: () {
         final Map<String, String?> dataHolder = <String, String?>{};
@@ -50,31 +50,31 @@ class _CategoryViewItem extends State<CategoryViewItem> {
             height: PsDimens.space52,
             color: PsColors.backgroundColor,
             child: Row(
-              mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              widget.category!.catName!,
-                              style: Theme.of(context).textTheme.subtitle2,
-                            ),
-                            Container(
-                                child: widget.category!.catId ==
-                                        widget.selectedData[PsConst.CATEGORY_ID]
-                                    ? IconButton(
-                                        icon: Icon(Icons.check_circle,
-                                            color: Theme.of(context)
-                                                .iconTheme
-                                                .copyWith(color: PsColors.activeColor)
-                                                .color),
-                                        onPressed: () {})
-                                    : Container())
-                          ]),
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    widget.category!.catName!,
+                    style: Theme.of(context).textTheme.subtitle2,
+                  ),
+                  Container(
+                      child: widget.category!.catId ==
+                              widget.selectedData[PsConst.CATEGORY_ID]
+                          ? IconButton(
+                              icon: Icon(Icons.check_circle,
+                                  color: Theme.of(context)
+                                      .iconTheme
+                                      .copyWith(color: PsColors.activeColor)
+                                      .color),
+                              onPressed: () {})
+                          : Container())
+                ]),
           ),
           Container(
-              width: double.infinity,
-              height: PsDimens.space2,
-              color: Colors.black38,
-            ),
+            width: double.infinity,
+            height: PsDimens.space2,
+            color: Colors.black38,
+          ),
         ],
       ),
     );

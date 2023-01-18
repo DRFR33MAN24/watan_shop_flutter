@@ -106,7 +106,7 @@ class PsConfig {
   ///
   /// Animation Duration
   ///
-  static const Duration animation_duration = Duration(milliseconds: 500);
+  static const Duration animation_duration = Duration(milliseconds: 100);
 
   ///
   /// Fonts Family Config

@@ -46,10 +46,12 @@ class HomePopularProductHorizontalListWidget extends StatelessWidget {
                             context, 'home__drawer_menu_popular_item'),
                         headerDescription: '',
                         viewAllClicked: () {
-                         final PsValueHolder valueHolder =
-                          Provider.of<PsValueHolder>(context, listen: false);
-                       final ProductParameterHolder holder =
-                          ProductParameterHolder().getPopularParameterHolder();
+                          final PsValueHolder valueHolder =
+                              Provider.of<PsValueHolder>(context,
+                                  listen: false);
+                          final ProductParameterHolder holder =
+                              ProductParameterHolder()
+                                  .getPopularParameterHolder();
                           holder.mile = valueHolder.mile;
                           holder.itemLocationId = valueHolder.locationId;
                           Navigator.pushNamed(
@@ -79,40 +81,46 @@ class HomePopularProductHorizontalListWidget extends StatelessWidget {
                                 } else {
                                   final Product product =
                                       productProvider.productList.data![index];
-                                      if (productProvider
-                                      .productList.data![index].adType! ==
-                                  PsConst.GOOGLE_AD_TYPE) {
-                                return  Container();
-                              } else {
-                                  return ProductHorizontalListItem(
-                                    coreTagKey:
-                                        productProvider.hashCode.toString() +
-                                            product.id!,
-                                    product: productProvider
-                                        .productList.data![index],
-                                    onTap: () {
-                                      print(productProvider.productList
-                                          .data![index].defaultPhoto!.imgPath);
-                                      final ProductDetailIntentHolder holder =
-                                          ProductDetailIntentHolder(
-                                              productId: productProvider
-                                                  .productList.data![index].id,
-                                              heroTagImage: productProvider
-                                                      .hashCode
-                                                      .toString() +
-                                                  product.id! +
-                                                  PsConst.HERO_TAG__IMAGE,
-                                              heroTagTitle: productProvider
-                                                      .hashCode
-                                                      .toString() +
-                                                  product.id! +
-                                                  PsConst.HERO_TAG__TITLE);
-                                      Navigator.pushNamed(
-                                          context, RoutePaths.productDetail,
-                                          arguments: holder);
-                                    },
-                                  );
-                                }}
+                                  if (productProvider
+                                          .productList.data![index].adType! ==
+                                      PsConst.GOOGLE_AD_TYPE) {
+                                    return Container();
+                                  } else {
+                                    return ProductHorizontalListItem(
+                                      coreTagKey:
+                                          productProvider.hashCode.toString() +
+                                              product.id!,
+                                      product: productProvider
+                                          .productList.data![index],
+                                      onTap: () {
+                                        print(productProvider
+                                            .productList
+                                            .data![index]
+                                            .defaultPhoto!
+                                            .imgPath);
+                                        final ProductDetailIntentHolder holder =
+                                            ProductDetailIntentHolder(
+                                                productId: productProvider
+                                                    .productList
+                                                    .data![index]
+                                                    .id,
+                                                heroTagImage: productProvider
+                                                        .hashCode
+                                                        .toString() +
+                                                    product.id! +
+                                                    PsConst.HERO_TAG__IMAGE,
+                                                heroTagTitle: productProvider
+                                                        .hashCode
+                                                        .toString() +
+                                                    product.id! +
+                                                    PsConst.HERO_TAG__TITLE);
+                                        Navigator.pushNamed(
+                                            context, RoutePaths.productDetail,
+                                            arguments: holder);
+                                      },
+                                    );
+                                  }
+                                }
                               }))
                     ],
                   )

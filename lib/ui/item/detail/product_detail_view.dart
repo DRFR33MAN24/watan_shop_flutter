@@ -2054,7 +2054,7 @@ class _IconsAndTitleTextWidget extends StatelessWidget {
                     ),
                 Text(
                   name ?? '',
-                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
                       color: isStatus!
                           ? PsColors.textColor1
                           : PsColors.textColor2),
@@ -2355,9 +2355,9 @@ class __CallAndChatButtonWidgetState extends State<_CallAndChatButtonWidget> {
                                                 context, 'item_detail__call'),
                                             onPressed: () async {
                                               if (await canLaunchUrl(Uri.parse(
-                                                  'tel://${widget.provider.itemDetail.data!.user!.userPhone}'))) {
+                                                  'tel://${widget.provider.itemDetail.data!.highlightInformation}'))) {
                                                 await launchUrl(Uri.parse(
-                                                    'tel://${widget.provider.itemDetail.data!.user!.userPhone}'));
+                                                    'tel://${widget.provider.itemDetail.data!.highlightInformation}'));
                                               } else {
                                                 throw 'Could not Call Phone';
                                               }
@@ -2373,9 +2373,9 @@ class __CallAndChatButtonWidgetState extends State<_CallAndChatButtonWidget> {
                                             titleText: 'WhatsApp',
                                             onPressed: () async {
                                               if (await canLaunchUrl(Uri.parse(
-                                                  'tel://${widget.provider.itemDetail.data!.user!.userPhone}'))) {
+                                                  'whatsapp://send?phone=${widget.provider.itemDetail.data!.highlightInformation}'))) {
                                                 await launchUrl(Uri.parse(
-                                                    'tel://${widget.provider.itemDetail.data!.user!.userPhone}'));
+                                                    'whatsapp://send?phone=${widget.provider.itemDetail.data!.highlightInformation}'));
                                               } else {
                                                 throw 'Could not Call Phone';
                                               }

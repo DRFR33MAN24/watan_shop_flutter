@@ -1,4 +1,3 @@
-
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterbuyandsell/config/ps_colors.dart';
@@ -69,7 +68,7 @@ class _FilterListViewState extends State<FilterListView> {
       print('loading ads....');
       checkConnection();
     }
-    
+
     return PsWidgetWithAppBar<CategoryProvider>(
         appBarTitle: Utils.getString(context, 'search__category'),
         initProvider: () {
@@ -82,7 +81,9 @@ class _FilterListViewState extends State<FilterListView> {
         },
         actions: <Widget>[
           IconButton(
-            icon: Icon(CommunityMaterialIcons.filter_remove_outline, //MaterialIcon.filter_list,
+            icon: Icon(
+                CommunityMaterialIcons
+                    .filter_remove_outline, //MaterialIcon.filter_list,
                 color: PsColors.iconColor),
             onPressed: () {
               final Map<String, String> dataHolder = <String, String>{};
@@ -110,16 +111,17 @@ class _FilterListViewState extends State<FilterListView> {
                         itemBuilder: (BuildContext context, int index) {
                           if (provider.categoryList.data != null ||
                               provider.categoryList.data!.isEmpty) {
-                            return Utils.showUI(psValueHolder!.subCatId) ? 
-                              FilterExpantionTileView(
-                                selectedData: widget.selectedData,
-                                category: provider.categoryList.data![index],
-                                onSubCategoryClick: onSubCategoryClick) 
-                                : 
-                              CategoryViewItem(
-                                selectedData: widget.selectedData,
-                                category: provider.categoryList.data![index],
-                                onCategoryClick: onCategoryClick);
+                            return Utils.showUI(psValueHolder!.subCatId)
+                                ? FilterExpantionTileView(
+                                    selectedData: widget.selectedData,
+                                    category:
+                                        provider.categoryList.data![index],
+                                    onSubCategoryClick: onSubCategoryClick)
+                                : CategoryViewItem(
+                                    selectedData: widget.selectedData,
+                                    category:
+                                        provider.categoryList.data![index],
+                                    onCategoryClick: onCategoryClick);
                           } else {
                             return Container();
                           }

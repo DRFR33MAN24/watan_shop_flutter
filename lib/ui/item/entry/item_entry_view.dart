@@ -2956,7 +2956,7 @@ class PriceDropDownControllerWidget extends StatelessWidget {
                   border: Border.all(color: PsColors.mainDividerColor),
                 ),
                 child: Container(
-                  margin: const EdgeInsets.all(PsDimens.space12),
+                  margin: const EdgeInsets.all(PsDimens.space10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -2972,9 +2972,9 @@ class PriceDropDownControllerWidget extends StatelessWidget {
                               style: currencySymbolController!.text == ''
                                   ? Theme.of(context)
                                       .textTheme
-                                      .bodyText2!
+                                      .bodySmall!
                                       .copyWith(color: Colors.grey[600])
-                                  : Theme.of(context).textTheme.bodyText1,
+                                  : Theme.of(context).textTheme.bodySmall,
                             ),
                           ),
                         ),

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutterbuyandsell/config/ps_colors.dart';
 import 'package:flutterbuyandsell/constant/ps_constants.dart';
@@ -14,7 +12,10 @@ import 'package:provider/provider.dart';
 
 class FilterExpantionTileView extends StatefulWidget {
   const FilterExpantionTileView(
-      {Key? key, this.selectedData, this.category, required this.onSubCategoryClick})
+      {Key? key,
+      this.selectedData,
+      this.category,
+      required this.onSubCategoryClick})
       : super(key: key);
   final dynamic selectedData;
   final Category? category;
@@ -25,7 +26,7 @@ class FilterExpantionTileView extends StatefulWidget {
 
 class _FilterExpantionTileView extends State<FilterExpantionTileView> {
   SubCategoryRepository? subCategoryRepository;
-   PsValueHolder? valueHolder;
+  PsValueHolder? valueHolder;
   bool isExpanded = false;
 //  SubCategoryProvider? _subCategoryProvider;
   @override
@@ -51,12 +52,13 @@ class _FilterExpantionTileView extends State<FilterExpantionTileView> {
           provider.subCategoryParameterHolder.catId = widget.category!.catId;
           provider.categoryId = widget.category!.catId!;
           provider.loadAllSubCategoryList(
-              provider.subCategoryParameterHolder.toMap(),
-             valueHolder!.loginUserId ?? '',);
+            provider.subCategoryParameterHolder.toMap(),
+            valueHolder!.loginUserId ?? '',
+          );
           return provider;
         },
-        child: Consumer<SubCategoryProvider>(builder:
-            (BuildContext context, SubCategoryProvider provider, Widget? child) {
+        child: Consumer<SubCategoryProvider>(builder: (BuildContext context,
+            SubCategoryProvider provider, Widget? child) {
           return Container(
               child: custom.ExpansionTile(
             initiallyExpanded: false,
@@ -101,13 +103,13 @@ class _FilterExpantionTileView extends State<FilterExpantionTileView> {
                               child: index == 0
                                   ? Text(
                                       Utils.getString(context,
-                                              'product_list__category_all'),
+                                          'product_list__category_all'),
                                       style:
                                           Theme.of(context).textTheme.bodyText1,
                                     )
                                   : Text(
-                                      provider
-                                          .subCategoryList.data![index - 1].name!,
+                                      provider.subCategoryList.data![index - 1]
+                                          .name!,
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyText1),

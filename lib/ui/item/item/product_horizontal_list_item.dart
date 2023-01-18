@@ -71,6 +71,7 @@ class ProductHorizontalListItem extends StatelessWidget {
                 const BorderRadius.all(Radius.circular(PsDimens.space8)),
           ),
           width: PsDimens.space180,
+
           // child:
           //  ClipPath(
           // child: Container(
@@ -234,12 +235,12 @@ class ProductHorizontalListItem extends StatelessWidget {
                     ),
 
                     Container(
-                      height: 88,
+                      height: 100,
                       padding: const EdgeInsets.only(
                           left: PsDimens.space8,
                           right: PsDimens.space8,
-                          top: PsDimens.space8,
-                          bottom: PsDimens.space4),
+                          top: PsDimens.space1,
+                          bottom: PsDimens.space1),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
@@ -306,7 +307,7 @@ class ProductHorizontalListItem extends StatelessWidget {
                                               .bodyText2!
                                               .copyWith(
                                                   color: PsColors.textColor1,
-                                                  fontSize: 16),
+                                                  fontSize: 14),
                                         )),
                                   ),
                                   Visibility(

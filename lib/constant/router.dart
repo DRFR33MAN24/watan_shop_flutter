@@ -129,43 +129,53 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
       return MaterialPageRoute<dynamic>(
           settings: const RouteSettings(name: RoutePaths.home),
-          maintainState: false,
+          // maintainState: false,
           builder: (BuildContext context) {
             return DashboardView();
           });
 
     case '${RoutePaths.itemLocationTownshipList}':
-      return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-        final Object? args = settings.arguments;
-        final String cityId = (args as String? ?? String) as String;
-        return ItemLocationTownshipContainerView(cityId: cityId);
-      });
+      return MaterialPageRoute<dynamic>(
+          maintainState: false,
+          builder: (BuildContext context) {
+            final Object? args = settings.arguments;
+            final String cityId = (args as String? ?? String) as String;
+            return ItemLocationTownshipContainerView(cityId: cityId);
+          });
 
     case '${RoutePaths.itemLocationTownship}':
-      return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-        final Object? args = settings.arguments;
-        final String cityId = (args as String? ?? String) as String;
-        return ItemEntryLocationTownshipView(cityId: cityId);
-      });
+      return MaterialPageRoute<dynamic>(
+          maintainState: false,
+          builder: (BuildContext context) {
+            final Object? args = settings.arguments;
+            final String cityId = (args as String? ?? String) as String;
+            return ItemEntryLocationTownshipView(cityId: cityId);
+          });
 
     case '${RoutePaths.itemLocationTownshipFirst}':
-      return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-        final Object? args = settings.arguments;
-        final String cityId = (args as String? ?? String) as String;
-        return ItemLocationTownshipFirstView(cityId: cityId);
-      });
+      return MaterialPageRoute<dynamic>(
+          maintainState: false,
+          builder: (BuildContext context) {
+            final Object? args = settings.arguments;
+            final String cityId = (args as String? ?? String) as String;
+            return ItemLocationTownshipFirstView(cityId: cityId);
+          });
 
     case '${RoutePaths.searchLocationList}':
-      return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-        return SearchLocationView();
-      });
+      return MaterialPageRoute<dynamic>(
+          maintainState: false,
+          builder: (BuildContext context) {
+            return SearchLocationView();
+          });
 
     case '${RoutePaths.searchLocationTownshipList}':
-      return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-        final Object? args = settings.arguments;
-        final String cityId = (args as String? ?? String) as String;
-        return SearchLocationTownshipView(cityId: cityId);
-      });
+      return MaterialPageRoute<dynamic>(
+          maintainState: false,
+          builder: (BuildContext context) {
+            final Object? args = settings.arguments;
+            final String cityId = (args as String? ?? String) as String;
+            return SearchLocationTownshipView(cityId: cityId);
+          });
 
     case '${RoutePaths.introSlider}':
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
@@ -378,14 +388,16 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       });
 
     case '${RoutePaths.filterLocationList}':
-      return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-        final Object? args = settings.arguments;
-        final LocationParameterHolder locationParameterHolder =
-            (args as LocationParameterHolder? ?? LocationParameterHolder)
-                as LocationParameterHolder;
-        return FilterLocationView(
-            locationParameterHolder: locationParameterHolder);
-      });
+      return MaterialPageRoute<dynamic>(
+          maintainState: false,
+          builder: (BuildContext context) {
+            final Object? args = settings.arguments;
+            final LocationParameterHolder locationParameterHolder =
+                (args as LocationParameterHolder? ?? LocationParameterHolder)
+                    as LocationParameterHolder;
+            return FilterLocationView(
+                locationParameterHolder: locationParameterHolder);
+          });
 
     case '${RoutePaths.privacyPolicy}':
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
